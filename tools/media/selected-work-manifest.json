@@ -1,0 +1,98 @@
+{
+  "videos": [
+    {
+      "id": "eltacoria-translation",
+      "source": "F:/2. Raden Media Production/El Tacoria 2/Rendered/Newly Rendered/Translation.mp4",
+      "duration": 14.35
+    },
+    {
+      "id": "eltacoria-app",
+      "source": "F:/2. Raden Media Production/El Tacoria 2/Rendered/Newly Rendered/App with Voiceover Draft 2.mp4",
+      "duration": 24.98
+    },
+    {
+      "id": "jury-eid",
+      "source": "F:/2. Raden Media Production/2025/RAMADAN WORK EDITED MASTER/JURY/Jury Eid Gift.mp4",
+      "duration": 21.67
+    },
+    {
+      "id": "jury-cake",
+      "source": "F:/2. Raden Media Production/2025/RAMADAN WORK EDITED MASTER/JURY/Jury Cake 4K.mp4",
+      "duration": 17.64
+    }
+  ],
+  "files": [
+    {
+      "name": "eltacoria-app-film.mp4",
+      "bytes": 10513594
+    },
+    {
+      "name": "eltacoria-app-poster.webp",
+      "bytes": 72496
+    },
+    {
+      "name": "eltacoria-app-preview.mp4",
+      "bytes": 328343
+    },
+    {
+      "name": "eltacoria-translation-film.mp4",
+      "bytes": 8164758
+    },
+    {
+      "name": "eltacoria-translation-poster.webp",
+      "bytes": 121522
+    },
+    {
+      "name": "eltacoria-translation-preview.mp4",
+      "bytes": 358550
+    },
+    {
+      "name": "grading-after.webp",
+      "bytes": 87812
+    },
+    {
+      "name": "grading-before.webp",
+      "bytes": 45382
+    },
+    {
+      "name": "grading-day.webp",
+      "bytes": 206082
+    },
+    {
+      "name": "grading-flight.webp",
+      "bytes": 207618
+    },
+    {
+      "name": "grading-night.webp",
+      "bytes": 192878
+    },
+    {
+      "name": "grading-process.webp",
+      "bytes": 148780
+    },
+    {
+      "name": "jury-cake-film.mp4",
+      "bytes": 7662098
+    },
+    {
+      "name": "jury-cake-poster.webp",
+      "bytes": 54928
+    },
+    {
+      "name": "jury-cake-preview.mp4",
+      "bytes": 278833
+    },
+    {
+      "name": "jury-eid-film.mp4",
+      "bytes": 8204624
+    },
+    {
+      "name": "jury-eid-poster.webp",
+      "bytes": 49034
+    },
+    {
+      "name": "jury-eid-preview.mp4",
+      "bytes": 220875
+    }
+  ]
+}

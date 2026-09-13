@@ -40,7 +40,7 @@ export default function FilmPlayer({ project, onClose }: { project: Project; onC
 
   return <dialog className="film-dialog" ref={dialogRef} aria-labelledby="film-title" onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
     <div className="player-shell">
-      <div className="player-heading"><div><h2 id="film-title">{project.title}</h2><p>{project.contribution}</p></div><button className="player-close" ref={closeRef} aria-label="Close film" onClick={onClose}><XIcon size={25} /></button></div>
+      <div className="player-heading"><div><h2 id="film-title">{project.title}</h2><p>{project.contribution}</p>{project.credits && <p className="player-credit">{project.credits}</p>}</div><button className="player-close" ref={closeRef} aria-label="Close film" onClick={onClose}><XIcon size={25} /></button></div>
       <div className={`player-screen ${project.aspect === 'portrait' ? 'portrait-player' : ''}`}>
         <video ref={videoRef} src={project.film} poster={project.poster} controls playsInline preload="none" aria-label={`${project.title} full film`} onPlaying={() => setStatus('playing')} onWaiting={() => setStatus('loading')} onPause={() => setStatus(current => current === 'error' ? 'error' : 'paused')} onError={() => setStatus('error')} onEnded={() => setStatus('paused')}>
           {project.captions && <track kind="captions" src={project.captions} srcLang="en" label="English" default />}

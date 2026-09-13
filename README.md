@@ -35,13 +35,14 @@ Each project has:
 | `film` | Full MP4, requested only after clicking Play |
 | `aspect` | `portrait` or `landscape` |
 | `captions` | Optional English WebVTT caption file |
+| `duration`, `credits` | Display duration and collaborator attribution |
 | `placeholder` | Keep true until the work and its claims are ready |
 
 Put assets under `public/media/` and reference them with `/media/filename`. Direct hosted file URLs also work for videos. Remote posters require a matching `images.remotePatterns` configuration in `next.config.ts`.
 
-Set `placeholder: false` and provide `film` for playable work. Missing preview is supported: the poster remains visible and the full film still plays. The four placeholder images currently come from the owner's existing CV assets; they are expressly labeled pending film selection. SwiftSoft is the only completed film currently supplied.
+Set `placeholder: false` and provide `film` for playable work. Missing preview is supported: the poster remains visible and the full film still plays. SwiftSoft, two El Tacoria commercials and two Jury Chocolate films are supplied. Aviation, Films/YouTube and Motion retain explicitly labeled placeholders from the owner's CV assets.
 
-The All work layout features AI films, pairs Reels, and stacks Films/Motion beside them. Keep v1 to 1–2 entries per category. Portrait films open in a matching tall player rather than cropping their content.
+The All work layout features SwiftSoft, a four-film portrait grid, pending selections, and an interactive before/after comparison linking to Color Grading. Keep selections concise: currently two El Tacoria and two Jury Chocolate films. Portrait films open in a matching tall player rather than cropping their content.
 
 ## Media
 
@@ -58,6 +59,12 @@ Original video and portrait remain unchanged outside this repo. Web derivatives 
 
 `tools/media/manifest.json` records dimensions and sizes. `tools/media/prepare.py` regenerates the exports with Pillow and imageio-ffmpeg; update its source paths for another machine. The three extra SwiftSoft stills are reserved for future process highlights, not separate portfolio projects.
 
+## Color grading
+
+`/color-grading` presents the supplied original/final pair as a keyboard-accessible range comparison, followed by four grading sheets in a swipeable carousel with thumbnails and an enlarged still viewer. No synthetic grades or color filters are applied. Carousel data lives in `src/components/grading.tsx`.
+
+`tools/media/prepare-selected.py` prepares the four commercial films and six grading images. It requires Pillow and imageio-ffmpeg; its source paths are machine-specific. `selected-work-manifest.json` records provenance and file sizes. Full commercial videos total about 35 MB; the four silent hover previews total about 1.2 MB.
+
 ## Playback and motion
 
 - Fine-pointer desktop hover begins after 150 ms and never requests the full film.
@@ -65,7 +72,7 @@ Original video and portrait remain unchanged outside this repo. Web derivatives 
 - Full film opens in a native dialog, with native video controls and focus restoration.
 - Touch devices open with one tap. Autoplay rejection has an explicit Play fallback.
 - Hidden/offscreen background media pauses. Reduced motion and data saving retain posters.
-- Native touch scrolling; Lenis enhances desktop wheel scrolling only.
+- Native touch scrolling; Lenis enhances desktop wheel scrolling only, with restrained hero depth. Anchor spacing follows the CSS scroll padding.
 
 ## Validation
 
@@ -77,11 +84,11 @@ npm run qa:capture
 npm run qa:performance
 ```
 
-Build first. `npm test` runs Chromium against an existing preview or starts the production server. Set `TEST_URL` to target a different running preview. `qa:capture` and `qa:performance` expect the production server at port 3000.
+Build first. `npm test` runs Chromium against an existing preview or starts the production server. Set `TEST_URL` to target a different running preview. `qa:capture` also honors `TEST_URL` and captures the grading page in both themes. `qa:performance` expects the production server at port 3000.
 
 Browser setup on another machine: `npx playwright install chromium webkit`.
 
-14 Chromium tests passed on 2026-09-13. WebKit was attempted but exits before page creation on this Windows host, including outside the sandbox; it is **not** claimed as tested. `test:webkit` remains available for a working host. Browser emulation is not a physical-phone test.
+21 Chromium tests passed on 2026-09-13. WebKit was attempted but exits before page creation on this Windows host, including outside the sandbox; it is **not** claimed as tested. `test:webkit` remains available for a working host. Browser emulation is not a physical-phone test.
 
 Screenshots and the single-run lab performance report are under `.local/` (ignored). The performance script uses a cold Chromium cache, 4× CPU throttle and 1.6 Mbps down/150 ms latency. This is a local lab measurement, not a production performance guarantee; resource timing totals can omit ongoing streaming transfers.
 

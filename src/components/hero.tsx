@@ -17,7 +17,10 @@ export function Hero() {
   const [paused, setPaused] = useState(false);
   const [source, setSource] = useState<string>();
   const { scrollYProgress } = useScroll({ target: container, offset: ['start start', 'end start'] });
-  const transform = useTransform(scrollYProgress, [0, 1], ['translateY(0px) scale(1.025)', 'translateY(90px) scale(1.07)']);
+  const transform = useTransform(scrollYProgress, [0, 1], ['translateY(0%) scale(1.025)', 'translateY(22%) scale(1.085)']);
+
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 110]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.65, 1], [1, 1, 0.25]);
 
   useEffect(() => {
     const element = container.current;
@@ -53,7 +56,7 @@ export function Hero() {
         <video ref={videoRef} src={source} className={`hero-video ${ready && !reducedMotion && !saveData ? 'is-ready' : ''}`} muted loop playsInline preload="none" aria-hidden="true" onPlaying={() => setReady(true)} onError={() => setReady(false)} />
       </motion.div>
       <div className="hero-shade" />
-      <div className="hero-content page-width">
+      <motion.div className="hero-content page-width" style={reducedMotion ? undefined : { y: contentY, opacity: contentOpacity }}>
         <div className="hero-heading-wrap">
           <h1 id="hero-heading"><span>Stories.</span><span>Made to <em>move.</em></span></h1>
           <p className="hero-description">Video editor & multimedia creative.<br />A cinematic eye. From idea to final frame.</p>
@@ -64,7 +67,7 @@ export function Hero() {
           <span><span className="hero-feature-title">SwiftSoft</span><span className="hero-feature-meta">An AI film by Raden Hanifa</span></span>
           <ArrowUpRightIcon size={19} />
         </button>
-      </div>
+      </motion.div>
       <div className="hero-bottom page-width">
         <p>Editing <span>/</span> Cinematography <span>/</span> AI filmmaking</p>
         {!reducedMotion && !saveData && source && <button className="background-toggle" onClick={() => setPaused(value => !value)} aria-label={paused ? 'Resume background video' : 'Pause background video'}>{paused ? <PlayIcon size={13} weight="fill" /> : <PauseIcon size={13} weight="fill" />}<span>{paused ? 'Resume' : 'Pause'} background</span></button>}

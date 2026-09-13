@@ -29,7 +29,7 @@ test('hover previews only; click plays full film, Escape stops it and restores f
   const card = page.getByRole('button', { name: 'Play SwiftSoft', exact: true });
   await card.scrollIntoViewIfNeeded();
   await card.hover();
-  await expect.poll(() => page.locator('.card-preview').evaluate((video: HTMLVideoElement) => !video.paused && video.readyState >= 2)).toBe(true);
+  await expect.poll(() => page.locator('[data-project="swiftsoft"] .card-preview').evaluate((video: HTMLVideoElement) => !video.paused && video.readyState >= 2)).toBe(true);
   expect(requests.some(url => url.includes('swiftsoft-preview.mp4'))).toBe(true);
   expect(requests.some(url => url.includes('swiftsoft-film.mp4'))).toBe(false);
   await card.click();
@@ -39,7 +39,7 @@ test('hover previews only; click plays full film, Escape stops it and restores f
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).toHaveCount(0);
   await expect(card).toBeFocused();
-  await expect(page.locator('.card-preview')).not.toHaveAttribute('src', /./);
+  await expect(page.locator('[data-project="swiftsoft"] .card-preview')).not.toHaveAttribute('src', /./);
 });
 
 test('leaving hover stops and unloads preview', async ({ page }) => {
@@ -47,23 +47,26 @@ test('leaving hover stops and unloads preview', async ({ page }) => {
   const card = page.getByRole('button', { name: 'Play SwiftSoft', exact: true });
   await card.scrollIntoViewIfNeeded();
   await card.hover();
-  await expect(page.locator('.card-preview')).toHaveAttribute('src', '/media/swiftsoft-preview.mp4');
+  await expect(page.locator('[data-project="swiftsoft"] .card-preview')).toHaveAttribute('src', '/media/swiftsoft-preview.mp4');
   await page.locator('#work-heading').hover();
-  await expect(page.locator('.card-preview')).not.toHaveAttribute('src', /./);
-  await expect(page.locator('.card-preview')).not.toHaveClass(/is-ready/);
+  await expect(page.locator('[data-project="swiftsoft"] .card-preview')).not.toHaveAttribute('src', /./);
+  await expect(page.locator('[data-project="swiftsoft"] .card-preview')).not.toHaveClass(/is-ready/);
 });
 
 test('filters and honest placeholders', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Reels', exact: true }).click();
-  await expect(page.locator('.project-card')).toHaveCount(2);
-  await expect(page.locator('.project-card button')).toHaveCount(0);
-  await expect(page.getByText('Preview image · film to come')).toHaveCount(2);
+  await expect(page.locator('.project-card')).toHaveCount(5);
+  await expect(page.locator('.project-card button')).toHaveCount(4);
+  await expect(page.getByText('Preview image · film to come')).toHaveCount(1);
   await page.getByRole('button', { name: 'AI filmmaking', exact: true }).click();
   await expect(page.locator('.project-card')).toHaveCount(1);
   await expect(page.getByRole('button', { name: 'Play SwiftSoft', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Color grading', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Color grading.' })).toBeVisible();
+  await expect(page.locator('.grading-project-link')).toHaveAttribute('href', '/color-grading');
   await page.getByRole('button', { name: 'All work', exact: true }).click();
-  await expect(page.locator('.project-card')).toHaveCount(5);
+  await expect(page.locator('.project-card')).toHaveCount(8);
 });
 
 test('reduced motion loads no decorative video; keyboard playback works', async ({ page }) => {
@@ -75,7 +78,7 @@ test('reduced motion loads no decorative video; keyboard playback works', async 
   await card.scrollIntoViewIfNeeded();
   await card.hover();
   await expect(page.locator('.hero-video')).not.toHaveAttribute('src', /./);
-  await expect(page.locator('.card-preview')).not.toHaveAttribute('src', /./);
+  await expect(page.locator('[data-project="swiftsoft"] .card-preview')).not.toHaveAttribute('src', /./);
   expect(requests).toEqual([]);
   await card.focus(); await page.keyboard.press('Enter');
   await expect(page.getByRole('dialog')).toBeVisible();
@@ -113,7 +116,7 @@ test('data saving keeps static posters', async ({ page }) => {
   const card = page.getByRole('button', { name: 'Play SwiftSoft', exact: true });
   await card.scrollIntoViewIfNeeded(); await card.hover();
   await expect(page.locator('.hero-video')).not.toHaveAttribute('src', /./);
-  await expect(page.locator('.card-preview')).not.toHaveAttribute('src', /./);
+  await expect(page.locator('[data-project="swiftsoft"] .card-preview')).not.toHaveAttribute('src', /./);
 });
 
 test('mobile touch opens film in one tap and never requests a hover preview', async ({ browser }) => {
@@ -121,7 +124,7 @@ test('mobile touch opens film in one tap and never requests a hover preview', as
   const page = await context.newPage();
   const requests: string[] = [];
   page.on('request', request => requests.push(request.url()));
-  await page.goto('http://127.0.0.1:3000/');
+  await page.goto(process.env.TEST_URL || 'http://127.0.0.1:3000/');
   const card = page.getByRole('button', { name: 'Play SwiftSoft', exact: true });
   await card.scrollIntoViewIfNeeded();
   await card.tap();

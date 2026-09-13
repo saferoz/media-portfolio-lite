@@ -45,7 +45,7 @@ export function PortfolioRuntime({ children }: { children: React.ReactNode }) {
     if (matchMedia('(pointer: fine)').matches) {
       import('lenis').then(({ default: Lenis }) => {
         if (disposed) return;
-        const scroll = new Lenis({ autoRaf: true, lerp: 0.12, smoothWheel: true, syncTouch: false, anchors: { offset: -100 }, prevent: node => node.closest('[role="dialog"]') !== null });
+        const scroll = new Lenis({ autoRaf: true, lerp: 0.085, smoothWheel: true, syncTouch: false, anchors: true, prevent: node => node.closest('[role="dialog"]') !== null });
         const onModal = () => document.documentElement.classList.contains('film-open') ? scroll.stop() : scroll.start();
         const observer = new MutationObserver(onModal);
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
