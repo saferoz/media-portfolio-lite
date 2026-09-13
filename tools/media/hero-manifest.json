@@ -1,41 +1,59 @@
 {
-  "duration": 7.6,
-  "transition": {
-    "type": "dissolve",
-    "start": 1.6,
-    "seconds": 0.4
-  },
+  "duration": 14.95,
+  "transitionSeconds": 0.35,
   "shots": [
     {
-      "project": "archi",
-      "kind": "BTS",
-      "seconds": 2,
-      "sourceStart": 1
+      "name": "TENET",
+      "source": "E:/Gen AI Projects/TENET/Generations/TENET PERFECT.mp4",
+      "sourceStart": 0.25,
+      "seconds": 4,
+      "mobileCropFraction": 0.25
     },
     {
-      "project": "archi",
-      "kind": "Finished commercial",
-      "seconds": 6,
-      "sourceStart": 1
+      "name": "Rakan",
+      "source": "E:/V1-0014_Rakan Brolls149555201.mov",
+      "sourceStart": 8,
+      "seconds": 4,
+      "mobileCropFraction": 0.62
+    },
+    {
+      "name": "SwiftSoft",
+      "source": "E:/Gen AI Projects/SwiftSoft/4K videos/hf_20260731_220106_d224db06-b626-4a90-9c54-7011291da0d2.mp4",
+      "sourceStart": 1,
+      "seconds": 4,
+      "mobileCropFraction": 0.67
+    },
+    {
+      "name": "Cockpit",
+      "source": "E:/horizontal cockpit.mp4",
+      "sourceStart": 0,
+      "seconds": 4,
+      "mobileCropFraction": 0.5
     }
   ],
+  "mobileSources": {
+    "TENET": "E:/tenet vertical.mp4",
+    "Rakan": "E:/2nd clip vertical.mp4",
+    "Cockpit": "E:/cockpit vertical.mp4"
+  },
+  "mobileSourceStart": 0,
+  "desktopTenetCropFraction": 0,
   "files": [
     {
       "name": "hero-personal-desktop-poster.webp",
-      "bytes": 49450
+      "bytes": 42180
     },
     {
       "name": "hero-personal-desktop.mp4",
-      "bytes": 1619855
+      "bytes": 3138330
     },
     {
       "name": "hero-personal-mobile-poster.webp",
-      "bytes": 30136
+      "bytes": 19560
     },
     {
       "name": "hero-personal-mobile.mp4",
-      "bytes": 766706
+      "bytes": 1712361
     }
-  ],
-  "btsFraming": "Desktop: 12% enlargement anchored right; opening video and poster right-aligned in viewport."
+  ]
 }

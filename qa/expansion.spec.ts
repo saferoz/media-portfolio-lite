@@ -65,7 +65,7 @@ test('graduation is supporting grading work with optional BTS', async ({ page })
   await page.keyboard.press('Escape');
 });
 
-test('hero is one bounded rendition with accurate shot credits', async ({ page }) => {
+test('hero uses one bounded rendition without project credit boxes', async ({ page }) => {
   const media: string[] = [];
   page.on('request', request => { if (/hero-personal-(desktop|mobile)\.mp4/.test(request.url())) media.push(request.url()); });
   await page.goto('/');
@@ -73,19 +73,18 @@ test('hero is one bounded rendition with accurate shot credits', async ({ page }
   await expect.poll(() => hero.evaluate((v: HTMLVideoElement) => v.readyState >= 2)).toBe(true);
   await page.getByRole('button', { name: 'Pause background video' }).click();
   await hero.evaluate((v: HTMLVideoElement) => { v.currentTime = 5; });
-  await expect(page.locator('.hero-feature-title')).toContainText('ARCHI');
-  await expect(page.locator('.hero-feature-meta')).toContainText('The finished film');
-  await page.locator('.hero-feature').click();
-  await expect(page.locator('.player-screen video')).toHaveAttribute('src', '/media/archi-film.mp4');
-  await page.keyboard.press('Escape');
+  await expect(page.locator('.hero-feature, .hero-mobile-credit')).toHaveCount(0);
+  await expect(page.locator('#hero-heading')).toContainText('final frame.');
+  expect(await hero.evaluate((v: HTMLVideoElement) => v.paused)).toBe(true);
   expect(media.some(url => url.includes('hero-personal-mobile.mp4'))).toBe(false);
-  expect(statSync('public/media/hero-personal-desktop.mp4').size).toBeLessThanOrEqual(3_000_000);
-  expect(statSync('public/media/hero-personal-mobile.mp4').size).toBeLessThanOrEqual(1_300_000);
+  expect(statSync('public/media/hero-personal-desktop.mp4').size).toBeLessThanOrEqual(3_500_000);
+  expect(statSync('public/media/hero-personal-mobile.mp4').size).toBeLessThanOrEqual(1_800_000);
 });
 
 test('portfolio request uses the new address and prepared subject', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#contact')).toContainText('Want to');
+  await expect(page.getByRole('link', { name: 'Instagram: @radenhanifa' })).toHaveAttribute('href', 'https://www.instagram.com/radenhanifa/');
   await expect(page.locator('#contact').getByRole('link', { name: 'Request full portfolio' })).toHaveAttribute('href', 'mailto:raden@radenhanifa.com?subject=Full%20portfolio%20request');
   await expect(page.getByRole('link', { name: 'raden@radenhanifa.com' })).toHaveAttribute('href', 'mailto:raden@radenhanifa.com');
 });

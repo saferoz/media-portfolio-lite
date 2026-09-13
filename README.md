@@ -41,7 +41,7 @@ Each project has:
 
 Put assets under `public/media/` and reference them with `/media/filename`. Direct hosted file URLs also work for videos. Remote posters require a matching `images.remotePatterns` configuration in `next.config.ts`.
 
-Set `placeholder: false` and provide `film` for playable work. `projects` contains eleven playable films, including two extracted interview title intros; `gradingFilms` contains two color-work clips; `supportingFilms` contains the interview grading steps, graduation trailer, and hero-linked ARCHI commercial. The two Motion examples appear in All work and under Motion.
+Set `placeholder: false` and provide `film` for playable work. `projects` contains eleven playable films, including two extracted interview title intros; `gradingFilms` contains two color-work clips; `supportingFilms` contains the interview grading steps, graduation trailer, and previous ARCHI commercial. The two Motion examples appear in All work and under Motion.
 
 The homepage leads with four F&B commercials, followed by YouTube / Long-form interviews, the educational series, AI filmmaking, and color grading. Project images preview on desktop hover; clicking plays the full film. Separate View project links open production breakdowns.
 
@@ -62,13 +62,13 @@ Original media remain unchanged outside this repo. Browser derivatives are in `p
 - `tools/media/prepare.py`: original SwiftSoft film, preview, stills and profile photo.
 - `tools/media/prepare-selected.py`: four commercial films and original grading images.
 - `tools/media/prepare-expansion.py`: eight additional videos and nine BTS/comparison images. Converts HEVC and PCM-audio sources to H.264/AAC, including explicit full-to-limited range conversion for the Spider-Man concept.
-- `tools/media/prepare-hero.py`: 7.6-second silent BTS-to-commercial loop, rendered as one file per device from the supplied ARCHI sources. Also prepares the full commercial and About BTS image.
+- `tools/media/prepare-hero.py`: 14.95-second silent four-shot loop, rendered as one file per device. Only hero videos and matching posters are generated.
 
 These scripts require Pillow and imageio-ffmpeg; source paths are machine-specific. Adjacent manifests record provenance and current derivative sizes. Full films are at most 1080p with original audio; all current full-video files are under 44 MB. Source 4K files are not served directly.
 
-The hero opens with 2 seconds of device-specific BTS, then dissolves over 0.4 seconds into a continuous six-second serving shot from the start of the ARCHI commercial. The visible credit opens the full commercial. About uses the standalone profile portrait.
+The hero uses four-second shots: TENET from 0.25 seconds, Rakan aviation footage from 8 seconds, SwiftSoft from 1 second, and cockpit footage from its beginning, joined with 0.35-second dissolves. Desktop TENET shifts the subject right using a left-aligned crop. Mobile uses the authored TENET, second-clip, and cockpit vertical exports from their beginnings. Project credit boxes are removed. About uses the standalone profile portrait.
 
-`hero-personal-desktop.mp4` targets at most 3 MB at 1280x720; `hero-personal-mobile.mp4` targets at most 1.3 MB at 540x720. Both versions have independent crops. Responsive WebP posters load first; only the matching video rendition is requested, and full source films are never loaded to assemble the hero in-browser.
+`hero-personal-desktop.mp4` targets at most 3.5 MB at 1280x720; `hero-personal-mobile.mp4` targets at most 1.8 MB at 540x960. Both versions have independent crops. Responsive WebP posters load first; only the matching video rendition is requested, and full source films are never loaded to assemble the hero in-browser.
 
 ## Playback and motion
 

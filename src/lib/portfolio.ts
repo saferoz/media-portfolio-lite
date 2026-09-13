@@ -22,6 +22,7 @@ export const profile = {
   name: 'Raden Hanifa',
   role: 'Video editor & multimedia creative',
   email: 'raden@radenhanifa.com',
+  instagram: 'https://www.instagram.com/radenhanifa/',
   cv: 'https://cv.radenhanifa.com',
   portrait: '/media/portrait.webp',
   intro: 'I’m Raden. I bring a cinematic eye to the edit.',
