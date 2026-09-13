@@ -65,20 +65,20 @@ test('graduation is supporting grading work with optional BTS', async ({ page })
 
 test('hero is one bounded rendition with accurate shot credits', async ({ page }) => {
   const media: string[] = [];
-  page.on('request', request => { if (/hero-montage-(desktop|mobile)\.mp4/.test(request.url())) media.push(request.url()); });
+  page.on('request', request => { if (/hero-personal-(desktop|mobile)\.mp4/.test(request.url())) media.push(request.url()); });
   await page.goto('/');
   const hero = page.locator('.hero-video');
   await expect.poll(() => hero.evaluate((v: HTMLVideoElement) => v.readyState >= 2)).toBe(true);
   await page.getByRole('button', { name: 'Pause background video' }).click();
-  await hero.evaluate((v: HTMLVideoElement) => { v.currentTime = 8.5; });
-  await expect(page.locator('.hero-feature-title')).toContainText('Spider-Man');
-  await expect(page.locator('.hero-feature-meta')).toContainText('AI concept');
+  await hero.evaluate((v: HTMLVideoElement) => { v.currentTime = 5; });
+  await expect(page.locator('.hero-feature-title')).toContainText('ARCHI');
+  await expect(page.locator('.hero-feature-meta')).toContainText('The finished film');
   await page.locator('.hero-feature').click();
-  await expect(page.locator('.player-screen video')).toHaveAttribute('src', '/media/spiderman-film.mp4');
+  await expect(page.locator('.player-screen video')).toHaveAttribute('src', '/media/archi-film.mp4');
   await page.keyboard.press('Escape');
-  expect(media.some(url => url.includes('hero-montage-mobile.mp4'))).toBe(false);
-  expect(statSync('public/media/hero-montage-desktop.mp4').size).toBeLessThanOrEqual(3_000_000);
-  expect(statSync('public/media/hero-montage-mobile.mp4').size).toBeLessThanOrEqual(1_300_000);
+  expect(media.some(url => url.includes('hero-personal-mobile.mp4'))).toBe(false);
+  expect(statSync('public/media/hero-personal-desktop.mp4').size).toBeLessThanOrEqual(3_000_000);
+  expect(statSync('public/media/hero-personal-mobile.mp4').size).toBeLessThanOrEqual(1_300_000);
 });
 
 test('portfolio request uses the new address and prepared subject', async ({ page }) => {

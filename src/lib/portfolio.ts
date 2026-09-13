@@ -106,6 +106,7 @@ export const gradingFilms: Project[] = [
   { id: 'diriyah', title: 'Diriyah Colors', category: 'Color grading', description: 'A study in color and atmosphere', contribution: 'Color grading', cardLabel: 'Color study', poster: '/media/diriyah-poster.webp', preview: '/media/diriyah-preview.mp4', film: '/media/diriyah-film.mp4', duration: '00:11', aspect: 'landscape', placeholder: false },
 ];
 export const supportingFilms: Project[] = [
+  { id: 'archi', title: 'ARCHI \u2014 Food Commercial', category: 'Reels', description: 'From behind the scenes to the finished film', contribution: 'Commercial filmmaking', poster: '/media/archi-poster.webp', film: '/media/archi-film.mp4', duration: '00:20', aspect: 'portrait', placeholder: false },
   { id: 'interview-grade', title: 'Student interview — Grading steps', category: 'Color grading', description: 'The grade, step by step', contribution: 'Color grading', cardLabel: 'Grading breakdown', poster: '/media/interview-grade-poster.webp', preview: '/media/interview-grade-preview.mp4', film: '/media/interview-grade-film.mp4', duration: '00:13', aspect: 'landscape', placeholder: false },
   { id: 'graduation', title: 'OxfordSaudia — Graduation Trailer', category: 'Films', description: 'A graduation film, from airside to the cockpit', contribution: 'Planning, cinematography, editing & color grading', cardLabel: 'Graduation trailer', poster: '/media/graduation-poster.webp', preview: '/media/graduation-preview.mp4', film: '/media/graduation-film.mp4', duration: '01:09', aspect: 'landscape', placeholder: false },
 ];
@@ -116,4 +117,3 @@ export function getProject(id: string): Project {
 }
 export const categoryLabel = (category: WorkCategory) => category === 'Films' ? 'YouTube / Long-form' : category;
 export const portfolioRequestHref = `mailto:${profile.email}?subject=${encodeURIComponent('Full portfolio request')}`;
-export const heroShotIds = ['jury-cake', 'students', 'hazardous', 'diriyah', 'spiderman'];

@@ -1,58 +1,40 @@
 {
-  "duration": 10,
+  "duration": 7.6,
+  "transition": {
+    "type": "dissolve",
+    "start": 1.6,
+    "seconds": 0.4
+  },
   "shots": [
     {
-      "project": "jury-cake",
-      "sourceStart": 11,
+      "project": "archi",
+      "kind": "BTS",
       "seconds": 2,
-      "desktopCrop": "crop=1080:608:0:490",
-      "mobileCrop": "crop=1080:1440:0:260"
+      "sourceStart": 1
     },
     {
-      "project": "students",
-      "sourceStart": 2,
-      "seconds": 2,
-      "desktopCrop": null,
-      "mobileCrop": "crop=810:1080:950:0"
-    },
-    {
-      "project": "hazardous",
-      "sourceStart": 18,
-      "seconds": 2,
-      "desktopCrop": "crop=1080:608:0:500",
-      "mobileCrop": "crop=1080:1440:0:100"
-    },
-    {
-      "project": "diriyah",
-      "sourceStart": 8,
-      "seconds": 2,
-      "desktopCrop": "crop=1920:800:0:140",
-      "mobileCrop": "crop=810:800:650:140"
-    },
-    {
-      "project": "spiderman",
-      "sourceStart": 17.5,
-      "seconds": 2,
-      "desktopCrop": "crop=1080:608:0:140",
-      "mobileCrop": "crop=1080:1440:0:180"
+      "project": "archi",
+      "kind": "Finished commercial",
+      "seconds": 6,
+      "sourceStart": 1
     }
   ],
   "files": [
     {
-      "name": "hero-montage-desktop.mp4",
-      "bytes": 2570160
+      "name": "hero-personal-desktop-poster.webp",
+      "bytes": 49900
     },
     {
-      "name": "hero-montage-mobile-poster.webp",
-      "bytes": 45834
+      "name": "hero-personal-desktop.mp4",
+      "bytes": 1629696
     },
     {
-      "name": "hero-montage-mobile.mp4",
-      "bytes": 1138028
+      "name": "hero-personal-mobile-poster.webp",
+      "bytes": 30136
     },
     {
-      "name": "hero-montage-poster.webp",
-      "bytes": 83986
+      "name": "hero-personal-mobile.mp4",
+      "bytes": 766706
     }
   ]
 }

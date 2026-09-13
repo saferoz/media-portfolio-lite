@@ -41,7 +41,7 @@ Each project has:
 
 Put assets under `public/media/` and reference them with `/media/filename`. Direct hosted file URLs also work for videos. Remote posters require a matching `images.remotePatterns` configuration in `next.config.ts`.
 
-Set `placeholder: false` and provide `film` for playable work. `projects` contains nine playable films and the honest Motion placeholder; `gradingFilms` contains two color-work clips; `supportingFilms` contains the interview grading steps and graduation trailer. The Motion placeholder is available under its filter.
+Set `placeholder: false` and provide `film` for playable work. `projects` contains nine playable films and the honest Motion placeholder; `gradingFilms` contains two color-work clips; `supportingFilms` contains the interview grading steps, graduation trailer, and hero-linked ARCHI commercial. The Motion placeholder is available under its filter.
 
 The homepage leads with four F&B commercials, followed by YouTube / Long-form interviews, the educational series, AI filmmaking, and color grading. Project images preview on desktop hover; clicking plays the full film. Separate View project links open production breakdowns.
 
@@ -62,13 +62,13 @@ Original media remain unchanged outside this repo. Browser derivatives are in `p
 - `tools/media/prepare.py`: original SwiftSoft film, preview, stills and profile photo.
 - `tools/media/prepare-selected.py`: four commercial films and original grading images.
 - `tools/media/prepare-expansion.py`: eight additional videos and nine BTS/comparison images. Converts HEVC and PCM-audio sources to H.264/AAC, including explicit full-to-limited range conversion for the Spider-Man concept.
-- `tools/media/prepare-hero.py`: ten-second silent montage, rendered as one file per device. Run after the commercial and expansion derivatives exist.
+- `tools/media/prepare-hero.py`: 7.6-second silent BTS-to-commercial loop, rendered as one file per device from the supplied ARCHI sources. Also prepares the full commercial and About BTS image.
 
 These scripts require Pillow and imageio-ffmpeg; source paths are machine-specific. Adjacent manifests record provenance and current derivative sizes. Full films are at most 1080p with original audio; all current full-video files are under 44 MB. Source 4K files are not served directly.
 
-The hero uses Jury Chocolate, the student interview, aviation education, Diriyah grading work, and the personal Seedance 2.0 Spider-Man concept. Each shot is two seconds. Keep `heroShotIds` in the portfolio data aligned with `SHOTS` in the preparation script. The visible credit opens the corresponding full film. AI footage is labeled.
+The hero opens with 2 seconds of device-specific BTS, then dissolves over 0.4 seconds into a continuous six-second serving shot from the start of the ARCHI commercial. The visible credit opens the full commercial. About retains the profile portrait over a darkened studio BTS background.
 
-`hero-montage-desktop.mp4` targets at most 3 MB at 1600x900; `hero-montage-mobile.mp4` targets at most 1.3 MB at 540x720. Both versions have independent crops. Responsive WebP posters load first; only the matching video rendition is requested, and full source films are never loaded to assemble the hero in-browser.
+`hero-personal-desktop.mp4` targets at most 3 MB at 1280x720; `hero-personal-mobile.mp4` targets at most 1.3 MB at 540x720. Both versions have independent crops. Responsive WebP posters load first; only the matching video rendition is requested, and full source films are never loaded to assemble the hero in-browser.
 
 ## Playback and motion
 

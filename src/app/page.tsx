@@ -14,7 +14,7 @@ export default function Home() {
       <Hero />
       <Work />
       <section className="about-section page-width" id="about" aria-labelledby="about-heading">
-        <div className="about-image" data-reveal="image"><Image src={profile.portrait} alt="Raden Hanifa" fill sizes="(max-width: 640px) 85vw, 36vw" /><span className="portrait-caption">Behind the frame</span></div>
+        <div className="about-portrait-scene" data-reveal="image"><Image className="about-bts-background" src="/media/about-studio-bts.webp" alt="" fill sizes="(max-width: 640px) 100vw, 42vw" /><div className="about-image"><Image src={profile.portrait} alt="Raden Hanifa" fill sizes="(max-width: 640px) 85vw, 36vw" /><span className="portrait-caption">Behind the camera</span></div></div>
         <div className="about-copy"><h2 id="about-heading">A cinematic eye.<br /><span>A curious mind.</span></h2><p className="about-intro">{profile.intro}</p><p>{profile.about}</p><div className="tool-list" aria-label="Creative tools">{profile.tools.map(tool => <span key={tool}>{tool}</span>)}</div><a className="text-link" href={profile.cv} target="_blank" rel="noreferrer">The longer story <span>View CV</span><ArrowUpRightIcon size={18} /></a></div>
       </section>
       <section className="contact-section" id="contact" aria-labelledby="contact-heading">

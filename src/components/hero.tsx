@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowDownRightIcon, ArrowUpRightIcon, PauseIcon, PlayIcon } from '@phosphor-icons/react';
 import { useScroll, useTransform, motion } from 'motion/react';
-import { getProject, heroShotIds } from '@/lib/portfolio';
+import { getProject } from '@/lib/portfolio';
 import { usePortfolio } from './portfolio-runtime';
 
 export function Hero() {
@@ -15,9 +15,9 @@ export function Hero() {
   const [ready, setReady] = useState(false);
   const [paused, setPaused] = useState(false);
   const [source, setSource] = useState<string>();
-  const [shot, setShot] = useState(0);
-  const currentProject = getProject(heroShotIds[ready && !reducedMotion && !saveData ? shot : 0]);
-  const shotCredit = currentProject.category === 'AI filmmaking' ? 'AI concept · Seedance 2.0' : currentProject.id === 'diriyah' ? 'Color grading' : currentProject.id === 'jury-cake' ? 'Planning, cinematography & edit' : 'Direction, cinematography & edit';
+  const [showingResult, setShowingResult] = useState(false);
+  const currentProject = getProject('archi');
+  const shotCredit = ready && showingResult && !reducedMotion && !saveData ? 'The finished film' : 'Behind the scenes';
   const { scrollYProgress } = useScroll({ target: container, offset: ['start start', 'end start'] });
   const transform = useTransform(scrollYProgress, [0, 1], ['translateY(0%) scale(1.025)', 'translateY(22%) scale(1.085)']);
 
@@ -36,7 +36,7 @@ export function Hero() {
 
   useEffect(() => {
     if (reducedMotion || saveData || !inView) return;
-    const timer = setTimeout(() => setSource(matchMedia('(max-width: 767px)').matches ? '/media/hero-montage-mobile.mp4' : '/media/hero-montage-desktop.mp4'), 350);
+    const timer = setTimeout(() => setSource(matchMedia('(max-width: 767px)').matches ? '/media/hero-personal-mobile.mp4' : '/media/hero-personal-desktop.mp4'), 350);
     return () => clearTimeout(timer);
   }, [reducedMotion, saveData, inView]);
 
@@ -54,8 +54,8 @@ export function Hero() {
     <section className="hero" id="top" ref={container} aria-labelledby="hero-heading">
       <span id="nav-sentinel" aria-hidden="true" />
       <motion.div className="hero-media" style={reducedMotion ? undefined : { transform }}>
-        <picture><source media="(max-width: 767px)" srcSet="/media/hero-montage-mobile-poster.webp" /><img src="/media/hero-montage-poster.webp" alt="A cinematic product shot from Jury Chocolate, filmed and edited by Raden Hanifa" width="1600" height="900" fetchPriority="high" loading="eager" className="hero-poster" /></picture>
-        <video ref={videoRef} src={source} className={`hero-video ${ready && !reducedMotion && !saveData ? 'is-ready' : ''}`} muted loop playsInline preload="none" aria-hidden="true" onTimeUpdate={event => setShot(Math.min(4, Math.floor(event.currentTarget.currentTime / 2)))} onPlaying={() => setReady(true)} onError={() => setReady(false)} />
+        <picture><source media="(max-width: 767px)" srcSet="/media/hero-personal-mobile-poster.webp" /><img src="/media/hero-personal-desktop-poster.webp" alt="Behind the scenes of a commercial shoot" width="1280" height="720" fetchPriority="high" loading="eager" className="hero-poster" /></picture>
+        <video ref={videoRef} src={source} className={`hero-video ${ready && !reducedMotion && !saveData ? 'is-ready' : ''}`} muted loop playsInline preload="none" aria-hidden="true" onTimeUpdate={event => setShowingResult(event.currentTarget.currentTime >= 2)} onPlaying={() => setReady(true)} onError={() => setReady(false)} />
       </motion.div>
       <div className="hero-shade" />
       <motion.div className="hero-content page-width" style={reducedMotion ? undefined : { y: contentY, opacity: contentOpacity }}>
