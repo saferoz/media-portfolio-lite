@@ -54,8 +54,8 @@ export function Hero() {
     <section className="hero" id="top" ref={container} aria-labelledby="hero-heading">
       <span id="nav-sentinel" aria-hidden="true" />
       <motion.div className="hero-media" style={reducedMotion ? undefined : { transform }}>
-        <picture><source media="(max-width: 767px)" srcSet="/media/hero-personal-mobile-poster.webp" /><img src="/media/hero-personal-desktop-poster.webp" alt="Behind the scenes of a commercial shoot" width="1280" height="720" fetchPriority="high" loading="eager" className="hero-poster" /></picture>
-        <video ref={videoRef} src={source} className={`hero-video ${ready && !reducedMotion && !saveData ? 'is-ready' : ''}`} muted loop playsInline preload="none" aria-hidden="true" onTimeUpdate={event => setShowingResult(event.currentTarget.currentTime >= 2)} onPlaying={() => setReady(true)} onError={() => setReady(false)} />
+        <picture><source media="(max-width: 767px)" srcSet="/media/hero-personal-mobile-poster.webp" /><img src="/media/hero-personal-desktop-poster.webp" alt="Behind the scenes of a commercial shoot" width="1280" height="720" fetchPriority="high" loading="eager" className="hero-poster" style={{ objectPosition: '100% center' }} /></picture>
+        <video ref={videoRef} src={source} className={`hero-video ${ready && !reducedMotion && !saveData ? 'is-ready' : ''}`} style={{ objectPosition: showingResult ? 'center' : '100% center' }} muted loop playsInline preload="none" aria-hidden="true" onTimeUpdate={event => setShowingResult(event.currentTarget.currentTime >= 2)} onPlaying={() => setReady(true)} onError={() => setReady(false)} />
       </motion.div>
       <div className="hero-shade" />
       <motion.div className="hero-content page-width" style={reducedMotion ? undefined : { y: contentY, opacity: contentOpacity }}>

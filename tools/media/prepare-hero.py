@@ -13,7 +13,9 @@ for device,w,h,bitrate,bts,rotation in [
  parts=[]
  for i,(source,start,duration,extra) in enumerate([(bts,1,2,rotation),(str(RESULT),1,6,'')]):
   target=TMP/f'quiet-{device}-{i}.mp4'; parts.append(target)
-  vf=extra+f'scale={w}:{h}:force_original_aspect_ratio=increase,crop={w}:{h},setsar=1,fps=24,format=yuv420p'
+  sw,sh=(int(w*1.12)//2*2,int(h*1.12)//2*2) if i==0 and device=='desktop' else (w,h)
+  crop_x='iw-ow' if i==0 else '(iw-ow)/2'
+  vf=extra+f'scale={sw}:{sh}:force_original_aspect_ratio=increase,crop={w}:{h}:{crop_x}:(ih-oh)/2,setsar=1,fps=24,format=yuv420p'
   run(['-ss',str(start),'-i',source,'-t',str(duration),'-an','-vf',vf,'-c:v','libx264','-crf','18','-preset','fast','-threads','3',str(target)])
  target=OUT/f'hero-personal-{device}.mp4'
  run(['-i',str(parts[0]),'-i',str(parts[1]),'-filter_complex','[0:v][1:v]xfade=transition=fade:duration=0.4:offset=1.6[v]','-map','[v]','-an','-c:v','libx264','-b:v',bitrate,'-maxrate',bitrate,'-bufsize','2M','-preset','slow','-threads','3','-pix_fmt','yuv420p','-movflags','+faststart','-map_metadata','-1',str(target)])

@@ -90,11 +90,8 @@ export const projects: Project[] = [
     contribution: 'Personal AI filmmaking concept · Seedance 2.0',
     poster: '/media/spiderman-poster.webp', preview: '/media/spiderman-preview.mp4', film: '/media/spiderman-film.mp4', duration: '00:47', aspect: 'portrait', placeholder: false,
   },
-  {
-    id: 'motion', title: 'Made to move', category: 'Motion',
-    description: 'Motion graphics · Visual rhythm', contribution: 'Portfolio selection in progress',
-    poster: '/placeholders/motion.webp', aspect: 'landscape', placeholder: true,
-  },
+  { id: 'students-intro', title: 'Get to Know Our Students \u2014 Title Intro', category: 'Motion', description: 'Animated series title', contribution: 'Motion graphics', cardLabel: 'Title sequence', poster: '/media/students-intro-poster.webp', preview: '/media/students-intro-preview.mp4', film: '/media/students-intro-film.mp4', duration: '00:05', projectHref: '/work/oxfordsaudia-interviews', aspect: 'landscape', placeholder: false },
+  { id: 'captains-intro', title: 'Meet Our Captains \u2014 Title Intro', category: 'Motion', description: 'Animated series title', contribution: 'Motion graphics', cardLabel: 'Title sequence', poster: '/media/captains-intro-poster.webp', preview: '/media/captains-intro-preview.mp4', film: '/media/captains-intro-film.mp4', duration: '00:05', projectHref: '/work/oxfordsaudia-interviews', aspect: 'landscape', placeholder: false },
 
 ];
 

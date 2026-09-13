@@ -3,6 +3,8 @@ import { statSync } from 'node:fs';
 
 test('interviews are long-form and project navigation preserves the correct BTS', async ({ page }) => {
   await page.goto('/');
+  await expect(page.locator('[data-project="interview-grade"]')).toHaveCount(1);
+  await expect(page.locator('[data-project="diriyah"]')).toHaveCount(0);
   await page.getByRole('button', { name: 'YouTube / Long-form', exact: true }).click();
   await expect(page.locator('.project-card')).toHaveCount(2);
   await page.locator('[data-project="students"]').getByRole('link', { name: 'View project' }).click();

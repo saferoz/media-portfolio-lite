@@ -41,7 +41,7 @@ Each project has:
 
 Put assets under `public/media/` and reference them with `/media/filename`. Direct hosted file URLs also work for videos. Remote posters require a matching `images.remotePatterns` configuration in `next.config.ts`.
 
-Set `placeholder: false` and provide `film` for playable work. `projects` contains nine playable films and the honest Motion placeholder; `gradingFilms` contains two color-work clips; `supportingFilms` contains the interview grading steps, graduation trailer, and hero-linked ARCHI commercial. The Motion placeholder is available under its filter.
+Set `placeholder: false` and provide `film` for playable work. `projects` contains eleven playable films, including two extracted interview title intros; `gradingFilms` contains two color-work clips; `supportingFilms` contains the interview grading steps, graduation trailer, and hero-linked ARCHI commercial. The two Motion examples appear in All work and under Motion.
 
 The homepage leads with four F&B commercials, followed by YouTube / Long-form interviews, the educational series, AI filmmaking, and color grading. Project images preview on desktop hover; clicking plays the full film. Separate View project links open production breakdowns.
 
@@ -66,7 +66,7 @@ Original media remain unchanged outside this repo. Browser derivatives are in `p
 
 These scripts require Pillow and imageio-ffmpeg; source paths are machine-specific. Adjacent manifests record provenance and current derivative sizes. Full films are at most 1080p with original audio; all current full-video files are under 44 MB. Source 4K files are not served directly.
 
-The hero opens with 2 seconds of device-specific BTS, then dissolves over 0.4 seconds into a continuous six-second serving shot from the start of the ARCHI commercial. The visible credit opens the full commercial. About retains the profile portrait over a darkened studio BTS background.
+The hero opens with 2 seconds of device-specific BTS, then dissolves over 0.4 seconds into a continuous six-second serving shot from the start of the ARCHI commercial. The visible credit opens the full commercial. About uses the standalone profile portrait.
 
 `hero-personal-desktop.mp4` targets at most 3 MB at 1280x720; `hero-personal-mobile.mp4` targets at most 1.3 MB at 540x720. Both versions have independent crops. Responsive WebP posters load first; only the matching video rendition is requested, and full source films are never loaded to assemble the hero in-browser.
 
@@ -102,3 +102,5 @@ Screenshots and the single-run lab performance report are under `.local/` (ignor
 No deployment was performed. Set `NEXT_PUBLIC_SITE_URL` to the final origin before a production build so social-preview URLs resolve correctly. See `.env.example`. This site has no analytics, login, backend, or CMS.
 
 `PRODUCT.md` and `DESIGN.md` preserve the scope and built design. `AGENT_HANDOFF.md` records the latest verified state.
+
+Motion intro extracts use seconds 12-17 of the student and captain interview derivatives, with five-second audio-enabled films and separate silent previews. Their posters use source time 15 seconds.

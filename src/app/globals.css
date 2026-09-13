@@ -477,9 +477,3 @@ h1, h2, h3 { font-weight: 500; }
  .bts-disclosure summary span { display: block; margin: 12px 0 0; font-size: 12px; }
  .contact-intro { line-height: 1.7; max-width: 40ch; }
 }
-
-/* A quiet glimpse of the set behind the existing portrait. */
-.about-portrait-scene { position: relative; isolation: isolate; padding: 40px 28px; border-radius: 12px; overflow: hidden; background: #071320; }
-.about-portrait-scene .about-bts-background { object-fit: cover; object-position: center; opacity: .3; z-index: -1; }
-.about-portrait-scene .about-image { width: 78%; margin: 0 auto; }
-@media (max-width: 640px) { .about-portrait-scene { padding: 32px 20px; } }

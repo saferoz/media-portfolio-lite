@@ -22,11 +22,11 @@
   "files": [
     {
       "name": "hero-personal-desktop-poster.webp",
-      "bytes": 49900
+      "bytes": 49450
     },
     {
       "name": "hero-personal-desktop.mp4",
-      "bytes": 1629696
+      "bytes": 1619855
     },
     {
       "name": "hero-personal-mobile-poster.webp",
@@ -36,5 +36,6 @@
       "name": "hero-personal-mobile.mp4",
       "bytes": 766706
     }
-  ]
+  ],
+  "btsFraming": "Desktop: 12% enlargement anchored right; opening video and poster right-aligned in viewport."
 }

@@ -53,7 +53,7 @@ test('leaving hover stops and unloads preview', async ({ page }) => {
   await expect(page.locator('[data-project="swiftsoft"] .card-preview')).not.toHaveClass(/is-ready/);
 });
 
-test('filters and honest placeholders', async ({ page }) => {
+test('filters and playable motion intros', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Reels', exact: true }).click();
   await expect(page.locator('.project-card')).toHaveCount(5);
@@ -66,9 +66,15 @@ test('filters and honest placeholders', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Color grading.' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'View color grading' })).toHaveAttribute('href', '/color-grading');
   await page.getByRole('button', { name: 'All work', exact: true }).click();
-  await expect(page.locator('.project-card')).toHaveCount(11);
+  await expect(page.locator('.project-card')).toHaveCount(13);
   await page.getByRole('button', { name: 'Motion', exact: true }).click();
-  await expect(page.locator('.placeholder-card')).toHaveCount(1);
+  await expect(page.locator('.project-card')).toHaveCount(2);
+  await expect(page.locator('.placeholder-card')).toHaveCount(0);
+  for (const id of ['students-intro', 'captains-intro']) {
+    await page.locator(`[data-project="${id}"] .project-visual`).click();
+    await expect.poll(() => page.locator('.player-screen video').evaluate((v: HTMLVideoElement) => v.readyState >= 2)).toBe(true);
+    await page.keyboard.press('Escape');
+  }
   await expect(page.locator('.placeholder-card button')).toHaveCount(0);
 });
 
