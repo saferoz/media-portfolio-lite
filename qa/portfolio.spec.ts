@@ -57,16 +57,19 @@ test('filters and honest placeholders', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Reels', exact: true }).click();
   await expect(page.locator('.project-card')).toHaveCount(5);
-  await expect(page.locator('.project-card button')).toHaveCount(4);
-  await expect(page.getByText('Preview image · film to come')).toHaveCount(1);
+  await expect(page.locator('.project-card button')).toHaveCount(5);
+  await expect(page.locator('.placeholder-card')).toHaveCount(0);
   await page.getByRole('button', { name: 'AI filmmaking', exact: true }).click();
-  await expect(page.locator('.project-card')).toHaveCount(1);
+  await expect(page.locator('.project-card')).toHaveCount(2);
   await expect(page.getByRole('button', { name: 'Play SwiftSoft', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Color grading', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Color grading.' })).toBeVisible();
-  await expect(page.locator('.grading-project-link')).toHaveAttribute('href', '/color-grading');
+  await expect(page.getByRole('link', { name: 'View color grading' })).toHaveAttribute('href', '/color-grading');
   await page.getByRole('button', { name: 'All work', exact: true }).click();
-  await expect(page.locator('.project-card')).toHaveCount(8);
+  await expect(page.locator('.project-card')).toHaveCount(11);
+  await page.getByRole('button', { name: 'Motion', exact: true }).click();
+  await expect(page.locator('.placeholder-card')).toHaveCount(1);
+  await expect(page.locator('.placeholder-card button')).toHaveCount(0);
 });
 
 test('reduced motion loads no decorative video; keyboard playback works', async ({ page }) => {
@@ -90,7 +93,7 @@ test('reduced motion loads no decorative video; keyboard playback works', async 
 test('failed film offers recovery', async ({ page }) => {
   await page.route('**/swiftsoft-film.mp4', route => route.abort());
   await page.goto('/');
-  await page.getByRole('button', { name: 'Play SwiftSoft film' }).click({ force: true });
+  await page.getByRole('button', { name: 'Play SwiftSoft', exact: true }).click({ force: true });
   await expect(page.getByRole('dialog').getByRole('alert')).toContainText('The film couldn’t load');
   await expect(page.getByRole('button', { name: 'Try again' })).toBeVisible();
   await page.getByRole('button', { name: 'Close film' }).click();
@@ -138,7 +141,7 @@ test('mobile touch opens film in one tap and never requests a hover preview', as
 
 test('pausing an opening film does not show a false error', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Play SwiftSoft film' }).click();
+  await page.getByRole('button', { name: 'Play SwiftSoft', exact: true }).click();
   await page.getByRole('dialog').waitFor();
   await page.locator('.player-screen video').evaluate((video: HTMLVideoElement) => video.pause());
   await expect(page.locator('.player-error')).toHaveCount(0);

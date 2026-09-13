@@ -5,27 +5,27 @@ test('grading entry, original/final slider and keyboard control', async ({ page 
   await page.getByRole('button', { name: 'Color grading', exact: true }).click();
   const homeSlider = page.getByRole('slider', { name: 'Reveal original image' });
   await homeSlider.fill('25');
-  await expect.poll(() => page.locator('.grade-original').evaluate(e => getComputedStyle(e).clipPath)).toBe('inset(0px 75% 0px 0px)');
+  await expect.poll(() => page.locator('.grade-original').first().evaluate(e => getComputedStyle(e).clipPath)).toBe('inset(0px 75% 0px 0px)');
   await expect(page).not.toHaveURL(/color-grading/);
   await page.getByRole('link', { name: 'View color grading' }).click();
   await expect(page).toHaveURL(/color-grading/);
   const slider = page.getByRole('slider', { name: 'Reveal original image' });
   await slider.fill('80');
-  await expect.poll(() => page.locator('.grade-original').evaluate(e => getComputedStyle(e).clipPath)).toBe('inset(0px 20% 0px 0px)');
+  await expect.poll(() => page.locator('.grade-original').first().evaluate(e => getComputedStyle(e).clipPath)).toBe('inset(0px 20% 0px 0px)');
   await slider.focus();
   await page.keyboard.press('Home');
   await expect(slider).toHaveValue('0');
   await page.keyboard.press('End');
   await expect(slider).toHaveValue('100');
-  await expect(page.locator('.grade-comparison > img')).toHaveAttribute('src', /grading-after/);
-  await expect(page.locator('.grade-original img')).toHaveAttribute('src', /grading-before/);
+  await expect(page.locator('.grade-comparison > img').first()).toHaveAttribute('src', /grading-after/);
+  await expect(page.locator('.grade-original img').first()).toHaveAttribute('src', /grading-before/);
 });
 
 test('stills carousel, keyboard navigation, enlarge and focus return', async ({ page }) => {
   await page.goto('/color-grading');
-  await expect(page.getByRole('button', { name: 'Previous still', exact: true })).toBeDisabled();
-  await page.getByRole('button', { name: 'Next still', exact: true }).click();
-  await expect(page.locator('.gallery-count')).toHaveText('2 / 4');
+  await expect(page.getByRole('region', { name: 'Color grading stills', exact: true }).getByRole('button', { name: 'Previous still', exact: true })).toBeDisabled();
+  await page.getByRole('region', { name: 'Color grading stills', exact: true }).getByRole('button', { name: 'Next still', exact: true }).click();
+  await expect(page.getByRole('region', { name: 'Color grading stills', exact: true }).locator('.gallery-count')).toHaveText('2 / 4');
   const opener = page.getByRole('button', { name: 'Enlarge From log to the final look' });
   await opener.click();
   await expect(page.getByRole('dialog')).toBeVisible();
@@ -34,8 +34,8 @@ test('stills carousel, keyboard navigation, enlarge and focus return', async ({ 
   await expect(opener).toBeFocused();
   await page.getByRole('button', { name: 'Show A look that holds together' }).focus();
   await page.keyboard.press('Enter');
-  await expect(page.locator('.gallery-count')).toHaveText('4 / 4');
-  await expect(page.getByRole('button', { name: 'Next still', exact: true })).toBeDisabled();
+  await expect(page.getByRole('region', { name: 'Color grading stills', exact: true }).locator('.gallery-count')).toHaveText('4 / 4');
+  await expect(page.getByRole('region', { name: 'Color grading stills', exact: true }).getByRole('button', { name: 'Next still', exact: true })).toBeDisabled();
 });
 
 test('commercial films preview and play independently with attribution', async ({ page }) => {
@@ -66,7 +66,7 @@ for (const width of [320, 390, 1440]) {
       if (theme === 'light') await page.getByRole('button', { name: 'Switch to light mode' }).click();
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
       await page.getByRole('button', { name: 'Show Above the clouds' }).click();
-      await expect(page.locator('.gallery-count')).toHaveText('3 / 4');
+      await expect(page.getByRole('region', { name: 'Color grading stills', exact: true }).locator('.gallery-count')).toHaveText('3 / 4');
       await expect(page.locator('html')).not.toHaveClass(/lenis/);
     }
     expect(errors).toEqual([]);

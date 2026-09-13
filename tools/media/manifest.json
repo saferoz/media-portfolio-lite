@@ -9,28 +9,6 @@
   },
   "derivatives": [
     {
-      "file": "hero-desktop.mp4",
-      "bytes": 2649506,
-      "durationSeconds": 10.0,
-      "width": 1600,
-      "height": 900,
-      "audio": false
-    },
-    {
-      "file": "hero-mobile.mp4",
-      "bytes": 1189900,
-      "durationSeconds": 10.0,
-      "width": 540,
-      "height": 720,
-      "audio": false
-    },
-    {
-      "file": "hero-poster.webp",
-      "bytes": 40958,
-      "width": 1600,
-      "height": 900
-    },
-    {
       "file": "portrait.webp",
       "bytes": 55580,
       "width": 900,
@@ -79,7 +57,6 @@
   ],
   "notes": [
     "Original sources are unchanged.",
-    "Hero uses the opening ten seconds; card preview uses opening seven seconds.",
     "Stills are from SwiftSoft and must not be labeled as separate completed projects.",
     "Full film retains original audio; all previews are silent."
   ]

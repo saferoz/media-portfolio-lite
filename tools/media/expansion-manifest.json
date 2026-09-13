@@ -1,0 +1,224 @@
+{
+  "videos": [
+    {
+      "id": "students",
+      "source": "F:/Portfolio/Cinematography/Aviation 2.0/Get to Know Our Students EP1.mp4",
+      "duration": 79.12,
+      "portrait": false
+    },
+    {
+      "id": "captains",
+      "source": "F:/Portfolio/Cinematography/Aviation 2.0/Meet Our Captains EP01 Challin with sub.mp4",
+      "duration": 120.79,
+      "portrait": false
+    },
+    {
+      "id": "hazardous",
+      "source": "F:/OxfordSaudia 2021-2022/RENDERED FINAL VIDEO/5 Hazardous/(COMPRESSED) 5 Hazardous Attitudes VERY FINAL WITH ARABIC READY TO POST.mov",
+      "duration": 106.65,
+      "portrait": true
+    },
+    {
+      "id": "founding-day",
+      "source": "F:/Hanif's Gabut/Ajdan's Saudi Founding Day/Rendered/Color Work Before After.mp4",
+      "duration": 11.65,
+      "portrait": true
+    },
+    {
+      "id": "diriyah",
+      "source": "F:/Portfolio/Cinematography/General/Diriyah Colors.mp4",
+      "duration": 11.47,
+      "portrait": false
+    },
+    {
+      "id": "interview-grade",
+      "source": "C:/Users/User/Documents/PreziPitch/Content/322969661/dgxxBvDHfB/Media/A53E8F59BE3A0237D989148BDFBFAF1C.mp4",
+      "duration": 12.55,
+      "portrait": false
+    },
+    {
+      "id": "spiderman",
+      "source": "D:/Downloads/IMG_8769.MP4",
+      "duration": 46.7,
+      "portrait": true
+    },
+    {
+      "id": "graduation",
+      "source": "F:/OxfordSaudia 2021-2022/RENDERED FINAL VIDEO/Graduation Trailer/updated with text.mov",
+      "duration": 68.99,
+      "portrait": false
+    }
+  ],
+  "images": [
+    {
+      "id": "students-bts",
+      "source": "D:/OneDrive - OxfordSaudia/Desktop/DSC00650.jpg"
+    },
+    {
+      "id": "interview-before",
+      "source": "D:/OneDrive - OxfordSaudia/Desktop/jawad/A7FEAE9E5107C63110707AA972E2C7C9.png"
+    },
+    {
+      "id": "interview-after",
+      "source": "D:/OneDrive - OxfordSaudia/Desktop/jawad/1F13084224EE257A432768DB62FDDF77.png"
+    },
+    {
+      "id": "education-lighting",
+      "source": "D:/OneDrive - OxfordSaudia/Desktop/DF198263E6F1E221FE10F906BA32CDBD.jpeg"
+    },
+    {
+      "id": "education-planning",
+      "source": "C:/Users/User/AppData/Local/Temp/codex-clipboard-CJXV5z.png"
+    },
+    {
+      "id": "education-simulator",
+      "source": "C:/Users/User/Documents/PreziPitch/Content/322969661/4tKzSkohhV/Media/444383AF3CA27BA0F0BEF6CC8229DFAF.png"
+    },
+    {
+      "id": "education-filming",
+      "source": "C:/Users/User/Documents/PreziPitch/Content/322969661/4tKzSkohhV/Media/65B816E941DE1FB8D1E86A981F4CD1AA.png"
+    },
+    {
+      "id": "graduation-bts",
+      "source": "E:/2026 - 07 - Turkey Fam Trip/Edited/DSC05501.jpg"
+    },
+    {
+      "id": "graduation-camera",
+      "source": "C:/Users/User/AppData/Local/Temp/codex-clipboard-n05zL7.png"
+    }
+  ],
+  "files": [
+    {
+      "name": "captains-film.mp4",
+      "bytes": 43738039
+    },
+    {
+      "name": "captains-poster.webp",
+      "bytes": 50062
+    },
+    {
+      "name": "captains-preview.mp4",
+      "bytes": 316566
+    },
+    {
+      "name": "diriyah-film.mp4",
+      "bytes": 5602641
+    },
+    {
+      "name": "diriyah-poster.webp",
+      "bytes": 75084
+    },
+    {
+      "name": "diriyah-preview.mp4",
+      "bytes": 91714
+    },
+    {
+      "name": "education-filming.webp",
+      "bytes": 65352
+    },
+    {
+      "name": "education-lighting.webp",
+      "bytes": 287224
+    },
+    {
+      "name": "education-planning.webp",
+      "bytes": 35016
+    },
+    {
+      "name": "education-simulator.webp",
+      "bytes": 105974
+    },
+    {
+      "name": "founding-day-film.mp4",
+      "bytes": 7979739
+    },
+    {
+      "name": "founding-day-poster.webp",
+      "bytes": 81666
+    },
+    {
+      "name": "founding-day-preview.mp4",
+      "bytes": 354546
+    },
+    {
+      "name": "graduation-bts.webp",
+      "bytes": 281286
+    },
+    {
+      "name": "graduation-camera.webp",
+      "bytes": 109264
+    },
+    {
+      "name": "graduation-film.mp4",
+      "bytes": 27610863
+    },
+    {
+      "name": "graduation-poster.webp",
+      "bytes": 22534
+    },
+    {
+      "name": "graduation-preview.mp4",
+      "bytes": 283607
+    },
+    {
+      "name": "hazardous-film.mp4",
+      "bytes": 31142745
+    },
+    {
+      "name": "hazardous-poster.webp",
+      "bytes": 41062
+    },
+    {
+      "name": "hazardous-preview.mp4",
+      "bytes": 103628
+    },
+    {
+      "name": "interview-after.webp",
+      "bytes": 122734
+    },
+    {
+      "name": "interview-before.webp",
+      "bytes": 74572
+    },
+    {
+      "name": "interview-grade-film.mp4",
+      "bytes": 5934654
+    },
+    {
+      "name": "interview-grade-poster.webp",
+      "bytes": 28300
+    },
+    {
+      "name": "interview-grade-preview.mp4",
+      "bytes": 148410
+    },
+    {
+      "name": "spiderman-film.mp4",
+      "bytes": 29558169
+    },
+    {
+      "name": "spiderman-poster.webp",
+      "bytes": 31064
+    },
+    {
+      "name": "spiderman-preview.mp4",
+      "bytes": 444360
+    },
+    {
+      "name": "students-bts.webp",
+      "bytes": 299774
+    },
+    {
+      "name": "students-film.mp4",
+      "bytes": 22957832
+    },
+    {
+      "name": "students-poster.webp",
+      "bytes": 47020
+    },
+    {
+      "name": "students-preview.mp4",
+      "bytes": 151300
+    }
+  ]
+}

@@ -12,6 +12,8 @@ export type Project = {
   captions?: string;
   duration?: string;
   credits?: string;
+  projectHref?: string;
+  cardLabel?: string;
   aspect: 'landscape' | 'portrait';
   placeholder: boolean;
 };
@@ -19,7 +21,7 @@ export type Project = {
 export const profile = {
   name: 'Raden Hanifa',
   role: 'Video editor & multimedia creative',
-  email: 'Radenhanif00@gmail.com',
+  email: 'raden@radenhanifa.com',
   cv: 'https://cv.radenhanifa.com',
   portrait: '/media/portrait.webp',
   intro: 'I’m Raden. I bring a cinematic eye to the edit.',
@@ -62,14 +64,31 @@ export const projects: Project[] = [
     film: '/media/jury-cake-film.mp4', duration: '00:18', aspect: 'portrait', placeholder: false,
   },
   {
-    id: 'reels-aviation', title: 'A different altitude', category: 'Reels',
-    description: 'Aviation · Short-form', contribution: 'Portfolio selection in progress',
-    poster: '/placeholders/aviation.webp', aspect: 'portrait', placeholder: true,
+    id: 'students', title: 'Get to Know Our Students', category: 'Films',
+    description: 'OxfordSaudia — Student interview', cardLabel: 'Student interview',
+    contribution: 'Script, direction, cinematography, edit & audio',
+    projectHref: '/work/oxfordsaudia-interviews',
+    poster: '/media/students-poster.webp', preview: '/media/students-preview.mp4', film: '/media/students-film.mp4', duration: '01:19', aspect: 'landscape', placeholder: false,
   },
   {
-    id: 'films', title: 'The longer story', category: 'Films',
-    description: 'Long-form · YouTube', contribution: 'Portfolio selection in progress',
-    poster: '/placeholders/film.webp', aspect: 'landscape', placeholder: true,
+    id: 'captains', title: 'Meet Our Captains', category: 'Films',
+    description: 'OxfordSaudia — Captain interview', cardLabel: 'Captain interview',
+    contribution: 'Script, direction, cinematography, edit & audio',
+    projectHref: '/work/oxfordsaudia-interviews',
+    poster: '/media/captains-poster.webp', preview: '/media/captains-preview.mp4', film: '/media/captains-film.mp4', duration: '02:01', aspect: 'landscape', placeholder: false,
+  },
+  {
+    id: 'hazardous', title: '5 Hazardous Attitudes', category: 'Reels',
+    description: 'OxfordSaudia — Aviation Explained', cardLabel: 'Aviation education',
+    contribution: 'Script, direction, filming, edit & audio finishing',
+    projectHref: '/work/oxfordsaudia-educational-series',
+    poster: '/media/hazardous-poster.webp', preview: '/media/hazardous-preview.mp4', film: '/media/hazardous-film.mp4', duration: '01:47', aspect: 'portrait', placeholder: false,
+  },
+  {
+    id: 'spiderman', title: 'Spider-Man — A Cinematic Fan Concept', category: 'AI filmmaking',
+    description: 'Personal project · Seedance 2.0', cardLabel: 'AI fan concept',
+    contribution: 'Personal AI filmmaking concept · Seedance 2.0',
+    poster: '/media/spiderman-poster.webp', preview: '/media/spiderman-preview.mp4', film: '/media/spiderman-film.mp4', duration: '00:47', aspect: 'portrait', placeholder: false,
   },
   {
     id: 'motion', title: 'Made to move', category: 'Motion',
@@ -81,3 +100,20 @@ export const projects: Project[] = [
 
 export const categories = ['All work', 'Reels', 'Films', 'Motion', 'Color grading', 'AI filmmaking'] as const;
 export type WorkFilter = typeof categories[number];
+
+export const gradingFilms: Project[] = [
+  { id: 'founding-day', title: 'Saudi Founding Day', category: 'Color grading', description: 'Before and after, in motion', contribution: 'Color grading', cardLabel: 'Grading breakdown', poster: '/media/founding-day-poster.webp', preview: '/media/founding-day-preview.mp4', film: '/media/founding-day-film.mp4', duration: '00:12', aspect: 'portrait', placeholder: false },
+  { id: 'diriyah', title: 'Diriyah Colors', category: 'Color grading', description: 'A study in color and atmosphere', contribution: 'Color grading', cardLabel: 'Color study', poster: '/media/diriyah-poster.webp', preview: '/media/diriyah-preview.mp4', film: '/media/diriyah-film.mp4', duration: '00:11', aspect: 'landscape', placeholder: false },
+];
+export const supportingFilms: Project[] = [
+  { id: 'interview-grade', title: 'Student interview — Grading steps', category: 'Color grading', description: 'The grade, step by step', contribution: 'Color grading', cardLabel: 'Grading breakdown', poster: '/media/interview-grade-poster.webp', preview: '/media/interview-grade-preview.mp4', film: '/media/interview-grade-film.mp4', duration: '00:13', aspect: 'landscape', placeholder: false },
+  { id: 'graduation', title: 'OxfordSaudia — Graduation Trailer', category: 'Films', description: 'A graduation film, from airside to the cockpit', contribution: 'Planning, cinematography, editing & color grading', cardLabel: 'Graduation trailer', poster: '/media/graduation-poster.webp', preview: '/media/graduation-preview.mp4', film: '/media/graduation-film.mp4', duration: '01:09', aspect: 'landscape', placeholder: false },
+];
+export function getProject(id: string): Project {
+  const project = [...projects, ...gradingFilms, ...supportingFilms].find(item => item.id === id);
+  if (!project) throw new Error(`Unknown portfolio project: ${id}`);
+  return project;
+}
+export const categoryLabel = (category: WorkCategory) => category === 'Films' ? 'YouTube / Long-form' : category;
+export const portfolioRequestHref = `mailto:${profile.email}?subject=${encodeURIComponent('Full portfolio request')}`;
+export const heroShotIds = ['jury-cake', 'students', 'hazardous', 'diriyah', 'spiderman'];

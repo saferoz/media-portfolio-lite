@@ -26,15 +26,12 @@ def clip(name, seconds, size, bitrate, start=0):
                   "-b:v", bitrate, "-maxrate", bitrate, "-bufsize", "2M",
                   "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-map_metadata", "-1"])
 
-clip("hero-desktop.mp4", 10, "scale=1600:900", "2400k")
-clip("hero-mobile.mp4", 10, "crop=810:1080:650:0,scale=540:720", "950k")
 clip("swiftsoft-preview.mp4", 7, "scale=960:540", "900k")
 encode("swiftsoft-film.mp4", ["-i", str(VIDEO), "-map", "0:v:0", "-map", "0:a:0",
                              "-c:v", "libx264", "-crf", "22", "-preset", "medium",
                              "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k",
                              "-movflags", "+faststart", "-map_metadata", "-1"])
 for name, second, width in [
-    ("hero-poster.webp", 1, 1600),
     ("swiftsoft-poster.webp", 1, 1280),
     ("swiftsoft-still-01.webp", 12, 960),
     ("swiftsoft-still-02.webp", 24, 960),
@@ -56,7 +53,6 @@ manifest = {
     ],
     "notes": [
         "Original sources are unchanged.",
-        "Hero uses the opening ten seconds; card preview uses opening seven seconds.",
         "Stills are from SwiftSoft and must not be labeled as separate completed projects.",
         "Full film retains original audio; all previews are silent.",
     ],

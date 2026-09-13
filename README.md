@@ -36,34 +36,39 @@ Each project has:
 | `aspect` | `portrait` or `landscape` |
 | `captions` | Optional English WebVTT caption file |
 | `duration`, `credits` | Display duration and collaborator attribution |
+| `projectHref`, `cardLabel` | Optional project-page link and accurate card overlay |
 | `placeholder` | Keep true until the work and its claims are ready |
 
 Put assets under `public/media/` and reference them with `/media/filename`. Direct hosted file URLs also work for videos. Remote posters require a matching `images.remotePatterns` configuration in `next.config.ts`.
 
-Set `placeholder: false` and provide `film` for playable work. Missing preview is supported: the poster remains visible and the full film still plays. SwiftSoft, two El Tacoria commercials and two Jury Chocolate films are supplied. Aviation, Films/YouTube and Motion retain explicitly labeled placeholders from the owner's CV assets.
+Set `placeholder: false` and provide `film` for playable work. `projects` contains nine playable films and the honest Motion placeholder; `gradingFilms` contains two color-work clips; `supportingFilms` contains the interview grading steps and graduation trailer. The Motion placeholder is available under its filter.
 
-The All work layout features SwiftSoft, a four-film portrait grid, pending selections, and an interactive before/after comparison linking to Color Grading. Keep selections concise: currently two El Tacoria and two Jury Chocolate films. Portrait films open in a matching tall player rather than cropping their content.
+The homepage leads with four F&B commercials, followed by YouTube / Long-form interviews, the educational series, AI filmmaking, and color grading. Project images preview on desktop hover; clicking plays the full film. Separate View project links open production breakdowns.
+
+## Project pages
+
+- `/work/oxfordsaudia-interviews`: Students and Captains, with the group BTS photo attributed specifically to the student interview.
+- `/work/oxfordsaudia-educational-series`: OxfordSaudia - Aviation Explained, featuring 5 Hazardous Attitudes, with series-level planning, lighting and simulator BTS.
+- `/color-grading`: original graduation comparison and stills, the supporting graduation film and optional BTS, student interview comparison and steps, Saudi Founding Day and Diriyah Colors.
+
+The graduation trailer has no separate homepage card and is excluded from the hero. No synthetic grades or CSS color filters are applied to comparisons. Gallery assets can be enlarged; scripts and photos retain their supplied compositions.
+
+The contact section follows About. Request full portfolio opens `raden@radenhanifa.com` with the subject Full portfolio request. There is no submission backend or email delivery service.
 
 ## Media
 
-Original video and portrait remain unchanged outside this repo. Web derivatives are in `public/media/`.
+Original media remain unchanged outside this repo. Browser derivatives are in `public/media/`.
 
-| File | Size | Purpose |
-| --- | --- | --- |
-| `hero-desktop.mp4` | 2.65 MB | Silent 10-second hero loop |
-| `hero-mobile.mp4` | 1.19 MB | Smaller portrait crop |
-| `swiftsoft-preview.mp4` | 0.76 MB | Silent 7-second hover preview |
-| `swiftsoft-film.mp4` | 24.84 MB | Full 55.51-second 1080p film with audio |
-| `hero-poster.webp` | 41 KB | First paint and fallback |
-| `portrait.webp` | 56 KB | Supplied portrait, optimized |
+- `tools/media/prepare.py`: original SwiftSoft film, preview, stills and profile photo.
+- `tools/media/prepare-selected.py`: four commercial films and original grading images.
+- `tools/media/prepare-expansion.py`: eight additional videos and nine BTS/comparison images. Converts HEVC and PCM-audio sources to H.264/AAC, including explicit full-to-limited range conversion for the Spider-Man concept.
+- `tools/media/prepare-hero.py`: ten-second silent montage, rendered as one file per device. Run after the commercial and expansion derivatives exist.
 
-`tools/media/manifest.json` records dimensions and sizes. `tools/media/prepare.py` regenerates the exports with Pillow and imageio-ffmpeg; update its source paths for another machine. The three extra SwiftSoft stills are reserved for future process highlights, not separate portfolio projects.
+These scripts require Pillow and imageio-ffmpeg; source paths are machine-specific. Adjacent manifests record provenance and current derivative sizes. Full films are at most 1080p with original audio; all current full-video files are under 44 MB. Source 4K files are not served directly.
 
-## Color grading
+The hero uses Jury Chocolate, the student interview, aviation education, Diriyah grading work, and the personal Seedance 2.0 Spider-Man concept. Each shot is two seconds. Keep `heroShotIds` in the portfolio data aligned with `SHOTS` in the preparation script. The visible credit opens the corresponding full film. AI footage is labeled.
 
-`/color-grading` presents the supplied original/final pair as a keyboard-accessible range comparison, followed by four grading sheets in a swipeable carousel with thumbnails and an enlarged still viewer. No synthetic grades or color filters are applied. Carousel data lives in `src/components/grading.tsx`.
-
-`tools/media/prepare-selected.py` prepares the four commercial films and six grading images. It requires Pillow and imageio-ffmpeg; its source paths are machine-specific. `selected-work-manifest.json` records provenance and file sizes. Full commercial videos total about 35 MB; the four silent hover previews total about 1.2 MB.
+`hero-montage-desktop.mp4` targets at most 3 MB at 1600x900; `hero-montage-mobile.mp4` targets at most 1.3 MB at 540x720. Both versions have independent crops. Responsive WebP posters load first; only the matching video rendition is requested, and full source films are never loaded to assemble the hero in-browser.
 
 ## Playback and motion
 
@@ -84,11 +89,11 @@ npm run qa:capture
 npm run qa:performance
 ```
 
-Build first. `npm test` runs Chromium against an existing preview or starts the production server. Set `TEST_URL` to target a different running preview. `qa:capture` also honors `TEST_URL` and captures the grading page in both themes. `qa:performance` expects the production server at port 3000.
+Build first. `npm test` runs Chromium against an existing preview or starts the production server. Set `TEST_URL` to target a different running preview. `qa:capture` also honors `TEST_URL` and captures the grading page in both themes. `qa:performance` also honors `TEST_URL`.
 
 Browser setup on another machine: `npx playwright install chromium webkit`.
 
-21 Chromium tests passed on 2026-09-13. WebKit was attempted but exits before page creation on this Windows host, including outside the sandbox; it is **not** claimed as tested. `test:webkit` remains available for a working host. Browser emulation is not a physical-phone test.
+30 Chromium tests passed on 2026-09-13. WebKit was attempted but exits before page creation on this Windows host, including outside the sandbox; it is **not** claimed as tested. `test:webkit` remains available for a working host. Browser emulation is not a physical-phone test.
 
 Screenshots and the single-run lab performance report are under `.local/` (ignored). The performance script uses a cold Chromium cache, 4× CPU throttle and 1.6 Mbps down/150 ms latency. This is a local lab measurement, not a production performance guarantee; resource timing totals can omit ongoing streaming transfers.
 
