@@ -3,7 +3,7 @@
   "transitionSeconds": 0.35,
   "fps": 24,
   "audio": false,
-  "version": "hero-v3",
+  "version": "hero-v4",
   "devices": {
     "desktop": {
       "width": 1280,
@@ -49,11 +49,11 @@
       ],
       "files": [
         {
-          "name": "hero-v3-desktop.mp4",
-          "bytes": 2995573
+          "name": "hero-v4-desktop.mp4",
+          "bytes": 3000530
         },
         {
-          "name": "hero-v3-desktop-poster.webp",
+          "name": "hero-v4-desktop-poster.webp",
           "bytes": 42180
         }
       ]
@@ -82,8 +82,8 @@
           "timelineStart": 3.65
         },
         {
-          "name": "Eating",
-          "source": "E:/TEMPP DELL optionss/Eating Final.mp4",
+          "name": "Spider-Man",
+          "source": "E:/Gen AI Projects/Spiderman-v2/hf_20260803_221432_eb56c480-8903-4090-839a-47ccf212ee14.mp4",
           "sourceStart": 3,
           "seconds": 4,
           "cropFraction": 0.5,
@@ -91,8 +91,8 @@
           "timelineStart": 7.3
         },
         {
-          "name": "Spider-Man",
-          "source": "E:/Gen AI Projects/Spiderman-v2/hf_20260803_221432_eb56c480-8903-4090-839a-47ccf212ee14.mp4",
+          "name": "ARCHI",
+          "source": "E:/TEMPP DELL optionss/Eating Final.mp4",
           "sourceStart": 3,
           "seconds": 4,
           "cropFraction": 0.5,
@@ -102,11 +102,11 @@
       ],
       "files": [
         {
-          "name": "hero-v3-mobile.mp4",
-          "bytes": 1701718
+          "name": "hero-v4-mobile.mp4",
+          "bytes": 1624310
         },
         {
-          "name": "hero-v3-mobile-poster.webp",
+          "name": "hero-v4-mobile-poster.webp",
           "bytes": 19536
         }
       ]

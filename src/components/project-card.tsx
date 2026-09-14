@@ -28,7 +28,7 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
   function schedulePreview() {
     if (!project.preview || project.placeholder || previewFailed || reducedMotion || saveData || playingFilm || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => setPreview(project.id), 150);
+    timerRef.current = setTimeout(() => { timerRef.current = null; setPreview(project.id); }, 150);
   }
 
   useEffect(() => {
@@ -69,13 +69,13 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
     <span className="card-shade" />
     {project.placeholder ? <span className="placeholder-label">{project.category === 'Color grading' ? 'Placeholder · grading selection to come' : 'Preview image · film to come'}</span> : <>
       <span className="project-film-label">{project.cardLabel ?? project.description} <span>{project.duration}</span></span>
-      <span className="project-play"><PlayIcon size={24} weight="fill" /><span>Play film</span></span>
+      <span className="project-play"><PlayIcon size={24} weight="fill" /><span>{project.category === 'Reels' ? 'Play reel' : 'Play film'}</span></span>
       <span className="preview-hint">{active && previewReady ? <><SpeakerSlashIcon size={14} /> Previewing</> : <>Hover to preview <ArrowUpRightIcon size={15} /></>}</span>
     </>}
   </>;
 
   return <article className={`project-card ${featured ? 'featured-card' : ''} ${project.aspect === 'portrait' ? 'portrait-card' : ''} ${project.placeholder ? 'placeholder-card' : ''}`} ref={cardRef} data-project={project.id}>
-    {project.film && !project.placeholder ? <button className="project-visual" onPointerEnter={schedulePreview} onPointerLeave={stopPreview} onClick={event => { stopPreview(); openFilm(project, event.currentTarget); }} aria-label={`Play ${project.title}`}>
+    {project.film && !project.placeholder ? <button className="project-visual" onPointerEnter={schedulePreview} onPointerMove={() => { if (!active && !timerRef.current) schedulePreview(); }} onPointerLeave={stopPreview} onClick={event => { stopPreview(); openFilm(project, event.currentTarget); }} aria-label={`Play ${project.title}`}>
       {image}
     </button> : <div className="project-visual">{image}</div>}
     <div className="project-caption"><div><h3>{project.title}</h3><p>{project.placeholder ? project.description : project.contribution}</p></div>{project.contribution !== categoryLabel(project.category) && <span className="project-category">{project.category === 'AI filmmaking' ? 'AI film' : categoryLabel(project.category)}</span>}</div>

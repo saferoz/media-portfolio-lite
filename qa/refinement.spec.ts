@@ -2,12 +2,12 @@ import { test, expect } from '@playwright/test';
 
 test('Cadillac follows the four commercials, previews silently and plays with credits', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('.reels-pair .project-card')).toHaveCount(4);
+  await expect(page.locator('.reels-pair:not(.cadillac-feature) .project-card')).toHaveCount(4);
   const card = page.locator('[data-project="cadillac"]');
-  const row = await page.locator('.reels-pair').boundingBox();
+  const row = await page.locator('.reels-pair:not(.cadillac-feature)').boundingBox();
   const bounds = await card.boundingBox();
   expect(bounds!.y).toBeGreaterThan(row!.y + row!.height);
-  await expect(card.locator('.project-film-label')).toContainText('Automotive film');
+  await expect(card.locator('.project-film-label')).toContainText('Showcase reel');
   await expect(card.locator('.project-film-label')).not.toContainText('F&B');
   await card.scrollIntoViewIfNeeded();
   await card.locator('.project-visual').hover();
@@ -23,12 +23,13 @@ test('Cadillac follows the four commercials, previews silently and plays with cr
   await expect.poll(() => page.locator('.player-screen video').evaluate((v: HTMLVideoElement) => v.duration)).toBeGreaterThan(100);
   await page.keyboard.press('Escape');
   await page.getByRole('button', { name: 'Reels', exact: true }).click();
-  await expect(page.getByRole('button', { name: 'Play Cadillac Escalade', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Play Cadillac Escalade.*Showcase/ })).toBeVisible();
 });
 
 test('student title preview and film cover twelve seconds; SwiftSoft credits client script', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Motion', exact: true }).click();
+  await page.locator('.work-grid').evaluate(async grid => { await new Promise(requestAnimationFrame); await Promise.all(grid.getAnimations().map(animation => animation.finished.catch(() => {}))); });
   const card = page.locator('[data-project="students-intro"]');
   await card.locator('.project-visual').hover();
   await expect.poll(() => card.locator('video').evaluate((v: HTMLVideoElement) => v.duration)).toBeCloseTo(12, 0);
@@ -37,7 +38,7 @@ test('student title preview and film cover twelve seconds; SwiftSoft credits cli
   await page.keyboard.press('Escape');
   await page.getByRole('button', { name: 'AI filmmaking', exact: true }).click();
   await page.getByRole('button', { name: 'Play SwiftSoft', exact: true }).click();
-  await expect(page.locator('.player-credit')).toContainText('Script supplied by the client');
+  await expect(page.locator('.player-credit')).toContainText('based on a script from SwiftSoft for their launch');
   await expect(page.locator('.film-dialog')).not.toHaveClass(/is-immersive/);
 });
 
@@ -87,7 +88,7 @@ for (const mobile of [false, true]) {
       await page.goto(process.env.TEST_URL || 'http://127.0.0.1:3000');
       const poster = page.locator('.hero-poster');
       await expect.poll(() => poster.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)).toBe(true);
-      expect(await poster.evaluate((i: HTMLImageElement) => i.currentSrc)).toContain(`hero-v3-${device}-poster.webp`);
+      expect(await poster.evaluate((i: HTMLImageElement) => i.currentSrc)).toContain(`hero-v4-${device}-poster.webp`);
       await expect.poll(() => page.locator('.hero-video').evaluate((v: HTMLVideoElement) => v.readyState >= 2)).toBe(true);
       await page.getByRole('button', { name: 'Pause background video' }).click();
       for (const time of [0, 3.8, 5, 7.5, 9, 11.1, 13]) {
@@ -97,7 +98,7 @@ for (const mobile of [false, true]) {
       }
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     }
-    expect(requests.some(u => u.includes(`hero-v3-${device}.mp4`))).toBe(true);
+    expect(requests.some(u => u.includes(`hero-v4-${device}.mp4`))).toBe(true);
     expect(requests.some(u => u.includes(mobile ? '-desktop' : '-mobile'))).toBe(false);
     expect(requests.some(u => u.includes('hero-personal') || u.includes('archi'))).toBe(false);
     await context.close();
@@ -105,9 +106,9 @@ for (const mobile of [false, true]) {
 }
 
 test('hero loading and failed playback keep the new TENET poster', async ({ page }, testInfo) => {
-  await page.route('**/hero-v3-desktop.mp4', route => route.abort());
+  await page.route('**/hero-v4-desktop.mp4', route => route.abort());
   await page.goto('/');
-  await expect(page.locator('.hero-poster')).toHaveAttribute('src', '/media/hero-v3-desktop-poster.webp');
+  await expect(page.locator('.hero-poster')).toHaveAttribute('src', '/media/hero-v4-desktop-poster.webp');
   await expect(page.locator('.hero-video')).not.toHaveClass(/is-ready/);
   await page.screenshot({ path: testInfo.outputPath('hero-fallback.png') });
 });

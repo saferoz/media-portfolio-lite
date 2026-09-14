@@ -34,19 +34,18 @@ export const profile = {
 
 export const projects: Project[] = [
   {
-    id: 'swiftsoft', title: 'SwiftSoft', category: 'AI filmmaking',
-    description: 'An AI film for a SaaS ERP client.',
-    contribution: 'AI video production & editing',
-    credits: 'AI video production and editing: Raden Hanifa. Script supplied by the client.',
-    poster: '/media/swiftsoft-poster.webp', preview: '/media/swiftsoft-preview.mp4',
-    film: '/media/swiftsoft-film.mp4', duration: '00:55', aspect: 'landscape', placeholder: false,
+    id: 'spiderman', title: 'Spider-Man — A Cinematic Fan Concept', category: 'AI filmmaking',
+    description: 'Personal project · Seedance 2.0', cardLabel: 'AI fan concept',
+    contribution: 'Personal AI filmmaking concept · Seedance 2.0',
+    poster: '/media/spiderman-poster.webp', preview: '/media/spiderman-preview.mp4', film: '/media/spiderman-film.mp4', duration: '00:47', aspect: 'portrait', placeholder: false,
   },
   {
-    id: 'eltacoria-translation', title: 'El Tacoria — Translation', category: 'Reels',
-    description: 'F&B commercial', contribution: 'Concept, script, production & edit',
-    credits: 'Arabic script: Abdullah Alzahrani',
-    poster: '/media/eltacoria-translation-poster.webp', preview: '/media/eltacoria-translation-preview.mp4',
-    film: '/media/eltacoria-translation-film.mp4', duration: '00:14', aspect: 'portrait', placeholder: false,
+    id: 'swiftsoft', title: 'SwiftSoft', category: 'AI filmmaking',
+    description: 'An AI launch film for SwiftSoft, a SaaS ERP platform.', cardLabel: 'AI launch film',
+    contribution: 'AI video production & editing',
+    credits: 'AI filmmaking and editing by Raden Hanifa, based on a script from SwiftSoft for their launch.',
+    poster: '/media/swiftsoft-poster.webp', preview: '/media/swiftsoft-preview.mp4',
+    film: '/media/swiftsoft-film.mp4', duration: '00:55', aspect: 'landscape', placeholder: false,
   },
   {
     id: 'eltacoria-app', title: 'El Tacoria — App', category: 'Reels',
@@ -56,27 +55,33 @@ export const projects: Project[] = [
     film: '/media/eltacoria-app-film.mp4', duration: '00:25', aspect: 'portrait', placeholder: false,
   },
   {
+    id: 'eltacoria-translation', title: 'El Tacoria — Ramadan Campaign', category: 'Reels',
+    description: 'F&B commercial', contribution: 'Concept, production & edit',
+    poster: '/media/eltacoria-translation-poster.webp', preview: '/media/eltacoria-translation-preview.mp4',
+    film: '/media/eltacoria-translation-film.mp4', duration: '00:14', aspect: 'portrait', placeholder: false,
+  },
+  {
+    id: 'jury-cake', title: 'Jury Chocolate — Eid Showcase', category: 'Reels',
+    description: 'F&B · Product film', contribution: 'Planning, cinematography & edit',
+    poster: '/media/jury-cake-poster.webp', preview: '/media/jury-cake-preview.mp4',
+    film: '/media/jury-cake-film.mp4', duration: '00:18', aspect: 'portrait', placeholder: false,
+  },
+  {
     id: 'jury-eid', title: 'Jury Chocolate — Eid Gift', category: 'Reels',
     description: 'F&B · Product film', contribution: 'Planning, cinematography & edit',
     poster: '/media/jury-eid-poster.webp', preview: '/media/jury-eid-preview.mp4',
     film: '/media/jury-eid-film.mp4', duration: '00:22', aspect: 'portrait', placeholder: false,
   },
   {
-    id: 'jury-cake', title: 'Jury Chocolate — Cake', category: 'Reels',
-    description: 'F&B · Product film', contribution: 'Planning, cinematography & edit',
-    poster: '/media/jury-cake-poster.webp', preview: '/media/jury-cake-preview.mp4',
-    film: '/media/jury-cake-film.mp4', duration: '00:18', aspect: 'portrait', placeholder: false,
-  },
-  {
-    id: 'cadillac', title: 'Cadillac Escalade', category: 'Reels',
-    description: 'Automotive film', cardLabel: 'Automotive film', contribution: 'Concept, production, cinematography & editing',
+    id: 'cadillac', title: 'Cadillac Escalade — Showcase', category: 'Reels',
+    description: 'A short showcase of the Cadillac Escalade.', cardLabel: 'Showcase reel', contribution: 'Concept, production, cinematography & editing',
     credits: 'Concept, production, cinematography and editing: Raden Hanifa. In collaboration with Cadillac Alghanim Kuwait.',
-    poster: '/media/cadillac-escalade-v2-poster.webp', preview: '/media/cadillac-escalade-v2-preview.mp4',
+    poster: '/media/cadillac-escalade-v3-poster.webp', preview: '/media/cadillac-escalade-v2-preview.mp4',
     film: '/media/cadillac-escalade-v2-film.mp4', duration: '00:14', aspect: 'portrait', placeholder: false,
   },
   {
-    id: 'cadillac-second', title: 'Cadillac Escalade \u2014 Film 2', category: 'Reels',
-    description: 'Automotive film', cardLabel: 'Automotive film', contribution: 'Concept, production, cinematography & editing',
+    id: 'cadillac-second', title: 'Cadillac Escalade — Walkthrough', category: 'Reels',
+    description: 'A sales-led introduction to the then-new Cadillac Escalade.', cardLabel: 'Walkthrough reel', contribution: 'Concept, production, cinematography & editing',
     credits: 'Concept, production, cinematography and editing: Raden Hanifa. In collaboration with Cadillac Alghanim Kuwait.',
     poster: '/media/cadillac-poster.webp', preview: '/media/cadillac-preview.mp4',
     film: '/media/cadillac-film.mp4', duration: '01:41', aspect: 'portrait', placeholder: false,
@@ -102,14 +107,8 @@ export const projects: Project[] = [
     projectHref: '/work/oxfordsaudia-educational-series',
     poster: '/media/hazardous-v2-poster.webp', preview: '/media/hazardous-preview.mp4', film: '/media/hazardous-film.mp4', duration: '01:47', aspect: 'portrait', placeholder: false,
   },
-  {
-    id: 'spiderman', title: 'Spider-Man — A Cinematic Fan Concept', category: 'AI filmmaking',
-    description: 'Personal project · Seedance 2.0', cardLabel: 'AI fan concept',
-    contribution: 'Personal AI filmmaking concept · Seedance 2.0',
-    poster: '/media/spiderman-poster.webp', preview: '/media/spiderman-preview.mp4', film: '/media/spiderman-film.mp4', duration: '00:47', aspect: 'portrait', placeholder: false,
-  },
   { id: 'students-intro', title: 'Get to Know Our Students \u2014 Title Intro', category: 'Motion', description: 'Animated series title', contribution: 'Motion graphics', cardLabel: 'Title sequence', poster: '/media/students-intro-poster.webp', preview: '/media/students-intro-v2-preview.mp4', film: '/media/students-intro-v2-film.mp4', duration: '00:12', projectHref: '/work/oxfordsaudia-interviews', aspect: 'landscape', placeholder: false },
-  { id: 'captains-intro', title: 'Meet Our Captains \u2014 Title Intro', category: 'Motion', description: 'Animated series title', contribution: 'Motion graphics', cardLabel: 'Title sequence', poster: '/media/captains-intro-poster.webp', preview: '/media/captains-intro-preview.mp4', film: '/media/captains-intro-film.mp4', duration: '00:05', projectHref: '/work/oxfordsaudia-interviews', aspect: 'landscape', placeholder: false },
+  { id: 'captains-intro', title: 'Meet Our Captains \u2014 Title Intro', category: 'Motion', description: 'Animated series title', contribution: 'Motion graphics', cardLabel: 'Title sequence', poster: '/media/captains-intro-poster.webp', preview: '/media/captains-intro-v2-preview.mp4', film: '/media/captains-intro-v2-film.mp4', duration: '00:08', projectHref: '/work/oxfordsaudia-interviews', aspect: 'landscape', placeholder: false },
 
 ];
 

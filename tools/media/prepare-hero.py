@@ -5,9 +5,9 @@ from pathlib import Path
 import subprocess, json, imageio_ffmpeg
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'public/media'
-TMP = ROOT / '.local/hero-v3'
+TMP = ROOT / '.local/hero-v4'
 FF = imageio_ffmpeg.get_ffmpeg_exe()
-VERSION = 'hero-v3'
+VERSION = 'hero-v4'
 # name, source, in-point, horizontal crop fraction; every shot is four seconds.
 # TENET preserves the preceding recipe exactly, including authored mobile framing.
 TIMELINES = {
@@ -20,8 +20,9 @@ TIMELINES = {
  'mobile': [
   ('TENET', 'E:/TEMPP DELL optionss/tenet vertical.mp4', 0, .25),
   ('Preflight inspection', 'E:/TEMPP DELL optionss/preflight inspection clip vertical.mp4', 0, .5),
-  ('Eating', 'E:/TEMPP DELL optionss/Eating Final.mp4', 3, .5),
   ('Spider-Man', 'E:/Gen AI Projects/Spiderman-v2/hf_20260803_221432_eb56c480-8903-4090-839a-47ccf212ee14.mp4', 3, .5),
+  ('ARCHI', 'E:/TEMPP DELL optionss/Eating Final.mp4', 3, .5),
+
  ],
 }
 def run(args):

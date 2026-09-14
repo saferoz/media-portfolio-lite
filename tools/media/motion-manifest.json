@@ -11,9 +11,10 @@
     {
       "source": "captains-film.mp4",
       "start": 12,
-      "duration": 5,
+      "duration": 8,
       "posterTime": 15,
-      "output": "captains-intro"
+      "output": "captains-intro-v2",
+      "posterOutput": "captains-intro-poster.webp"
     }
   ]
 }

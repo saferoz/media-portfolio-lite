@@ -69,9 +69,9 @@ These scripts require Pillow and imageio-ffmpeg; source paths are machine-specif
 
 Read [PROJECT_STATE.md](PROJECT_STATE.md) first for the current site, confirmed credits, per-device timelines, validation and deployment status. Update that document after meaningful changes.
 
-The hero uses four-second shots and 0.35-second dissolves (14.95-second timeline). Desktop: TENET, simulator, Rakan preflight, Diriyah. Mobile: authored TENET, vertical preflight, Eating, Spider-Man. The opening TENET framing is unchanged. See `tools/media/hero-manifest.json` for source in-points and crop values.
+The hero uses four-second shots and 0.35-second dissolves (14.95-second timeline). Desktop: TENET, simulator, Rakan preflight, Diriyah. Mobile: authored TENET, vertical preflight, Spider-Man, ARCHI. The opening TENET framing is unchanged. See `tools/media/hero-manifest.json` for source in-points and crop values.
 
-`hero-v3-desktop.mp4` stays within 3.5 MB at 1280x720; `hero-v3-mobile.mp4` stays within 1.8 MB at 540x960. Matching versioned posters load first and only the matching video rendition is requested.
+`hero-v4-desktop.mp4` stays within 3.5 MB at 1280x720; `hero-v4-mobile.mp4` stays within 1.8 MB at 540x960. Matching versioned posters load first and only the matching video rendition is requested.
 
 `tools/media/prepare-refinement.py` prepares the 12?24s student title excerpt, 41s hazardous poster, and Cadillac film/poster/silent preview; `refinement-manifest.json` records provenance and sizes. The hazardous hover still starts at 75s.
 
@@ -98,7 +98,7 @@ Build first. `npm test` runs Chromium against an existing preview or starts the 
 
 Browser setup on another machine: `npx playwright install chromium webkit`.
 
-38 Chromium tests passed on 2026-09-14; the production build also passed. WebKit was attempted but exits before page creation on this Windows host, including outside the sandbox; it is **not** claimed as tested. `test:webkit` remains available for a working host. Browser emulation is not a physical-phone test.
+The preceding pass had 38 Chromium tests passing on 2026-09-14; the production build also passed. WebKit was attempted but exits before page creation on this Windows host, including outside the sandbox; it is **not** claimed as tested. `test:webkit` remains available for a working host. Browser emulation is not a physical-phone test.
 
 Screenshots and the single-run lab performance report are under `.local/` (ignored). The performance script uses a cold Chromium cache, 4× CPU throttle and 1.6 Mbps down/150 ms latency. This is a local lab measurement, not a production performance guarantee; resource timing totals can omit ongoing streaming transfers.
 
@@ -111,3 +111,7 @@ No deployment was performed. Set `NEXT_PUBLIC_SITE_URL` to the final origin befo
 Motion intro extracts use seconds 12-17 of the student and captain interview derivatives, with five-second audio-enabled films and separate silent previews. Their posters use source time 15 seconds.
 
 The primary Escalade sample is rendered by `tools/media/prepare-cadillac.py` (see `cadillac-manifest.json`); the prior long film remains Film 2. Hero-v3 uses Diriyah 7?11s with its embedded bars cropped out, and the user-specified Spider-Man-v2 source at 3?7s.
+
+The polish pass adds an expandable Reels viewer with swipe/wheel/keyboard navigation, equally sized mobile commercial pairs, the homepage interview comparison, captain question-card completion and revised GCC-focused copy. See `docs/COPY_STRATEGY.md` for the audience and writing framework. `PROJECT_STATE.md` owns current validation results.
+
+Polish validation: production build and 45 Chromium tests passed. Throttled local mobile run: LCP 720ms, CLS 0.0007794, no full-film request. See PROJECT_STATE.md for conditions and limits.
