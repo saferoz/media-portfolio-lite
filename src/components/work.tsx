@@ -16,14 +16,14 @@ export function Work() {
   const grading = <section className="grading-section" aria-labelledby="grading-heading">
     <div className="grading-heading"><h3 id="grading-heading">Color grading.</h3><p>Compare the camera image with the finished grade.</p></div>
     <GradingComparison />
-    <div className="interview-comparison" data-reveal="image"><div className="grading-heading"><h3>Skin tones, in balance.</h3><p>A frame from Get to Know Our Students.</p></div><GradingComparison before="/media/interview-before.webp" after="/media/interview-after.webp" subject="the OxfordSaudia student interview" label="Reveal original student interview image" /></div>
+    <div className="interview-comparison"><div className="grading-heading"><h3>Skin tones, in balance.</h3><p>A frame from Get to Know Our Students.</p></div><GradingComparison before="/media/interview-before.webp" after="/media/interview-after.webp" subject="the OxfordSaudia student interview" label="Reveal original student interview image" /></div>
     <div className="grading-film-grid">{[gradingFilms[0], getProject('interview-grade')].map(project => <ProjectCard key={project.id} project={project} />)}</div>
     <Link className="grading-project-link" href="/color-grading">View color grading <ArrowUpRightIcon size={20} /></Link>
   </section>;
   return <section id="work" className="work-section page-width" aria-labelledby="work-heading">
     <div className="section-heading" data-reveal><h2 id="work-heading">Selected <span>work.</span></h2><p>Commercial reels, interviews,<br />and work made with AI.</p></div>
     <div className="work-toolbar"><div className="work-filters" role="group" aria-label="Filter work by editing category">
-      {categories.map(category => <button key={category} aria-pressed={filter === category} onClick={event => { settleScroll(); setPreview(null); setFilter(category); if (!reducedMotion && event.detail !== 0) requestAnimationFrame(() => { const grid = gridRef.current; if (!grid) return; grid.getAnimations().forEach(a => a.cancel()); grid.animate([{ opacity: .55, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 220, easing: 'cubic-bezier(.23,1,.32,1)' }); }); }}>{category === 'All work' ? category : categoryLabel(category)}</button>)}
+      {categories.map(category => <button key={category} aria-pressed={filter === category} onClick={event => { settleScroll(); setPreview(null); setFilter(category); if (!reducedMotion && event.detail !== 0) requestAnimationFrame(() => { const grid = gridRef.current; if (!grid) return; grid.getAnimations().forEach(a => a.cancel()); grid.animate([{ opacity: .85 }, { opacity: 1 }], { duration: 220, easing: 'cubic-bezier(.23,1,.32,1)' }); }); }}>{category === 'All work' ? category : categoryLabel(category)}</button>)}
     </div></div>
     <div ref={gridRef} className={`work-grid ${filter !== 'All work' ? 'is-filtered' : ''}`}>
       {filter === 'All work' ? <>

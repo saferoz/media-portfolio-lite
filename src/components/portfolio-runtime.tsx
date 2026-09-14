@@ -63,19 +63,35 @@ export function PortfolioRuntime({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (reducedMotion) return;
     const targets = document.querySelectorAll<HTMLElement>('[data-reveal]');
+    const animations = new Set<Animation>();
+    const cancellations: Array<() => void> = [];
+    // Arm only content below the viewport. Restored scroll positions and content
+    // already being read must never jump back into an entrance animation.
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         const element = entry.target as HTMLElement;
-        const frames = element.dataset.reveal === 'image' || element.dataset.reveal === 'card'
-          ? [{ clipPath: 'inset(0 0 18% 0)', opacity: 0.3, transform: 'translateY(32px)' }, { clipPath: 'inset(0 0 0 0)', opacity: 1, transform: 'translateY(0)' }]
-          : [{ opacity: 0.35, transform: 'translateY(24px)' }, { opacity: 1, transform: 'translateY(0)' }];
-        element.animate(frames, { duration: element.dataset.reveal === 'chapter' ? 450 : 750, delay: element.dataset.reveal === 'card' ? Array.from(element.parentElement?.children ?? []).indexOf(element) % 4 * 60 : 0, easing: 'cubic-bezier(.23,1,.32,1)' });
         observer.unobserve(element);
+        if (entry.boundingClientRect.top < 0) continue;
+        const visual = element.dataset.reveal === 'card' || element.dataset.reveal === 'image';
+        const target = visual ? element.querySelector<HTMLElement>('.project-visual > img, :scope > img') : element;
+        if (!target || element.matches(':hover, :focus-within')) continue;
+        // Animate the image inside a fixed frame, never its hit target or caption.
+        const animation = target.animate(visual
+          ? [{ transform: 'scale(1.025)' }, { transform: 'scale(1)' }]
+          : [{ opacity: .85, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }],
+          { duration: visual ? 600 : 350, easing: 'cubic-bezier(.23,1,.32,1)' });
+        animations.add(animation);
+        const stop = () => animation.cancel();
+        element.addEventListener('pointerenter', stop, { once: true });
+        element.addEventListener('focusin', stop, { once: true });
+        cancellations.push(() => { element.removeEventListener('pointerenter', stop); element.removeEventListener('focusin', stop); });
+        void animation.finished.catch(() => {}).finally(() => animations.delete(animation));
       }
-    }, { threshold: 0.1 });
-    targets.forEach(element => observer.observe(element));
-    return () => { observer.disconnect(); targets.forEach(element => element.getAnimations().forEach(animation => animation.cancel())); };
+    }, { threshold: 0 });
+    targets.forEach(element => { if (element.getBoundingClientRect().top >= innerHeight) observer.observe(element); });
+    return () => { observer.disconnect(); animations.forEach(animation => animation.cancel()); cancellations.forEach(cancel => cancel()); };
+
   }, [reducedMotion]);
 
   const settleScroll = useCallback(() => {
