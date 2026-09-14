@@ -1,9 +1,7 @@
 {
-  "duration": 14.95,
-  "transitionSeconds": 0.35,
   "fps": 24,
   "audio": false,
-  "version": "hero-v4",
+  "version": "desktop-v4-mobile-v5",
   "devices": {
     "desktop": {
       "width": 1280,
@@ -56,9 +54,21 @@
           "name": "hero-v4-desktop-poster.webp",
           "bytes": 42180
         }
+      ],
+      "duration": 14.95,
+      "transitions": [
+        0.35,
+        0.35,
+        0.35
       ]
     },
     "mobile": {
+      "duration": 15.5,
+      "transitions": [
+        0.35,
+        0.15,
+        0
+      ],
       "width": 540,
       "height": 960,
       "budgetBytes": 1800000,
@@ -70,7 +80,7 @@
           "seconds": 4,
           "cropFraction": 0.25,
           "sourceCrop": null,
-          "timelineStart": 0.0
+          "timelineStart": 0
         },
         {
           "name": "Preflight inspection",
@@ -88,7 +98,7 @@
           "seconds": 4,
           "cropFraction": 0.5,
           "sourceCrop": null,
-          "timelineStart": 7.3
+          "timelineStart": 7.5
         },
         {
           "name": "ARCHI",
@@ -97,16 +107,16 @@
           "seconds": 4,
           "cropFraction": 0.5,
           "sourceCrop": null,
-          "timelineStart": 10.95
+          "timelineStart": 11.5
         }
       ],
       "files": [
         {
-          "name": "hero-v4-mobile.mp4",
-          "bytes": 1624310
+          "name": "hero-v5-mobile.mp4",
+          "bytes": 1673600
         },
         {
-          "name": "hero-v4-mobile-poster.webp",
+          "name": "hero-v5-mobile-poster.webp",
           "bytes": 19536
         }
       ]

@@ -32,7 +32,7 @@ export function Hero() {
 
   useEffect(() => {
     if (reducedMotion || saveData || !inView) return;
-    const timer = setTimeout(() => setSource(matchMedia('(max-width: 767px)').matches ? '/media/hero-v4-mobile.mp4' : '/media/hero-v4-desktop.mp4'), 350);
+    const timer = setTimeout(() => setSource(matchMedia('(max-width: 767px)').matches ? '/media/hero-v5-mobile.mp4' : '/media/hero-v4-desktop.mp4'), 350);
     return () => clearTimeout(timer);
   }, [reducedMotion, saveData, inView]);
 
@@ -50,14 +50,14 @@ export function Hero() {
     <section className="hero" id="top" ref={container} aria-labelledby="hero-heading">
       <span id="nav-sentinel" aria-hidden="true" />
       <motion.div className="hero-media" style={reducedMotion ? undefined : { transform }}>
-        <picture><source media="(max-width: 767px)" srcSet="/media/hero-v4-mobile-poster.webp" /><img src="/media/hero-v4-desktop-poster.webp" alt="Raden in a cinematic AI concept film" width="1280" height="720" fetchPriority="high" loading="eager" className="hero-poster" /></picture>
+        <picture><source media="(max-width: 767px)" srcSet="/media/hero-v5-mobile-poster.webp" /><img src="/media/hero-v4-desktop-poster.webp" alt="Raden in a cinematic AI concept film" width="1280" height="720" fetchPriority="high" loading="eager" className="hero-poster" /></picture>
         <video ref={videoRef} src={source} className={`hero-video ${ready && !reducedMotion && !saveData ? 'is-ready' : ''}`} muted loop playsInline preload="none" aria-hidden="true" onPlaying={() => setReady(true)} onError={() => setReady(false)} />
       </motion.div>
       <div className="hero-shade" />
       <motion.div className="hero-content page-width" style={reducedMotion ? undefined : { transform: contentTransform, opacity: contentOpacity }}>
         <div className="hero-heading-wrap">
           <h1 id="hero-heading"><span>From idea</span><span>to <em>final frame.</em></span></h1>
-          <p className="hero-description">I’m Raden Hanifa. I film, edit and create with AI, from commercial reels to aviation stories.</p>
+          <p className="hero-description">I’m Raden Hanifa. I shoot and edit commercial reels, interviews and aviation stories. I also make AI films.</p>
           <a className="hero-cta" href="#work">Explore work <ArrowDownRightIcon size={23} /></a>
         </div>
       </motion.div>

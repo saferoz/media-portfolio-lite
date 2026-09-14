@@ -67,10 +67,10 @@ export function PortfolioRuntime({ children }: { children: React.ReactNode }) {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         const element = entry.target as HTMLElement;
-        const frames = element.dataset.reveal === 'image'
-          ? [{ clipPath: 'inset(0 0 12% 0)', opacity: 0.5 }, { clipPath: 'inset(0 0 0 0)', opacity: 1 }]
+        const frames = element.dataset.reveal === 'image' || element.dataset.reveal === 'card'
+          ? [{ clipPath: 'inset(0 0 18% 0)', opacity: 0.3, transform: 'translateY(32px)' }, { clipPath: 'inset(0 0 0 0)', opacity: 1, transform: 'translateY(0)' }]
           : [{ opacity: 0.35, transform: 'translateY(24px)' }, { opacity: 1, transform: 'translateY(0)' }];
-        element.animate(frames, { duration: element.dataset.reveal === 'chapter' ? 450 : 750, easing: 'cubic-bezier(.23,1,.32,1)' });
+        element.animate(frames, { duration: element.dataset.reveal === 'chapter' ? 450 : 750, delay: element.dataset.reveal === 'card' ? Array.from(element.parentElement?.children ?? []).indexOf(element) % 4 * 60 : 0, easing: 'cubic-bezier(.23,1,.32,1)' });
         observer.unobserve(element);
       }
     }, { threshold: 0.1 });

@@ -88,7 +88,7 @@ for (const mobile of [false, true]) {
       await page.goto(process.env.TEST_URL || 'http://127.0.0.1:3000');
       const poster = page.locator('.hero-poster');
       await expect.poll(() => poster.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)).toBe(true);
-      expect(await poster.evaluate((i: HTMLImageElement) => i.currentSrc)).toContain(`hero-v4-${device}-poster.webp`);
+      expect(await poster.evaluate((i: HTMLImageElement) => i.currentSrc)).toContain(`hero-v${device === 'mobile' ? 5 : 4}-${device}-poster.webp`);
       await expect.poll(() => page.locator('.hero-video').evaluate((v: HTMLVideoElement) => v.readyState >= 2)).toBe(true);
       await page.getByRole('button', { name: 'Pause background video' }).click();
       for (const time of [0, 3.8, 5, 7.5, 9, 11.1, 13]) {
@@ -98,7 +98,7 @@ for (const mobile of [false, true]) {
       }
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     }
-    expect(requests.some(u => u.includes(`hero-v4-${device}.mp4`))).toBe(true);
+    expect(requests.some(u => u.includes(`hero-v${device === 'mobile' ? 5 : 4}-${device}.mp4`))).toBe(true);
     expect(requests.some(u => u.includes(mobile ? '-desktop' : '-mobile'))).toBe(false);
     expect(requests.some(u => u.includes('hero-personal') || u.includes('archi'))).toBe(false);
     await context.close();

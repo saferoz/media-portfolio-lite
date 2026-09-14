@@ -27,3 +27,6 @@ Voice: conversational, specific and understated. Project titles name the client 
 Unselected headline alternatives: "Filming. Editing. AI filmmaking." is more literal but less distinctive; "Video work by Raden Hanifa." is direct but loses the breadth of the current headline. Keep the existing headline and put specificity in the description. Contact alternative "Tell me about the role or project" is appropriate for a direct email action; the existing "Request full portfolio" still accurately describes its prepared email.
 
 Review checklist: Can someone tell what the project is? Whose script was used? What did Raden do? Does the CTA explain what happens? Are geography and availability claims supported? Does the sentence sound natural aloud?
+
+
+Feedback update: the hero now explicitly separates filmed work from AI projects: ?I shoot and edit commercial reels, interviews and aviation stories. I also make AI films.? The user removed the secondary ?Discuss a project or role? footer link; ?Request full portfolio? remains the primary action.

@@ -546,3 +546,32 @@ h1, h2, h3 { font-weight: 500; }
 .contact-region { color: var(--muted); font-size: 13px; line-height: 1.6; margin-top: 12px; }
 .contact-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 28px; margin-top: 26px; }
 .contact-actions .grading-project-link, .contact-actions .text-link { margin-top: 0; }
+
+/* Compact controls keep the image dominant while preserving 44px hit targets. */
+.project-play, .reels-pair .project-play { width: 48px; height: 48px; background: #07132135; border-color: #ffffff50; }
+.player-actions { gap: 4px; }
+.player-close, .reel-expand { width: 44px; height: 44px; min-height: 44px; padding: 0; border: 0; background: transparent; }
+.reel-expand span { display: none; }
+.player-heading { position: relative; padding-right: 100px; min-height: 44px; }
+.player-heading .player-actions { position: absolute; top: 0; right: 0; }
+.player-close:focus:not(:focus-visible) { outline: none; }
+.film-dialog:focus { outline: none; }
+.immersive-toolbar .player-close, .immersive-toolbar .reel-expand { background: #03080e35; }
+.reel-navigation { opacity: .18; transition: opacity 160ms var(--ease); }
+.controls-active .reel-navigation, .reel-navigation:has(:focus-visible) { opacity: 1; }
+@media (hover: hover) and (pointer: fine) { .reel-navigation:hover { opacity: 1; } }
+.reel-navigation button { background: #03080e35; border-color: #ffffff30; }
+.immersive-controls { background: #03080ea6; }
+.is-reel-view .player-shell { position: relative; overflow: hidden; }
+.reel-outgoing { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #03080e; pointer-events: none; }
+@media (min-width: 768px) {
+  .grade-comparison { max-width: calc((100svh - 220px) * 16 / 9); margin-inline: auto; }
+  .comparison-caption { max-width: calc((100svh - 220px) * 16 / 9); margin-inline: auto; }
+}
+@media (max-width: 767px) {
+  .player-heading { flex-direction: row; gap: 0; margin-bottom: 16px; }
+  .player-heading h2 { font-size: 20px; }
+  .player-heading .player-credit { font-size: 11px; }
+  .player-screen video { max-height: calc(100svh - 180px); }
+}
+@media (prefers-reduced-motion: reduce) { .reel-navigation { transition: none; } }

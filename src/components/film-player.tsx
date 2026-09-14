@@ -21,15 +21,17 @@ export default function FilmPlayer({ project: initialProject, onClose }: { proje
   const [status, setStatus] = useState<'loading' | 'playing' | 'paused' | 'blocked' | 'error'>('loading');
 
   const immersive = project.immersive === true || expanded;
+  const customControls = immersive || isReel;
+  const transitionBusy = useRef(false);
   const controlsRef = useRef<HTMLDivElement>(null);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const [controlsVisible, setControlsVisible] = useState(true);
+  const [controlsVisible, setControlsVisible] = useState(false);
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [muted, setMuted] = useState(false);
 
   function revealControls() {
-    if (!immersive) return;
+    if (!customControls) return;
     setControlsVisible(true);
     clearTimeout(hideTimer.current);
     hideTimer.current = setTimeout(() => {
@@ -47,7 +49,8 @@ export default function FilmPlayer({ project: initialProject, onClose }: { proje
     const close = closeRef.current;
     const closeOnTouch = (event: TouchEvent) => { event.preventDefault(); onClose(); };
     close?.addEventListener('touchend', closeOnTouch, { passive: false });
-    closeRef.current?.focus({ preventScroll: true });
+    if (initialProject.category !== 'Reels') closeRef.current?.focus({ preventScroll: true });
+    else dialog.focus({ preventScroll: true });
     return () => { close?.removeEventListener('touchend', closeOnTouch); dialog.close(); document.documentElement.classList.remove('film-open'); };
   }, [onClose]);
 
@@ -55,7 +58,7 @@ export default function FilmPlayer({ project: initialProject, onClose }: { proje
     const video = videoRef.current;
     if (!video) return;
     let disposed = false;
-    setStatus('loading'); setTime(0); setDuration(0); setControlsVisible(true);
+    setStatus('loading'); setTime(0); setDuration(0); setControlsVisible(false);
     video.src = project.film!;
     video.play().catch(error => {
       if (!disposed && error?.name !== 'AbortError') setStatus(error?.name === 'NotAllowedError' ? 'blocked' : 'error');
@@ -89,13 +92,25 @@ export default function FilmPlayer({ project: initialProject, onClose }: { proje
   function nextReel(direction: number, animate = true) {
     const next = reels[reelIndex + direction];
     if (!expanded || !next) return;
-    videoRef.current?.pause();
-    setProject(next);
-    if (animate && !reduce()) {
-      const screen = screenRef.current;
-      screen?.getAnimations().forEach(a => a.cancel());
-      screen?.animate([{ transform: `translateY(${direction * 32}px)`, opacity: .45 }, { transform: 'translateY(0)', opacity: 1 }], { duration: 220, easing: 'cubic-bezier(.23,1,.32,1)' });
-    }
+    if (transitionBusy.current) return;
+    const screen = screenRef.current;
+    const video = videoRef.current;
+    if (!screen || !video) return;
+    setControlsVisible(false);
+    if (!animate || reduce()) { video.pause(); setProject(next); return; }
+    // Keep only a still of the outgoing frame: no second streaming video.
+    const snapshot = document.createElement('canvas');
+    snapshot.width = video.videoWidth || 540; snapshot.height = video.videoHeight || 960;
+    try { snapshot.getContext('2d')?.drawImage(video, 0, 0, snapshot.width, snapshot.height); } catch { /* Poster remains underneath if no decoded frame is available. */ }
+    snapshot.className = 'reel-outgoing';
+    screen.parentElement?.append(snapshot);
+    video.pause(); setProject(next);
+    transitionBusy.current = true;
+    const options = { duration: 280, easing: 'cubic-bezier(.23,1,.32,1)' };
+    const outgoing = snapshot.animate([{ transform: 'translateY(0)' }, { transform: `translateY(${-direction * 100}%)` }], options);
+    screen.getAnimations().forEach(a => a.cancel());
+    const incoming = screen.animate([{ transform: `translateY(${direction * 100}%)` }, { transform: 'translateY(0)' }], options);
+    void Promise.allSettled([outgoing.finished, incoming.finished]).then(() => { snapshot.remove(); transitionBusy.current = false; });
   }
 
   function onWheel(event: React.WheelEvent) {
@@ -141,23 +156,23 @@ export default function FilmPlayer({ project: initialProject, onClose }: { proje
     try { await video.play(); } catch (error) { if (!(error instanceof DOMException && error.name === 'AbortError')) setStatus('error'); }
   }
 
-  return <dialog className={`film-dialog ${immersive ? 'is-immersive' : ''} ${expanded ? 'is-reel-view' : ''}`} ref={dialogRef} aria-label={immersive ? project.title : undefined} aria-labelledby={immersive ? undefined : 'film-title'} onPointerMove={revealControls} onPointerDown={revealControls} onWheel={onWheel} onKeyDown={event => { revealControls(); if (expanded && !(event.target as HTMLElement).closest('input') && ['ArrowDown', 'ArrowUp'].includes(event.key)) { event.preventDefault(); nextReel(event.key === 'ArrowDown' ? 1 : -1, false); } }} onFocusCapture={revealControls} onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
+  return <dialog className={`film-dialog ${immersive ? 'is-immersive' : ''} ${expanded ? 'is-reel-view' : ''} ${controlsVisible ? 'controls-active' : ''}`} tabIndex={-1} ref={dialogRef} aria-label={immersive ? project.title : undefined} aria-labelledby={immersive ? undefined : 'film-title'} onPointerMove={revealControls} onPointerDown={revealControls} onWheel={onWheel} onKeyDown={event => { revealControls(); if (expanded && !(event.target as HTMLElement).closest('input') && ['ArrowDown', 'ArrowUp'].includes(event.key)) { event.preventDefault(); nextReel(event.key === 'ArrowDown' ? 1 : -1, false); } }} onFocusCapture={event => { if (event.target !== dialogRef.current) revealControls(); }} onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
     <div className="player-shell">
       <div className={immersive ? 'immersive-toolbar' : 'player-heading'}>
         {!immersive && <div><h2 id="film-title">{project.title}</h2><p>{project.contribution}</p>{project.credits && <p className="player-credit">{project.credits}</p>}</div>}
         <div className="player-actions">
           {isReel && <button className="reel-expand" aria-label={expanded ? 'Show reel details' : 'Expand reel'} onClick={event => toggleExpanded(event.detail !== 0)}>{expanded ? <ArrowsInSimpleIcon size={20} /> : <ArrowsOutSimpleIcon size={20} />}<span>{expanded ? 'Details' : 'Reel view'}</span></button>}
-          <button className="player-close" ref={closeRef} aria-label="Close film" onClick={onClose}><XIcon size={25} /></button>
+          <button className="player-close" ref={closeRef} aria-label="Close film" onClick={onClose}><XIcon size={20} /></button>
         </div>
       </div>
       <div ref={screenRef} className={`player-screen ${project.aspect === 'portrait' ? 'portrait-player' : ''}`}>
-        <video ref={videoRef} loop={expanded} poster={project.poster} controls={!immersive} playsInline preload="none" aria-label={`${project.title} full film`} onClick={() => { if (expanded) { if (videoRef.current?.paused) void play(); else videoRef.current?.pause(); } }} onPlaying={() => { setStatus('playing'); revealControls(); }} onTimeUpdate={immersive ? () => setTime(videoRef.current?.currentTime ?? 0) : undefined} onLoadedMetadata={() => setDuration(videoRef.current?.duration ?? 0)} onVolumeChange={() => setMuted(videoRef.current?.muted ?? false)} onWaiting={() => setStatus('loading')} onPause={() => setStatus(current => current === 'error' ? 'error' : 'paused')} onError={() => setStatus('error')} onEnded={() => setStatus('paused')}>
+        <video ref={videoRef} loop={expanded} poster={project.poster} controls={!customControls} playsInline preload="none" aria-label={`${project.title} full film`} onClick={() => { if (isReel) { revealControls(); if (videoRef.current?.paused) void play(); else videoRef.current?.pause(); } }} onPlaying={() => { setStatus('playing'); }} onTimeUpdate={customControls ? () => setTime(videoRef.current?.currentTime ?? 0) : undefined} onLoadedMetadata={() => setDuration(videoRef.current?.duration ?? 0)} onVolumeChange={() => setMuted(videoRef.current?.muted ?? false)} onWaiting={() => setStatus('loading')} onPause={() => setStatus(current => current === 'error' ? 'error' : 'paused')} onError={() => setStatus('error')} onEnded={() => setStatus('paused')}>
           {project.captions && <track kind="captions" src={project.captions} srcLang="en" label="English" default />}
         </video>
         {status === 'loading' && <div className="player-status" role="status">Loading film<span className="loading-ellipsis">…</span></div>}
         {status === 'blocked' && <button className="player-retry" onClick={() => play()}><PlayIcon size={20} weight="fill" /> Play film</button>}
         {status === 'error' && <div className="player-error" role="alert"><p>The film couldn’t load.</p><button onClick={() => play(true)}><ArrowClockwiseIcon size={18} /> Try again</button></div>}
-        {immersive && <div ref={controlsRef} className={`immersive-controls ${controlsVisible || status !== 'playing' ? 'is-visible' : ''}`} onBlurCapture={revealControls} role="group" aria-label="Playback controls">
+        {customControls && <div ref={controlsRef} className={`immersive-controls ${controlsVisible || status === 'paused' || status === 'blocked' ? 'is-visible' : ''}`} onBlurCapture={revealControls} role="group" aria-label="Playback controls">
           <button aria-label={status === 'playing' ? 'Pause film' : 'Play film'} onClick={() => { if (videoRef.current?.paused) void play(); else videoRef.current?.pause(); }}>{status === 'playing' ? <PauseIcon size={22} weight="fill" /> : <PlayIcon size={22} weight="fill" />}</button>
           <input aria-label="Seek film" type="range" min="0" max={Number.isFinite(duration) ? duration : 0} step="0.1" value={time} aria-valuetext={`${Math.floor(time)} of ${Math.floor(duration)} seconds`} onChange={event => { if (videoRef.current) videoRef.current.currentTime = Number(event.target.value); setTime(Number(event.target.value)); }} />
           <span className="playback-time">{Math.floor(time)} / {Math.floor(duration)}s</span>

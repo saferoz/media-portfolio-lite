@@ -113,8 +113,8 @@ test('contact invites the full craft and both roles and projects', async ({ page
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await expect(page.locator('.contact-intro')).toContainText('filming, cinematography, editing, color grading and AI filmmaking');
-  const action = page.getByRole('link', { name: 'Discuss a project or role', exact: true });
-  await expect(action).toHaveAttribute('href', 'mailto:raden@radenhanifa.com?subject=Project%20or%20role%20enquiry');
+  await expect(page.getByRole('link', { name: 'Discuss a project or role', exact: true })).toHaveCount(0);
+  const action = page.getByRole('link', { name: 'Request full portfolio', exact: true });
   await expect(page.getByRole('link', { name: 'Request full portfolio', exact: true })).toHaveAttribute('href', /Full%20portfolio%20request/);
   await action.scrollIntoViewIfNeeded();
   await page.screenshot({ path: info.outputPath('contact-mobile.png') });
