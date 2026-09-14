@@ -7,10 +7,10 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: 'Raden Hanifa — Video editor & multimedia creative',
-  description: 'Selected films, short-form edits, and AI filmmaking by Raden Hanifa. A cinematic eye, from the first idea to the final frame.',
+  description: 'Explore Raden Hanifa’s work in filming, cinematography, editing, color grading and AI filmmaking. Watch selected projects or request the full portfolio.',
   openGraph: {
     title: 'Raden Hanifa — Selected work',
-    description: 'Video editing, cinematography & AI filmmaking.',
+    description: 'Filming, editing, color grading and AI filmmaking by Raden Hanifa.',
     type: 'website',
     images: [{ url: '/media/swiftsoft-poster.webp', width: 1600, height: 900, alt: 'A frame from SwiftSoft by Raden Hanifa' }],
   },
