@@ -1,0 +1,31 @@
+{
+  "primary": {
+    "source": "D:/Downloads/CADILLAC ESCALADE 2ND SAMPLE BY RADEN (With CAR Sound) (1).mp4",
+    "previewStart": 3,
+    "previewSeconds": 6,
+    "posterTime": 1,
+    "filmAudio": true,
+    "previewAudio": false,
+    "sourceSeconds": 13.59,
+    "encodedSeconds": 13.55
+  },
+  "second": {
+    "source": "D:/Downloads/Cadillac.mp4",
+    "film": "cadillac-film.mp4",
+    "seconds": 101.08
+  },
+  "files": [
+    {
+      "name": "cadillac-escalade-v2-film.mp4",
+      "bytes": 4781830
+    },
+    {
+      "name": "cadillac-escalade-v2-poster.webp",
+      "bytes": 89672
+    },
+    {
+      "name": "cadillac-escalade-v2-preview.mp4",
+      "bytes": 589689
+    }
+  ]
+}

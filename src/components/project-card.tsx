@@ -68,7 +68,7 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
     {!project.placeholder && <video ref={videoRef} className={`card-preview ${active && previewReady ? 'is-ready' : ''}`} muted loop playsInline preload="none" aria-hidden="true" onPlaying={() => setPreviewReady(true)} onError={() => { setPreviewReady(false); setPreviewFailed(true); setPreview(null); }} />}
     <span className="card-shade" />
     {project.placeholder ? <span className="placeholder-label">{project.category === 'Color grading' ? 'Placeholder · grading selection to come' : 'Preview image · film to come'}</span> : <>
-      <span className="project-film-label">{project.cardLabel ?? (project.category === 'AI filmmaking' ? project.category : 'F&B commercial')} <span>{project.duration}</span></span>
+      <span className="project-film-label">{project.cardLabel ?? project.description} <span>{project.duration}</span></span>
       <span className="project-play"><PlayIcon size={24} weight="fill" /><span>Play film</span></span>
       <span className="preview-hint">{active && previewReady ? <><SpeakerSlashIcon size={14} /> Previewing</> : <>Hover to preview <ArrowUpRightIcon size={15} /></>}</span>
     </>}

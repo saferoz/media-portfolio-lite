@@ -3,7 +3,7 @@
   "transitionSeconds": 0.35,
   "fps": 24,
   "audio": false,
-  "version": "hero-v2",
+  "version": "hero-v3",
   "devices": {
     "desktop": {
       "width": 1280,
@@ -16,6 +16,7 @@
           "sourceStart": 0.25,
           "seconds": 4,
           "cropFraction": 0,
+          "sourceCrop": null,
           "timelineStart": 0.0
         },
         {
@@ -24,6 +25,7 @@
           "sourceStart": 0,
           "seconds": 4,
           "cropFraction": 0.5,
+          "sourceCrop": null,
           "timelineStart": 3.65
         },
         {
@@ -32,24 +34,26 @@
           "sourceStart": 8,
           "seconds": 4,
           "cropFraction": 0.5,
+          "sourceCrop": null,
           "timelineStart": 7.3
         },
         {
           "name": "Diriyah",
-          "source": "F:/Portfolio/Cinematography/General/Diriyah Colors.mp4",
-          "sourceStart": 6,
+          "source": "P:\\My Cursor Local Code Projects\\media-portfolio-lite\\public\\media\\diriyah-film.mp4",
+          "sourceStart": 7,
           "seconds": 4,
           "cropFraction": 0.5,
+          "sourceCrop": "1920:816:0:132",
           "timelineStart": 10.95
         }
       ],
       "files": [
         {
-          "name": "hero-v2-desktop.mp4",
-          "bytes": 2883888
+          "name": "hero-v3-desktop.mp4",
+          "bytes": 2995573
         },
         {
-          "name": "hero-v2-desktop-poster.webp",
+          "name": "hero-v3-desktop-poster.webp",
           "bytes": 42180
         }
       ]
@@ -65,6 +69,7 @@
           "sourceStart": 0,
           "seconds": 4,
           "cropFraction": 0.25,
+          "sourceCrop": null,
           "timelineStart": 0.0
         },
         {
@@ -73,6 +78,7 @@
           "sourceStart": 0,
           "seconds": 4,
           "cropFraction": 0.5,
+          "sourceCrop": null,
           "timelineStart": 3.65
         },
         {
@@ -81,24 +87,26 @@
           "sourceStart": 3,
           "seconds": 4,
           "cropFraction": 0.5,
+          "sourceCrop": null,
           "timelineStart": 7.3
         },
         {
           "name": "Spider-Man",
-          "source": "D:/Downloads/IMG_8769.MP4",
+          "source": "E:/Gen AI Projects/Spiderman-v2/hf_20260803_221432_eb56c480-8903-4090-839a-47ccf212ee14.mp4",
           "sourceStart": 3,
           "seconds": 4,
           "cropFraction": 0.5,
+          "sourceCrop": null,
           "timelineStart": 10.95
         }
       ],
       "files": [
         {
-          "name": "hero-v2-mobile.mp4",
-          "bytes": 1681772
+          "name": "hero-v3-mobile.mp4",
+          "bytes": 1701718
         },
         {
-          "name": "hero-v2-mobile-poster.webp",
+          "name": "hero-v3-mobile-poster.webp",
           "bytes": 19536
         }
       ]

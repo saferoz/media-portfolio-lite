@@ -1,4 +1,4 @@
-﻿import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 test('Cadillac follows the four commercials, previews silently and plays with credits', async ({ page }) => {
   await page.goto('/');
@@ -7,15 +7,21 @@ test('Cadillac follows the four commercials, previews silently and plays with cr
   const row = await page.locator('.reels-pair').boundingBox();
   const bounds = await card.boundingBox();
   expect(bounds!.y).toBeGreaterThan(row!.y + row!.height);
+  await expect(card.locator('.project-film-label')).toContainText('Automotive film');
+  await expect(card.locator('.project-film-label')).not.toContainText('F&B');
   await card.scrollIntoViewIfNeeded();
   await card.locator('.project-visual').hover();
-  await expect(card.locator('video')).toHaveAttribute('src', '/media/cadillac-preview.mp4');
+  await expect(card.locator('video')).toHaveAttribute('src', '/media/cadillac-escalade-v2-preview.mp4');
   expect(await card.locator('video').evaluate((v: HTMLVideoElement) => v.muted)).toBe(true);
   await card.locator('.project-visual').click();
   await expect(page.locator('.player-credit')).toContainText('Cadillac Alghanim Kuwait');
-  await expect.poll(() => page.locator('.player-screen video').evaluate((v: HTMLVideoElement) => v.duration)).toBeGreaterThan(100);
+  await expect.poll(() => page.locator('.player-screen video').evaluate((v: HTMLVideoElement) => v.duration)).toBeCloseTo(13.6, 0);
   await page.keyboard.press('Escape');
   await expect(card.locator('.project-visual')).toBeFocused();
+  await page.locator('[data-project="cadillac-second"] .project-visual').click();
+  await expect(page.locator('.player-screen video')).toHaveAttribute('src', '/media/cadillac-film.mp4');
+  await expect.poll(() => page.locator('.player-screen video').evaluate((v: HTMLVideoElement) => v.duration)).toBeGreaterThan(100);
+  await page.keyboard.press('Escape');
   await page.getByRole('button', { name: 'Reels', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Play Cadillac Escalade', exact: true })).toBeVisible();
 });
@@ -81,7 +87,7 @@ for (const mobile of [false, true]) {
       await page.goto(process.env.TEST_URL || 'http://127.0.0.1:3000');
       const poster = page.locator('.hero-poster');
       await expect.poll(() => poster.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)).toBe(true);
-      expect(await poster.evaluate((i: HTMLImageElement) => i.currentSrc)).toContain(`hero-v2-${device}-poster.webp`);
+      expect(await poster.evaluate((i: HTMLImageElement) => i.currentSrc)).toContain(`hero-v3-${device}-poster.webp`);
       await expect.poll(() => page.locator('.hero-video').evaluate((v: HTMLVideoElement) => v.readyState >= 2)).toBe(true);
       await page.getByRole('button', { name: 'Pause background video' }).click();
       for (const time of [0, 3.8, 5, 7.5, 9, 11.1, 13]) {
@@ -91,7 +97,7 @@ for (const mobile of [false, true]) {
       }
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     }
-    expect(requests.some(u => u.includes(`hero-v2-${device}.mp4`))).toBe(true);
+    expect(requests.some(u => u.includes(`hero-v3-${device}.mp4`))).toBe(true);
     expect(requests.some(u => u.includes(mobile ? '-desktop' : '-mobile'))).toBe(false);
     expect(requests.some(u => u.includes('hero-personal') || u.includes('archi'))).toBe(false);
     await context.close();
@@ -99,9 +105,9 @@ for (const mobile of [false, true]) {
 }
 
 test('hero loading and failed playback keep the new TENET poster', async ({ page }, testInfo) => {
-  await page.route('**/hero-v2-desktop.mp4', route => route.abort());
+  await page.route('**/hero-v3-desktop.mp4', route => route.abort());
   await page.goto('/');
-  await expect(page.locator('.hero-poster')).toHaveAttribute('src', '/media/hero-v2-desktop-poster.webp');
+  await expect(page.locator('.hero-poster')).toHaveAttribute('src', '/media/hero-v3-desktop-poster.webp');
   await expect(page.locator('.hero-video')).not.toHaveClass(/is-ready/);
   await page.screenshot({ path: testInfo.outputPath('hero-fallback.png') });
 });

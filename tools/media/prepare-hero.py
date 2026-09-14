@@ -1,13 +1,13 @@
-﻿"""Render independent four-shot hero edits. Originals remain untouched.
+"""Render independent four-shot hero edits. Originals remain untouched.
 Run with PYTHONPATH=C:/Users/User/AppData/Local/Temp/portfolio-media-tools.
 """
 from pathlib import Path
 import subprocess, json, imageio_ffmpeg
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'public/media'
-TMP = ROOT / '.local/hero-v2'
+TMP = ROOT / '.local/hero-v3'
 FF = imageio_ffmpeg.get_ffmpeg_exe()
-VERSION = 'hero-v2'
+VERSION = 'hero-v3'
 # name, source, in-point, horizontal crop fraction; every shot is four seconds.
 # TENET preserves the preceding recipe exactly, including authored mobile framing.
 TIMELINES = {
@@ -15,13 +15,13 @@ TIMELINES = {
   ('TENET', 'E:/Gen AI Projects/TENET/Generations/TENET PERFECT.mp4', .25, 0),
   ('Simulator', 'D:/Downloads/sim room v2.mp4', 0, .5),
   ('Rakan preflight', 'E:/V1-0014_Rakan Brolls149555201.mov', 8, .5),
-  ('Diriyah', 'F:/Portfolio/Cinematography/General/Diriyah Colors.mp4', 6, .5),
+  ('Diriyah', str(OUT/'diriyah-film.mp4'), 7, .5),
  ],
  'mobile': [
   ('TENET', 'E:/TEMPP DELL optionss/tenet vertical.mp4', 0, .25),
   ('Preflight inspection', 'E:/TEMPP DELL optionss/preflight inspection clip vertical.mp4', 0, .5),
   ('Eating', 'E:/TEMPP DELL optionss/Eating Final.mp4', 3, .5),
-  ('Spider-Man', 'D:/Downloads/IMG_8769.MP4', 3, .5),
+  ('Spider-Man', 'E:/Gen AI Projects/Spiderman-v2/hf_20260803_221432_eb56c480-8903-4090-839a-47ccf212ee14.mp4', 3, .5),
  ],
 }
 def run(args):
@@ -34,10 +34,11 @@ def main():
   parts=[]; shots=[]
   for i,(name,src,start,focus) in enumerate(TIMELINES[device]):
    target=TMP/f'{device}-{i}.mp4'; parts.append(target)
-   range_filter=':in_range=full:out_range=tv' if name=='Spider-Man' else ''
-   vf=f'scale={w}:{h}:force_original_aspect_ratio=increase{range_filter},crop={w}:{h}:(iw-ow)*{focus}:(ih-oh)/2,setsar=1,fps=24,format=yuv420p,settb=AVTB,setpts=PTS-STARTPTS'
+   range_filter=''
+   precrop='crop=1920:816:0:132,' if name=='Diriyah' else ''
+   vf=f'{precrop}scale={w}:{h}:force_original_aspect_ratio=increase{range_filter},crop={w}:{h}:(iw-ow)*{focus}:(ih-oh)/2,setsar=1,fps=24,format=yuv420p,settb=AVTB,setpts=PTS-STARTPTS'
    run(['-ss',start,'-i',src,'-t',4,'-an','-vf',vf,'-c:v','libx264','-crf',18,'-preset','fast','-threads',3,target])
-   shots.append({'name':name,'source':src,'sourceStart':start,'seconds':4,'cropFraction':focus,'timelineStart':round(i*3.65,2)})
+   shots.append({'name':name,'source':src,'sourceStart':start,'seconds':4,'cropFraction':focus,'sourceCrop': '1920:816:0:132' if name=='Diriyah' else None,'timelineStart':round(i*3.65,2)})
   args=[]
   for part in parts: args+=['-i',part]
   graph='[0:v][1:v]xfade=transition=fade:duration=0.35:offset=3.65[v1];[v1][2:v]xfade=transition=fade:duration=0.35:offset=7.3[v2];[v2][3:v]xfade=transition=fade:duration=0.35:offset=10.95[v]'

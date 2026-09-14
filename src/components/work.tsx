@@ -26,7 +26,7 @@ export function Work() {
     <div className={`work-grid ${filter !== 'All work' ? 'is-filtered' : ''}`}>
       {filter === 'All work' ? <>
         <div className="reels-pair">{projects.filter(project => project.id.startsWith('eltacoria') || project.id.startsWith('jury')).map(project => <ProjectCard key={project.id} project={project} />)}</div>
-        <div className="cadillac-feature"><ProjectCard project={getProject('cadillac')} /></div>
+        <div className="cadillac-feature">{[getProject('cadillac'), getProject('cadillac-second')].map(project => <ProjectCard key={project.id} project={project} />)}</div>
         <section className="work-collection"><h3 className="collection-title">YouTube / Long-form</h3><div className="film-pair">{projects.filter(project => project.category === 'Films').map(project => <ProjectCard key={project.id} project={project} />)}</div></section>
         <section className="education-feature work-collection"><ProjectCard project={projects.find(p => p.id === 'hazardous')!} /><div className="education-feature-copy"><h3>Aviation,<br /><span>explained.</span></h3><p>Educational short films. From the first script to the final sound mix.</p><Link className="text-link" href="/work/oxfordsaudia-educational-series">Behind the series <ArrowUpRightIcon size={18} /></Link></div></section>
         <section className="work-collection"><h3 className="collection-title">AI filmmaking</h3><div className="ai-pair">{projects.filter(project => project.category === 'AI filmmaking').map(project => <ProjectCard key={project.id} project={project} />)}</div></section>

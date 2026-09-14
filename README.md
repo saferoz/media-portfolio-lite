@@ -44,7 +44,7 @@ Put assets under `public/media/` and reference them with `/media/filename`. Dire
 
 Set `placeholder: false` and provide `film` for playable work. `projects` contains twelve playable films, including two extracted interview title intros; `gradingFilms` contains two color-work clips; `supportingFilms` contains the interview grading steps, graduation trailer, and previous ARCHI commercial. The two Motion examples appear in All work and under Motion.
 
-The homepage leads with four F&B commercials, Cadillac on its own row directly below, followed by YouTube / Long-form interviews, the educational series, AI filmmaking, and color grading. Project images preview on desktop hover; clicking plays the full film. Separate View project links open production breakdowns.
+The homepage leads with four F&B commercials, both Cadillac films on their own row directly below, followed by YouTube / Long-form interviews, the educational series, AI filmmaking, and color grading. Project images preview on desktop hover; clicking plays the full film. Separate View project links open production breakdowns.
 
 ## Project pages
 
@@ -71,7 +71,7 @@ Read [PROJECT_STATE.md](PROJECT_STATE.md) first for the current site, confirmed 
 
 The hero uses four-second shots and 0.35-second dissolves (14.95-second timeline). Desktop: TENET, simulator, Rakan preflight, Diriyah. Mobile: authored TENET, vertical preflight, Eating, Spider-Man. The opening TENET framing is unchanged. See `tools/media/hero-manifest.json` for source in-points and crop values.
 
-`hero-v2-desktop.mp4` stays within 3.5 MB at 1280x720; `hero-v2-mobile.mp4` stays within 1.8 MB at 540x960. Matching versioned posters load first and only the matching video rendition is requested.
+`hero-v3-desktop.mp4` stays within 3.5 MB at 1280x720; `hero-v3-mobile.mp4` stays within 1.8 MB at 540x960. Matching versioned posters load first and only the matching video rendition is requested.
 
 `tools/media/prepare-refinement.py` prepares the 12?24s student title excerpt, 41s hazardous poster, and Cadillac film/poster/silent preview; `refinement-manifest.json` records provenance and sizes. The hazardous hover still starts at 75s.
 
@@ -109,3 +109,5 @@ No deployment was performed. Set `NEXT_PUBLIC_SITE_URL` to the final origin befo
 `PRODUCT.md` and `DESIGN.md` preserve the scope and built design. `AGENT_HANDOFF.md` records the latest verified state.
 
 Motion intro extracts use seconds 12-17 of the student and captain interview derivatives, with five-second audio-enabled films and separate silent previews. Their posters use source time 15 seconds.
+
+The primary Escalade sample is rendered by `tools/media/prepare-cadillac.py` (see `cadillac-manifest.json`); the prior long film remains Film 2. Hero-v3 uses Diriyah 7?11s with its embedded bars cropped out, and the user-specified Spider-Man-v2 source at 3?7s.

@@ -412,7 +412,8 @@ h1, h2, h3 { font-weight: 500; }
 .immersive-controls button { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; }
 .immersive-controls input { width: 100%; min-width: 0; height: 44px; accent-color: var(--accent); }
 .playback-time { font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.cadillac-feature { grid-column: 1 / -1; width: min(100%, 360px); }
+.cadillac-feature { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 360px)); gap: 24px; }
+@media (max-width: 600px) { .cadillac-feature { grid-template-columns: minmax(0, 1fr); } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

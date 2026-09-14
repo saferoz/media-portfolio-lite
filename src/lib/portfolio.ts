@@ -69,7 +69,14 @@ export const projects: Project[] = [
   },
   {
     id: 'cadillac', title: 'Cadillac Escalade', category: 'Reels',
-    description: 'Automotive film', contribution: 'Concept, production, cinematography & editing',
+    description: 'Automotive film', cardLabel: 'Automotive film', contribution: 'Concept, production, cinematography & editing',
+    credits: 'Concept, production, cinematography and editing: Raden Hanifa. In collaboration with Cadillac Alghanim Kuwait.',
+    poster: '/media/cadillac-escalade-v2-poster.webp', preview: '/media/cadillac-escalade-v2-preview.mp4',
+    film: '/media/cadillac-escalade-v2-film.mp4', duration: '00:14', aspect: 'portrait', placeholder: false,
+  },
+  {
+    id: 'cadillac-second', title: 'Cadillac Escalade \u2014 Film 2', category: 'Reels',
+    description: 'Automotive film', cardLabel: 'Automotive film', contribution: 'Concept, production, cinematography & editing',
     credits: 'Concept, production, cinematography and editing: Raden Hanifa. In collaboration with Cadillac Alghanim Kuwait.',
     poster: '/media/cadillac-poster.webp', preview: '/media/cadillac-preview.mp4',
     film: '/media/cadillac-film.mp4', duration: '01:41', aspect: 'portrait', placeholder: false,

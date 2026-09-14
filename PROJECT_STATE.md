@@ -6,14 +6,14 @@ Read this first. This is the canonical tracked handover for the media portfolio.
 
 Next.js 16.3.5 App Router, React 19.3, TypeScript, Motion and Lenis. Static routes: `/`, `/color-grading`, `/work/oxfordsaudia-interviews`, `/work/oxfordsaudia-educational-series`. Local installed framework guides in `node_modules/next/dist/docs/` take precedence over remembered framework behavior. No backend, CMS, analytics, login, or email delivery service.
 
-The site is a dark/light cinematic portfolio for Raden Hanifa. Preserve the current hero headline, authored opening framing, standalone About portrait, accessibility and media lifecycle. All work has 14 cards: the four F&B commercials together, Cadillac on its own row immediately below, the two interviews, hazardous education feature, two AI films, two motion intros and two grading clips. Reels has six cards. Grading detail includes Diriyah and graduation work in addition to homepage grading.
+The site is a dark/light cinematic portfolio for Raden Hanifa. Preserve the current hero headline, authored opening framing, standalone About portrait, accessibility and media lifecycle. All work has 15 cards: the four F&B commercials together, two Cadillac films on a separate row immediately below, the two interviews, hazardous education feature, two AI films, two motion intros and two grading clips. Reels has seven cards. Grading detail includes Diriyah and graduation work in addition to homepage grading.
 
 Contact: `raden@radenhanifa.com`; portfolio request is a mailto with subject `Full portfolio request`. Instagram `https://www.instagram.com/radenhanifa/`. LinkedIn `https://www.linkedin.com/in/radenhanifa`, verified against the existing CV site's `frontend/src/components/cv/Contact.jsx`. CV: `https://cv.radenhanifa.com`.
 
 ## Confirmed attribution
 
 - SwiftSoft: an AI film for a SaaS ERP client. Raden: AI video production and editing. Script supplied by the client; do not imply Raden wrote it.
-- Cadillac Escalade: concept, production, cinematography and editing by Raden; collaboration with Cadillac Alghanim Kuwait. Uses the complete `D:/Downloads/Cadillac.mp4` (101.08s), not the separate 14s sample.
+- Cadillac Escalade: concept, production, cinematography and editing by Raden; collaboration with Cadillac Alghanim Kuwait. Primary: the user-confirmed `D:/Downloads/CADILLAC ESCALADE 2ND SAMPLE BY RADEN (With CAR Sound) (1).mp4` (13.59s). The previously selected `D:/Downloads/Cadillac.mp4` (101.08s) is retained as Film 2 at the user's request. The earlier choice of the long film as primary was incorrect. Both cards say Automotive film.
 - El Tacoria Translation and App: concept, script, production and edit. Arabic script: Abdullah Alzahrani.
 - Jury Chocolate Eid Gift and Cake: planning, cinematography and edit.
 - OxfordSaudia student/captain interviews: script, direction, cinematography, edit and audio, including title graphics and dialogue polishing. Student set image belongs with student interviews.
@@ -32,9 +32,11 @@ Contact: `raden@radenhanifa.com`; portfolio request is a mailto with subject `Fu
 | 0.00s | TENET PERFECT, 0.25–4.25s; previous left-anchored crop retained | Authored TENET vertical, 0–4s; previous framing retained |
 | 3.65s | `D:/Downloads/sim room v2.mp4`, 0–4s | `E:/TEMPP DELL optionss/preflight inspection clip vertical.mp4`, 0–4s |
 | 7.30s | `E:/V1-0014_Rakan Brolls149555201.mov`, 8–12s | `E:/TEMPP DELL optionss/Eating Final.mp4`, 3–7s |
-| 10.95s | Original Diriyah Colors, 6–10s | Original `D:/Downloads/IMG_8769.MP4` Spider-Man, 3–7s |
+| 10.95s | `public/media/diriyah-film.mp4`, 7-11s; crop 1920:816:0:132, then fill 16:9 | `E:/Gen AI Projects/Spiderman-v2/hf_20260803_221432_eb56c480-8903-4090-839a-47ccf212ee14.mp4`, 3-7s |
 
-Output: `hero-v2-desktop.mp4` (1280×720, 2,883,888 bytes, budget 3,500,000), `hero-v2-mobile.mp4` (540×960, 1,681,772 bytes, budget 1,800,000). Matching `hero-v2-*-poster.webp` images are extracted from each encoded opening frame. Every live hero reference uses this version so old cached ARCHI/personal exports cannot act as loading posters. The mobile breakpoint is 767px. No CSS framing/headline changes were made.
+Output: `hero-v3-desktop.mp4` (1280×720, 2,995,573 bytes, budget 3,500,000), `hero-v3-mobile.mp4` (540×960, 1,701,718 bytes, budget 1,800,000). Matching `hero-v3-*-poster.webp` images are extracted from each encoded opening frame. Every live hero reference uses this version so old cached ARCHI/personal exports cannot act as loading posters. The mobile breakpoint is 767px. No CSS framing/headline changes were made.
+
+Diriyah uses the complete existing 1080p derivative because the original F: drive is unavailable. Its source timeline is unchanged from the original; the baked-in 132px top/bottom bars are cropped before the centered fill. No original footage is modified. The new Spider-Man source uses its native range; the full-range conversion for the previous IMG_8769 export does not apply.
 
 ## Other media recipes
 
@@ -46,7 +48,8 @@ Original source footage stays untouched outside the repository. Browser derivati
 - `prepare-refinement.py` / `refinement-manifest.json`: student title excerpt, hazardous poster and Cadillac. Also updates `motion-manifest.json`.
 - Student title: source `public/media/students-film.mp4`, 12–24s, playable `students-intro-v2-film.mp4` (12s, original audio) and silent `students-intro-v2-preview.mp4` (12s). Existing poster at source 15s retained. Captain intro remains 12–17s, 5s long.
 - Hazardous: `hazardous-v2-poster.webp` from full-film 41s, including the project Open Graph image. Existing silent hover preview still starts at 75s; full film unchanged.
-- Cadillac: full portrait H.264/AAC 1080×1920 export, 36,835,417 bytes; six-second silent hover at 3–9s, poster at 3s. Full-film encoding uses CRF 23 with maxrate 2.8 Mbps. No full-film bytes load until the visitor activates playback.
+- `prepare-cadillac.py` / `cadillac-manifest.json`: primary Escalade sample, versioned `cadillac-escalade-v2-*`; 4,781,830-byte full film with audio, six-second silent preview at 3-9s, clear front-of-car poster at 1s.
+- Cadillac Film 2: full portrait H.264/AAC 1080×1920 export, 36,835,417 bytes; six-second silent hover at 3–9s, poster at 3s. Full-film encoding uses CRF 23 with maxrate 2.8 Mbps. No full-film bytes load until the visitor activates playback.
 - Superseded files may remain as historical assets; live component references select the new versions.
 
 ## Key implementation and constraints
@@ -65,6 +68,8 @@ Performance requirements: hero ≤3.5MB desktop / ≤1.8MB mobile; full films �
 
 ## Validation
 
+Correction pass: production build and all 38 Chromium tests passed (1.1 minutes). Updated tests verify the 13.6s primary Cadillac, automotive label, separate 101s Film 2, 15 All work cards / seven Reels, and hero-v3 cache/rendition behavior. Reviewed encoded opening frames, final dissolves and fourth shots on both devices; Diriyah fills the image without letterboxing. Primary Cadillac poster changed to the clear 1s front view after visual review. The final build and focused Cadillac regression passed again after poster/title cleanup. Both new heroes remain silent and within budgets.
+
 Production build passed after UI/media changes. The new viewport checks found a desktop scrollbar-gutter gap and early animation measurements. The immersive dialog now uses explicit viewport units and block layout to avoid inherited grid intrinsic-height expansion; assertions wait for the settled entrance. Both focused desktop/touch immersive tests pass. Final production build passed and all 38 Chromium tests passed (1.1 minutes). `git diff --check` passed.
 
 Visual review inspected desktop/mobile TENET opening posters, all four shots and three dissolves at 0, 3.8, 5, 7.5, 9, 11.1 and 13 seconds. Cold/warm cache captures were reviewed and are generated by `qa/refinement.spec.ts` in `test-results/`; poster fallback is tested with video requests aborted. Both poster sources show TENET, not ARCHI. Cadillac and hazardous posters were inspected. Desktop/mobile Ajdan screenshots confirm uncropped viewport playback with discreet controls and no descriptive heading/footer. Encoded stream inspection confirms silent heroes/previews, 14.96s hero files and 12.01s student excerpts (frame quantization). The student excerpt ends after the transition into the interview. Largest full film remains 43,738,039 bytes. The 38-test suite covers Cadillac placement/preview/full film/credits, LinkedIn, student duration, SwiftSoft credit, keyboard/touch immersive controls, focus return, reduced motion, data saving, cold/warm device-only hero loading, poster failure fallback, and horizontal overflow at 320/390/768/1440px in both themes.
@@ -79,4 +84,8 @@ Branch `main`, origin `https://github.com/saferoz/media-portfolio-lite.git`. Use
 
 Repository verification and deployment are separate. The final commit and remote alignment are evidenced by Git history and remote refs rather than a hard-coded self-referential hash here. No hosting deployment is claimed from a build, commit or push. Confirm the remote branch hash after pushing; verify a hosting deployment independently before calling it live.
 
-No WebKit or physical-device verification in this pass; earlier WebKit attempts exited before creating a page on this Windows host. Speech caption coverage and listening verification are not established; no new caption tracks supplied. Media sources are external and not portable. Local production preview for this pass: `http://127.0.0.1:3013`. Default sandbox terminal, image viewer and in-app browser setup failed before execution (`helper_unknown_error: setup refresh had errors`); approved terminal commands, local FFmpeg and the repository Playwright suite supplied the verification fallback.
+No WebKit or physical-device verification in this pass; earlier WebKit attempts exited before creating a page on this Windows host. Speech caption coverage and listening verification are not established; no new caption tracks supplied. Media sources are external and not portable. Local production preview for this pass: `http://127.0.0.1:3015`. Default sandbox terminal, image viewer and in-app browser setup failed before execution (`helper_unknown_error: setup refresh had errors`); approved terminal commands, local FFmpeg and the repository Playwright suite supplied the verification fallback.
+
+## Local disk footprint
+
+Measured before these correction exports: node_modules 442 MB, .git 311 MB, public 299 MB, .next 258 MB, .local 53 MB and test-results 20 MB; src about 0.10 MB. This is local disk usage, not browser download size. Dependencies, build caches and QA artifacts are ignored by Git. Videos dominate tracked assets and accumulate in Git history; a media CDN/object store can be considered if the portfolio grows. No cleanup or history rewrite was performed. The earlier throttled load result above is from the preceding pass, not a new measurement of hero-v3.
