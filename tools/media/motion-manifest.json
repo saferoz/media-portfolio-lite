@@ -3,9 +3,10 @@
     {
       "source": "students-film.mp4",
       "start": 12,
-      "duration": 5,
+      "duration": 12,
       "posterTime": 15,
-      "output": "students-intro"
+      "output": "students-intro-v2",
+      "posterOutput": "students-intro-poster.webp"
     },
     {
       "source": "captains-film.mp4",

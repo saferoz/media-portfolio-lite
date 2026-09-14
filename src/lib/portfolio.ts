@@ -16,6 +16,7 @@ export type Project = {
   cardLabel?: string;
   aspect: 'landscape' | 'portrait';
   placeholder: boolean;
+  immersive?: boolean;
 };
 
 export const profile = {
@@ -23,6 +24,7 @@ export const profile = {
   role: 'Video editor & multimedia creative',
   email: 'raden@radenhanifa.com',
   instagram: 'https://www.instagram.com/radenhanifa/',
+  linkedin: 'https://www.linkedin.com/in/radenhanifa',
   cv: 'https://cv.radenhanifa.com',
   portrait: '/media/portrait.webp',
   intro: 'I’m Raden. I bring a cinematic eye to the edit.',
@@ -33,8 +35,9 @@ export const profile = {
 export const projects: Project[] = [
   {
     id: 'swiftsoft', title: 'SwiftSoft', category: 'AI filmmaking',
-    description: 'An idea, brought into motion.',
-    contribution: 'End-to-end AI video creation',
+    description: 'An AI film for a SaaS ERP client.',
+    contribution: 'AI video production & editing',
+    credits: 'AI video production and editing: Raden Hanifa. Script supplied by the client.',
     poster: '/media/swiftsoft-poster.webp', preview: '/media/swiftsoft-preview.mp4',
     film: '/media/swiftsoft-film.mp4', duration: '00:55', aspect: 'landscape', placeholder: false,
   },
@@ -65,6 +68,13 @@ export const projects: Project[] = [
     film: '/media/jury-cake-film.mp4', duration: '00:18', aspect: 'portrait', placeholder: false,
   },
   {
+    id: 'cadillac', title: 'Cadillac Escalade', category: 'Reels',
+    description: 'Automotive film', contribution: 'Concept, production, cinematography & editing',
+    credits: 'Concept, production, cinematography and editing: Raden Hanifa. In collaboration with Cadillac Alghanim Kuwait.',
+    poster: '/media/cadillac-poster.webp', preview: '/media/cadillac-preview.mp4',
+    film: '/media/cadillac-film.mp4', duration: '01:41', aspect: 'portrait', placeholder: false,
+  },
+  {
     id: 'students', title: 'Get to Know Our Students', category: 'Films',
     description: 'OxfordSaudia — Student interview', cardLabel: 'Student interview',
     contribution: 'Script, direction, cinematography, edit & audio',
@@ -83,7 +93,7 @@ export const projects: Project[] = [
     description: 'OxfordSaudia — Aviation Explained', cardLabel: 'Aviation education',
     contribution: 'Script, direction, filming, edit & audio finishing',
     projectHref: '/work/oxfordsaudia-educational-series',
-    poster: '/media/hazardous-poster.webp', preview: '/media/hazardous-preview.mp4', film: '/media/hazardous-film.mp4', duration: '01:47', aspect: 'portrait', placeholder: false,
+    poster: '/media/hazardous-v2-poster.webp', preview: '/media/hazardous-preview.mp4', film: '/media/hazardous-film.mp4', duration: '01:47', aspect: 'portrait', placeholder: false,
   },
   {
     id: 'spiderman', title: 'Spider-Man — A Cinematic Fan Concept', category: 'AI filmmaking',
@@ -91,7 +101,7 @@ export const projects: Project[] = [
     contribution: 'Personal AI filmmaking concept · Seedance 2.0',
     poster: '/media/spiderman-poster.webp', preview: '/media/spiderman-preview.mp4', film: '/media/spiderman-film.mp4', duration: '00:47', aspect: 'portrait', placeholder: false,
   },
-  { id: 'students-intro', title: 'Get to Know Our Students \u2014 Title Intro', category: 'Motion', description: 'Animated series title', contribution: 'Motion graphics', cardLabel: 'Title sequence', poster: '/media/students-intro-poster.webp', preview: '/media/students-intro-preview.mp4', film: '/media/students-intro-film.mp4', duration: '00:05', projectHref: '/work/oxfordsaudia-interviews', aspect: 'landscape', placeholder: false },
+  { id: 'students-intro', title: 'Get to Know Our Students \u2014 Title Intro', category: 'Motion', description: 'Animated series title', contribution: 'Motion graphics', cardLabel: 'Title sequence', poster: '/media/students-intro-poster.webp', preview: '/media/students-intro-v2-preview.mp4', film: '/media/students-intro-v2-film.mp4', duration: '00:12', projectHref: '/work/oxfordsaudia-interviews', aspect: 'landscape', placeholder: false },
   { id: 'captains-intro', title: 'Meet Our Captains \u2014 Title Intro', category: 'Motion', description: 'Animated series title', contribution: 'Motion graphics', cardLabel: 'Title sequence', poster: '/media/captains-intro-poster.webp', preview: '/media/captains-intro-preview.mp4', film: '/media/captains-intro-film.mp4', duration: '00:05', projectHref: '/work/oxfordsaudia-interviews', aspect: 'landscape', placeholder: false },
 
 ];
@@ -100,7 +110,7 @@ export const categories = ['All work', 'Reels', 'Films', 'Motion', 'Color gradin
 export type WorkFilter = typeof categories[number];
 
 export const gradingFilms: Project[] = [
-  { id: 'founding-day', title: 'Saudi Founding Day', category: 'Color grading', description: 'Before and after, in motion', contribution: 'Color grading', cardLabel: 'Grading breakdown', poster: '/media/founding-day-poster.webp', preview: '/media/founding-day-preview.mp4', film: '/media/founding-day-film.mp4', duration: '00:12', aspect: 'portrait', placeholder: false },
+  { id: 'founding-day', immersive: true, title: 'Saudi Founding Day', category: 'Color grading', description: 'Before and after, in motion', contribution: 'Color grading', cardLabel: 'Grading breakdown', poster: '/media/founding-day-poster.webp', preview: '/media/founding-day-preview.mp4', film: '/media/founding-day-film.mp4', duration: '00:12', aspect: 'portrait', placeholder: false },
   { id: 'diriyah', title: 'Diriyah Colors', category: 'Color grading', description: 'A study in color and atmosphere', contribution: 'Color grading', cardLabel: 'Color study', poster: '/media/diriyah-poster.webp', preview: '/media/diriyah-preview.mp4', film: '/media/diriyah-film.mp4', duration: '00:11', aspect: 'landscape', placeholder: false },
 ];
 export const supportingFilms: Project[] = [

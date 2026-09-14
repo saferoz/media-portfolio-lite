@@ -1,0 +1,51 @@
+{
+  "studentIntro": {
+    "source": "public/media/students-film.mp4",
+    "sourceStart": 12,
+    "sourceEnd": 24,
+    "seconds": 12,
+    "filmAudio": true,
+    "previewAudio": false,
+    "posterSourceTime": 15
+  },
+  "hazardous": {
+    "posterSource": "public/media/hazardous-film.mp4",
+    "posterSourceTime": 41,
+    "unchangedPreviewStart": 75
+  },
+  "cadillac": {
+    "source": "D:/Downloads/Cadillac.mp4",
+    "duration": 101.08,
+    "previewStart": 3,
+    "previewSeconds": 6,
+    "posterTime": 3,
+    "fullFilmAudio": true,
+    "previewAudio": false
+  },
+  "files": [
+    {
+      "name": "cadillac-film.mp4",
+      "bytes": 36835417
+    },
+    {
+      "name": "cadillac-poster.webp",
+      "bytes": 37872
+    },
+    {
+      "name": "cadillac-preview.mp4",
+      "bytes": 254128
+    },
+    {
+      "name": "hazardous-v2-poster.webp",
+      "bytes": 36054
+    },
+    {
+      "name": "students-intro-v2-film.mp4",
+      "bytes": 1768527
+    },
+    {
+      "name": "students-intro-v2-preview.mp4",
+      "bytes": 302520
+    }
+  ]
+}

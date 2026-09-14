@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const education = slug === slugs[1];
   const title = education ? 'OxfordSaudia — Aviation Explained' : 'OxfordSaudia — The interview series';
   const description = education ? 'Educational short films: scripting, directing, filming, editing and audio finishing by Raden Hanifa.' : 'Student and captain interviews: from scripting and cinematography to the final edit and dialogue polish.';
-  return { title, description, openGraph: { title, description, images: [{ url: education ? '/media/hazardous-poster.webp' : '/media/students-poster.webp' }] } };
+  return { title, description, openGraph: { title, description, images: [{ url: education ? '/media/hazardous-v2-poster.webp' : '/media/students-poster.webp' }] } };
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {

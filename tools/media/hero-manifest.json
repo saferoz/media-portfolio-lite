@@ -1,59 +1,107 @@
 {
   "duration": 14.95,
   "transitionSeconds": 0.35,
-  "shots": [
-    {
-      "name": "TENET",
-      "source": "E:/Gen AI Projects/TENET/Generations/TENET PERFECT.mp4",
-      "sourceStart": 0.25,
-      "seconds": 4,
-      "mobileCropFraction": 0.25
+  "fps": 24,
+  "audio": false,
+  "version": "hero-v2",
+  "devices": {
+    "desktop": {
+      "width": 1280,
+      "height": 720,
+      "budgetBytes": 3500000,
+      "shots": [
+        {
+          "name": "TENET",
+          "source": "E:/Gen AI Projects/TENET/Generations/TENET PERFECT.mp4",
+          "sourceStart": 0.25,
+          "seconds": 4,
+          "cropFraction": 0,
+          "timelineStart": 0.0
+        },
+        {
+          "name": "Simulator",
+          "source": "D:/Downloads/sim room v2.mp4",
+          "sourceStart": 0,
+          "seconds": 4,
+          "cropFraction": 0.5,
+          "timelineStart": 3.65
+        },
+        {
+          "name": "Rakan preflight",
+          "source": "E:/V1-0014_Rakan Brolls149555201.mov",
+          "sourceStart": 8,
+          "seconds": 4,
+          "cropFraction": 0.5,
+          "timelineStart": 7.3
+        },
+        {
+          "name": "Diriyah",
+          "source": "F:/Portfolio/Cinematography/General/Diriyah Colors.mp4",
+          "sourceStart": 6,
+          "seconds": 4,
+          "cropFraction": 0.5,
+          "timelineStart": 10.95
+        }
+      ],
+      "files": [
+        {
+          "name": "hero-v2-desktop.mp4",
+          "bytes": 2883888
+        },
+        {
+          "name": "hero-v2-desktop-poster.webp",
+          "bytes": 42180
+        }
+      ]
     },
-    {
-      "name": "Rakan",
-      "source": "E:/V1-0014_Rakan Brolls149555201.mov",
-      "sourceStart": 8,
-      "seconds": 4,
-      "mobileCropFraction": 0.62
-    },
-    {
-      "name": "SwiftSoft",
-      "source": "E:/Gen AI Projects/SwiftSoft/4K videos/hf_20260731_220106_d224db06-b626-4a90-9c54-7011291da0d2.mp4",
-      "sourceStart": 1,
-      "seconds": 4,
-      "mobileCropFraction": 0.67
-    },
-    {
-      "name": "Cockpit",
-      "source": "E:/horizontal cockpit.mp4",
-      "sourceStart": 0,
-      "seconds": 4,
-      "mobileCropFraction": 0.5
+    "mobile": {
+      "width": 540,
+      "height": 960,
+      "budgetBytes": 1800000,
+      "shots": [
+        {
+          "name": "TENET",
+          "source": "E:/TEMPP DELL optionss/tenet vertical.mp4",
+          "sourceStart": 0,
+          "seconds": 4,
+          "cropFraction": 0.25,
+          "timelineStart": 0.0
+        },
+        {
+          "name": "Preflight inspection",
+          "source": "E:/TEMPP DELL optionss/preflight inspection clip vertical.mp4",
+          "sourceStart": 0,
+          "seconds": 4,
+          "cropFraction": 0.5,
+          "timelineStart": 3.65
+        },
+        {
+          "name": "Eating",
+          "source": "E:/TEMPP DELL optionss/Eating Final.mp4",
+          "sourceStart": 3,
+          "seconds": 4,
+          "cropFraction": 0.5,
+          "timelineStart": 7.3
+        },
+        {
+          "name": "Spider-Man",
+          "source": "D:/Downloads/IMG_8769.MP4",
+          "sourceStart": 3,
+          "seconds": 4,
+          "cropFraction": 0.5,
+          "timelineStart": 10.95
+        }
+      ],
+      "files": [
+        {
+          "name": "hero-v2-mobile.mp4",
+          "bytes": 1681772
+        },
+        {
+          "name": "hero-v2-mobile-poster.webp",
+          "bytes": 19536
+        }
+      ]
     }
-  ],
-  "mobileSources": {
-    "TENET": "E:/tenet vertical.mp4",
-    "Rakan": "E:/2nd clip vertical.mp4",
-    "Cockpit": "E:/cockpit vertical.mp4"
-  },
-  "mobileSourceStart": 0,
-  "desktopTenetCropFraction": 0,
-  "files": [
-    {
-      "name": "hero-personal-desktop-poster.webp",
-      "bytes": 42180
-    },
-    {
-      "name": "hero-personal-desktop.mp4",
-      "bytes": 3138330
-    },
-    {
-      "name": "hero-personal-mobile-poster.webp",
-      "bytes": 19560
-    },
-    {
-      "name": "hero-personal-mobile.mp4",
-      "bytes": 1712361
-    }
-  ]
+  }
 }

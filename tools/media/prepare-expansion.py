@@ -10,7 +10,7 @@ FF=imageio_ffmpeg.get_ffmpeg_exe()
 VIDEOS=[
 ('students',r'F:/Portfolio/Cinematography/Aviation 2.0/Get to Know Our Students EP1.mp4',79.12,False,8),
 ('captains',r'F:/Portfolio/Cinematography/Aviation 2.0/Meet Our Captains EP01 Challin with sub.mp4',120.79,False,10),
-('hazardous',r'F:/OxfordSaudia 2021-2022/RENDERED FINAL VIDEO/5 Hazardous/(COMPRESSED) 5 Hazardous Attitudes VERY FINAL WITH ARABIC READY TO POST.mov',106.65,True,18),
+('hazardous',r'F:/OxfordSaudia 2021-2022/RENDERED FINAL VIDEO/5 Hazardous/(COMPRESSED) 5 Hazardous Attitudes VERY FINAL WITH ARABIC READY TO POST.mov',106.65,True,41),
 ('founding-day',r"F:/Hanif's Gabut/Ajdan's Saudi Founding Day/Rendered/Color Work Before After.mp4",11.65,True,1),
 ('diriyah',r'F:/Portfolio/Cinematography/General/Diriyah Colors.mp4',11.47,False,8),
 ('interview-grade',r'C:/Users/User/Documents/PreziPitch/Content/322969661/dgxxBvDHfB/Media/A53E8F59BE3A0237D989148BDFBFAF1C.mp4',12.55,False,1),
@@ -40,7 +40,7 @@ def video(item):
  vf='scale='+size+(':in_range=full:out_range=tv' if name=='spiderman' else '')
  run(name+'-film.mp4',['-i',src,'-map','0:v:0','-map','0:a:0?','-vf',vf,'-c:v','libx264','-crf','18' if name in ['founding-day','diriyah','interview-grade'] else '21','-maxrate','5M','-bufsize','10M','-preset','fast','-threads','3','-pix_fmt','yuv420p','-color_range','tv','-colorspace','bt709','-color_primaries','bt709','-color_trc','bt709','-c:a','aac','-b:a','160k','-movflags','+faststart','-map_metadata','-1'])
  run(name+'-preview.mp4',['-ss',str(75 if name=='hazardous' else start),'-i',str(OUT/(name+'-film.mp4')),'-t',str(min(6,duration-start)),'-an','-vf','scale='+small,'-c:v','libx264','-crf','25','-preset','fast','-threads','2','-pix_fmt','yuv420p','-movflags','+faststart','-map_metadata','-1'])
- run(name+'-poster.webp',['-ss',str(start),'-i',str(OUT/(name+'-film.mp4')),'-frames:v','1','-vf','scale='+poster,'-c:v','libwebp','-quality','86'])
+ run(('hazardous-v2' if name=='hazardous' else name)+'-poster.webp',['-ss',str(start),'-i',str(OUT/(name+'-film.mp4')),'-frames:v','1','-vf','scale='+poster,'-c:v','libwebp','-quality','86'])
 if __name__=='__main__':
  OUT.mkdir(exist_ok=True)
  for name,src in IMAGES:

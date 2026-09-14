@@ -399,6 +399,21 @@ h1, h2, h3 { font-weight: 500; }
   .still-dialog { padding: 16px; }
 }
 
+.contact-socials { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
+
+/* Ajdan's grading breakdown fills the viewing surface without cropping. */
+.film-dialog.is-immersive { width: 100vw; height: 100dvh; padding: 0; overflow: hidden; background: #03080e; }
+.film-dialog.is-immersive[open] { display: block; }
+.is-immersive .player-shell, .is-immersive .player-screen { width: 100%; height: 100%; border-radius: 0; }
+.is-immersive .player-screen video { width: 100%; height: 100%; max-height: none; min-height: 0; aspect-ratio: auto; object-fit: contain; }
+.immersive-close { position: absolute; z-index: 3; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); background: #03080ecc; }
+.immersive-controls { position: absolute; z-index: 2; bottom: max(16px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); width: min(640px, calc(100% - 32px)); display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 8px; background: #03080ee8; opacity: 0; pointer-events: none; transition: opacity 160ms var(--ease); }
+.immersive-controls.is-visible { opacity: 1; pointer-events: auto; }
+.immersive-controls button { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; }
+.immersive-controls input { width: 100%; min-width: 0; height: 44px; accent-color: var(--accent); }
+.playback-time { font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cadillac-feature { grid-column: 1 / -1; width: min(100%, 360px); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }

@@ -56,8 +56,8 @@ test('leaving hover stops and unloads preview', async ({ page }) => {
 test('filters and playable motion intros', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Reels', exact: true }).click();
-  await expect(page.locator('.project-card')).toHaveCount(5);
-  await expect(page.locator('.project-card button')).toHaveCount(5);
+  await expect(page.locator('.project-card')).toHaveCount(6);
+  await expect(page.locator('.project-card button')).toHaveCount(6);
   await expect(page.locator('.placeholder-card')).toHaveCount(0);
   await page.getByRole('button', { name: 'AI filmmaking', exact: true }).click();
   await expect(page.locator('.project-card')).toHaveCount(2);
@@ -66,7 +66,7 @@ test('filters and playable motion intros', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Color grading.' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'View color grading' })).toHaveAttribute('href', '/color-grading');
   await page.getByRole('button', { name: 'All work', exact: true }).click();
-  await expect(page.locator('.project-card')).toHaveCount(13);
+  await expect(page.locator('.project-card')).toHaveCount(14);
   await page.getByRole('button', { name: 'Motion', exact: true }).click();
   await expect(page.locator('.project-card')).toHaveCount(2);
   await expect(page.locator('.placeholder-card')).toHaveCount(0);

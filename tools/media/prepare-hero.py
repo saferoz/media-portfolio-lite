@@ -1,32 +1,52 @@
-"""Render the four-shot hero only; original footage remains untouched."""
+﻿"""Render independent four-shot hero edits. Originals remain untouched.
+Run with PYTHONPATH=C:/Users/User/AppData/Local/Temp/portfolio-media-tools.
+"""
 from pathlib import Path
 import subprocess, json, imageio_ffmpeg
-ROOT=Path(__file__).resolve().parents[2]
-OUT=ROOT/'public/media'; TMP=ROOT/'.local/hero-polish'; TMP.mkdir(parents=True,exist_ok=True)
-FF=imageio_ffmpeg.get_ffmpeg_exe()
-SHOTS=[
- ('TENET', 'E:/Gen AI Projects/TENET/Generations/TENET PERFECT.mp4',0.25,4,0.25),
- ('Rakan', 'E:/V1-0014_Rakan Brolls149555201.mov',8,4,0.62),
- ('SwiftSoft', 'E:/Gen AI Projects/SwiftSoft/4K videos/hf_20260731_220106_d224db06-b626-4a90-9c54-7011291da0d2.mp4',1,4,0.67),
- ('Cockpit', 'E:/horizontal cockpit.mp4',0,4,0.5),
-]
-MOBILE_SOURCES={'TENET':'E:/tenet vertical.mp4','Rakan':'E:/2nd clip vertical.mp4','Cockpit':'E:/cockpit vertical.mp4'}
+ROOT = Path(__file__).resolve().parents[2]
+OUT = ROOT / 'public/media'
+TMP = ROOT / '.local/hero-v2'
+FF = imageio_ffmpeg.get_ffmpeg_exe()
+VERSION = 'hero-v2'
+# name, source, in-point, horizontal crop fraction; every shot is four seconds.
+# TENET preserves the preceding recipe exactly, including authored mobile framing.
+TIMELINES = {
+ 'desktop': [
+  ('TENET', 'E:/Gen AI Projects/TENET/Generations/TENET PERFECT.mp4', .25, 0),
+  ('Simulator', 'D:/Downloads/sim room v2.mp4', 0, .5),
+  ('Rakan preflight', 'E:/V1-0014_Rakan Brolls149555201.mov', 8, .5),
+  ('Diriyah', 'F:/Portfolio/Cinematography/General/Diriyah Colors.mp4', 6, .5),
+ ],
+ 'mobile': [
+  ('TENET', 'E:/TEMPP DELL optionss/tenet vertical.mp4', 0, .25),
+  ('Preflight inspection', 'E:/TEMPP DELL optionss/preflight inspection clip vertical.mp4', 0, .5),
+  ('Eating', 'E:/TEMPP DELL optionss/Eating Final.mp4', 3, .5),
+  ('Spider-Man', 'D:/Downloads/IMG_8769.MP4', 3, .5),
+ ],
+}
+def run(args):
+ subprocess.run([FF, '-hide_banner', '-loglevel', 'error', '-y', *map(str,args)], check=True)
 
-def run(args): subprocess.run([FF,'-hide_banner','-loglevel','error','-y',*args],check=True)
-for device,w,h,bitrate in [('desktop',1280,720,'1800k'),('mobile',540,960,'950k')]:
- parts=[]
- for i,(name,src,start,duration,focus) in enumerate(SHOTS):
-  if device=='mobile' and name in MOBILE_SOURCES: src,start=MOBILE_SOURCES[name],0
-  target=TMP/f'{device}-{i}.mp4'; parts.append(target)
-  x=focus if device=='mobile' else (0 if name=='TENET' else 0.5)
-  vf=f'scale={w}:{h}:force_original_aspect_ratio=increase,crop={w}:{h}:(iw-ow)*{x}:(ih-oh)/2,setsar=1,fps=24,format=yuv420p,settb=AVTB,setpts=PTS-STARTPTS'
-  run(['-ss',str(start),'-i',src,'-t',str(duration),'-an','-vf',vf,'-c:v','libx264','-crf','18','-preset','fast','-threads','3',str(target)])
- args=[]
- for part in parts: args+=['-i',str(part)]
- # Short dissolves retain the pace of the footage rather than adding motion effects.
- graph='[0:v][1:v]xfade=transition=fade:duration=0.35:offset=3.65[v1];[v1][2:v]xfade=transition=fade:duration=0.35:offset=7.3[v2];[v2][3:v]xfade=transition=fade:duration=0.35:offset=10.95[v]'
- target=OUT/f'hero-personal-{device}.mp4'
- run([*args,'-filter_complex_threads','1','-filter_complex',graph,'-map','[v]','-an','-c:v','libx264','-b:v',bitrate,'-maxrate',bitrate,'-bufsize','2M','-preset','slow','-threads','3','-pix_fmt','yuv420p','-movflags','+faststart','-map_metadata','-1',str(target)])
- run(['-i',str(target),'-frames:v','1','-c:v','libwebp','-quality','85',str(OUT/f'hero-personal-{device}-poster.webp')])
- print(device,target.stat().st_size,flush=True)
-(ROOT/'tools/media/hero-manifest.json').write_text(json.dumps({'duration':14.95,'transitionSeconds':0.35,'shots':[{'name':n,'source':s,'sourceStart':t,'seconds':d,'mobileCropFraction':f} for n,s,t,d,f in SHOTS],'mobileSources':MOBILE_SOURCES,'mobileSourceStart':0,'desktopTenetCropFraction':0,'files':[{'name':p.name,'bytes':p.stat().st_size} for p in OUT.glob('hero-personal-*')]},indent=2),encoding='utf-8')
+def main():
+ TMP.mkdir(parents=True, exist_ok=True)
+ manifest = {'duration': 14.95, 'transitionSeconds': .35, 'fps': 24, 'audio': False, 'version': VERSION, 'devices': {}}
+ for device,w,h,bitrate,budget in [('desktop',1280,720,'1800k',3500000),('mobile',540,960,'900k',1800000)]:
+  parts=[]; shots=[]
+  for i,(name,src,start,focus) in enumerate(TIMELINES[device]):
+   target=TMP/f'{device}-{i}.mp4'; parts.append(target)
+   range_filter=':in_range=full:out_range=tv' if name=='Spider-Man' else ''
+   vf=f'scale={w}:{h}:force_original_aspect_ratio=increase{range_filter},crop={w}:{h}:(iw-ow)*{focus}:(ih-oh)/2,setsar=1,fps=24,format=yuv420p,settb=AVTB,setpts=PTS-STARTPTS'
+   run(['-ss',start,'-i',src,'-t',4,'-an','-vf',vf,'-c:v','libx264','-crf',18,'-preset','fast','-threads',3,target])
+   shots.append({'name':name,'source':src,'sourceStart':start,'seconds':4,'cropFraction':focus,'timelineStart':round(i*3.65,2)})
+  args=[]
+  for part in parts: args+=['-i',part]
+  graph='[0:v][1:v]xfade=transition=fade:duration=0.35:offset=3.65[v1];[v1][2:v]xfade=transition=fade:duration=0.35:offset=7.3[v2];[v2][3:v]xfade=transition=fade:duration=0.35:offset=10.95[v]'
+  target=OUT/f'{VERSION}-{device}.mp4'
+  run([*args,'-filter_complex_threads',1,'-filter_complex',graph,'-map','[v]','-an','-c:v','libx264','-b:v',bitrate,'-maxrate',bitrate,'-bufsize','2M','-preset','slow','-threads',3,'-pix_fmt','yuv420p','-movflags','+faststart','-map_metadata',-1,target])
+  assert target.stat().st_size <= budget, f'{device} exceeds budget'
+  poster=OUT/f'{VERSION}-{device}-poster.webp'
+  run(['-i',target,'-frames:v',1,'-c:v','libwebp','-quality',85,poster])
+  manifest['devices'][device]={'width':w,'height':h,'budgetBytes':budget,'shots':shots,'files':[{'name':p.name,'bytes':p.stat().st_size} for p in [target,poster]]}
+  print(device,target.stat().st_size,flush=True)
+ (ROOT/'tools/media/hero-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
+if __name__=='__main__': main()

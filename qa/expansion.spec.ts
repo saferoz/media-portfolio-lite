@@ -67,7 +67,7 @@ test('graduation is supporting grading work with optional BTS', async ({ page })
 
 test('hero uses one bounded rendition without project credit boxes', async ({ page }) => {
   const media: string[] = [];
-  page.on('request', request => { if (/hero-personal-(desktop|mobile)\.mp4/.test(request.url())) media.push(request.url()); });
+  page.on('request', request => { if (/hero-v2-(desktop|mobile)\.mp4/.test(request.url())) media.push(request.url()); });
   await page.goto('/');
   const hero = page.locator('.hero-video');
   await expect.poll(() => hero.evaluate((v: HTMLVideoElement) => v.readyState >= 2)).toBe(true);
@@ -76,9 +76,9 @@ test('hero uses one bounded rendition without project credit boxes', async ({ pa
   await expect(page.locator('.hero-feature, .hero-mobile-credit')).toHaveCount(0);
   await expect(page.locator('#hero-heading')).toContainText('final frame.');
   expect(await hero.evaluate((v: HTMLVideoElement) => v.paused)).toBe(true);
-  expect(media.some(url => url.includes('hero-personal-mobile.mp4'))).toBe(false);
-  expect(statSync('public/media/hero-personal-desktop.mp4').size).toBeLessThanOrEqual(3_500_000);
-  expect(statSync('public/media/hero-personal-mobile.mp4').size).toBeLessThanOrEqual(1_800_000);
+  expect(media.some(url => url.includes('hero-v2-mobile.mp4'))).toBe(false);
+  expect(statSync('public/media/hero-v2-desktop.mp4').size).toBeLessThanOrEqual(3_500_000);
+  expect(statSync('public/media/hero-v2-mobile.mp4').size).toBeLessThanOrEqual(1_800_000);
 });
 
 test('portfolio request uses the new address and prepared subject', async ({ page }) => {

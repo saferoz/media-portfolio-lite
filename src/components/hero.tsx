@@ -32,7 +32,7 @@ export function Hero() {
 
   useEffect(() => {
     if (reducedMotion || saveData || !inView) return;
-    const timer = setTimeout(() => setSource(matchMedia('(max-width: 767px)').matches ? '/media/hero-personal-mobile.mp4' : '/media/hero-personal-desktop.mp4'), 350);
+    const timer = setTimeout(() => setSource(matchMedia('(max-width: 767px)').matches ? '/media/hero-v2-mobile.mp4' : '/media/hero-v2-desktop.mp4'), 350);
     return () => clearTimeout(timer);
   }, [reducedMotion, saveData, inView]);
 
@@ -50,7 +50,7 @@ export function Hero() {
     <section className="hero" id="top" ref={container} aria-labelledby="hero-heading">
       <span id="nav-sentinel" aria-hidden="true" />
       <motion.div className="hero-media" style={reducedMotion ? undefined : { transform }}>
-        <picture><source media="(max-width: 767px)" srcSet="/media/hero-personal-mobile-poster.webp" /><img src="/media/hero-personal-desktop-poster.webp" alt="Raden in a cinematic AI concept film" width="1280" height="720" fetchPriority="high" loading="eager" className="hero-poster" /></picture>
+        <picture><source media="(max-width: 767px)" srcSet="/media/hero-v2-mobile-poster.webp" /><img src="/media/hero-v2-desktop-poster.webp" alt="Raden in a cinematic AI concept film" width="1280" height="720" fetchPriority="high" loading="eager" className="hero-poster" /></picture>
         <video ref={videoRef} src={source} className={`hero-video ${ready && !reducedMotion && !saveData ? 'is-ready' : ''}`} muted loop playsInline preload="none" aria-hidden="true" onPlaying={() => setReady(true)} onError={() => setReady(false)} />
       </motion.div>
       <div className="hero-shade" />

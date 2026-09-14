@@ -37,13 +37,14 @@ Each project has:
 | `captions` | Optional English WebVTT caption file |
 | `duration`, `credits` | Display duration and collaborator attribution |
 | `projectHref`, `cardLabel` | Optional project-page link and accurate card overlay |
+| `immersive` | Optional viewport player; enabled only for Ajdan / Saudi Founding Day |
 | `placeholder` | Keep true until the work and its claims are ready |
 
 Put assets under `public/media/` and reference them with `/media/filename`. Direct hosted file URLs also work for videos. Remote posters require a matching `images.remotePatterns` configuration in `next.config.ts`.
 
-Set `placeholder: false` and provide `film` for playable work. `projects` contains eleven playable films, including two extracted interview title intros; `gradingFilms` contains two color-work clips; `supportingFilms` contains the interview grading steps, graduation trailer, and previous ARCHI commercial. The two Motion examples appear in All work and under Motion.
+Set `placeholder: false` and provide `film` for playable work. `projects` contains twelve playable films, including two extracted interview title intros; `gradingFilms` contains two color-work clips; `supportingFilms` contains the interview grading steps, graduation trailer, and previous ARCHI commercial. The two Motion examples appear in All work and under Motion.
 
-The homepage leads with four F&B commercials, followed by YouTube / Long-form interviews, the educational series, AI filmmaking, and color grading. Project images preview on desktop hover; clicking plays the full film. Separate View project links open production breakdowns.
+The homepage leads with four F&B commercials, Cadillac on its own row directly below, followed by YouTube / Long-form interviews, the educational series, AI filmmaking, and color grading. Project images preview on desktop hover; clicking plays the full film. Separate View project links open production breakdowns.
 
 ## Project pages
 
@@ -66,15 +67,19 @@ Original media remain unchanged outside this repo. Browser derivatives are in `p
 
 These scripts require Pillow and imageio-ffmpeg; source paths are machine-specific. Adjacent manifests record provenance and current derivative sizes. Full films are at most 1080p with original audio; all current full-video files are under 44 MB. Source 4K files are not served directly.
 
-The hero uses four-second shots: TENET from 0.25 seconds, Rakan aviation footage from 8 seconds, SwiftSoft from 1 second, and cockpit footage from its beginning, joined with 0.35-second dissolves. Desktop TENET shifts the subject right using a left-aligned crop. Mobile uses the authored TENET, second-clip, and cockpit vertical exports from their beginnings. Project credit boxes are removed. About uses the standalone profile portrait.
+Read [PROJECT_STATE.md](PROJECT_STATE.md) first for the current site, confirmed credits, per-device timelines, validation and deployment status. Update that document after meaningful changes.
 
-`hero-personal-desktop.mp4` targets at most 3.5 MB at 1280x720; `hero-personal-mobile.mp4` targets at most 1.8 MB at 540x960. Both versions have independent crops. Responsive WebP posters load first; only the matching video rendition is requested, and full source films are never loaded to assemble the hero in-browser.
+The hero uses four-second shots and 0.35-second dissolves (14.95-second timeline). Desktop: TENET, simulator, Rakan preflight, Diriyah. Mobile: authored TENET, vertical preflight, Eating, Spider-Man. The opening TENET framing is unchanged. See `tools/media/hero-manifest.json` for source in-points and crop values.
+
+`hero-v2-desktop.mp4` stays within 3.5 MB at 1280x720; `hero-v2-mobile.mp4` stays within 1.8 MB at 540x960. Matching versioned posters load first and only the matching video rendition is requested.
+
+`tools/media/prepare-refinement.py` prepares the 12?24s student title excerpt, 41s hazardous poster, and Cadillac film/poster/silent preview; `refinement-manifest.json` records provenance and sizes. The hazardous hover still starts at 75s.
 
 ## Playback and motion
 
 - Fine-pointer desktop hover begins after 150 ms and never requests the full film.
 - Leaving hover unloads the preview. Only one media element plays at once.
-- Full film opens in a native dialog, with native video controls and focus restoration.
+- Full film opens in a native dialog, with native video controls and focus restoration. Ajdan alone uses an immersive, uncropped viewport with accessible controls that hide after inactivity.
 - Touch devices open with one tap. Autoplay rejection has an explicit Play fallback.
 - Hidden/offscreen background media pauses. Reduced motion and data saving retain posters.
 - Native touch scrolling; Lenis enhances desktop wheel scrolling only, with restrained hero depth. Anchor spacing follows the CSS scroll padding.
@@ -93,7 +98,7 @@ Build first. `npm test` runs Chromium against an existing preview or starts the 
 
 Browser setup on another machine: `npx playwright install chromium webkit`.
 
-30 Chromium tests passed on 2026-09-13. WebKit was attempted but exits before page creation on this Windows host, including outside the sandbox; it is **not** claimed as tested. `test:webkit` remains available for a working host. Browser emulation is not a physical-phone test.
+38 Chromium tests passed on 2026-09-14; the production build also passed. WebKit was attempted but exits before page creation on this Windows host, including outside the sandbox; it is **not** claimed as tested. `test:webkit` remains available for a working host. Browser emulation is not a physical-phone test.
 
 Screenshots and the single-run lab performance report are under `.local/` (ignored). The performance script uses a cold Chromium cache, 4× CPU throttle and 1.6 Mbps down/150 ms latency. This is a local lab measurement, not a production performance guarantee; resource timing totals can omit ongoing streaming transfers.
 
