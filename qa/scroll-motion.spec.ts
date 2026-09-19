@@ -17,7 +17,7 @@ for (const width of [390, 1440]) {
           positions.set(card, top);
           const style = getComputedStyle(card);
           if (style.clipPath !== 'none' || style.opacity !== '1' || style.transform !== 'none') audit.violations.push('card frame clipped, faded or transformed');
-          if (card.querySelector('.project-visual > img')?.getAnimations().length) audit.imageMotion++;
+          if (card.querySelector('.project-visual > img')?.getAnimations().some(animation => animation.playState === 'running')) audit.imageMotion++;
         }
         if (audit.running) requestAnimationFrame(sample);
       };
@@ -36,3 +36,22 @@ for (const width of [390, 1440]) {
     await context.close();
   });
 }
+
+
+test('entrances are prepared offscreen, visibly run and stop for interaction', async ({ page }) => {
+  await page.goto('/');
+  const card = page.locator('[data-project="cadillac"]');
+  const image = card.locator('.project-visual > img');
+  await expect.poll(() => image.evaluate(el => el.getAnimations().some(a => a.playState === 'paused'))).toBe(true);
+  await expect(image).toHaveCSS('transform', 'matrix(1.08, 0, 0, 1.08, 0, 0)');
+  await page.mouse.move(2, 200);
+  await card.evaluate(el => window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - innerHeight * .5, behavior: 'instant' }));
+  await expect.poll(() => image.evaluate(el => el.getAnimations().some(a => a.playState === 'running'))).toBe(true);
+  await expect(card).toHaveCSS('transform', 'none');
+  await card.locator('.project-visual').focus();
+  await expect.poll(() => image.evaluate(el => el.getAnimations().length)).toBe(0);
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(card.locator('.project-visual')).toBeFocused();
+});

@@ -63,33 +63,39 @@ export function PortfolioRuntime({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (reducedMotion) return;
     const targets = document.querySelectorAll<HTMLElement>('[data-reveal]');
-    const animations = new Set<Animation>();
+    const animations = new Map<HTMLElement, Animation>();
     const cancellations: Array<() => void> = [];
-    // Arm only content below the viewport. Restored scroll positions and content
-    // already being read must never jump back into an entrance animation.
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         const element = entry.target as HTMLElement;
         observer.unobserve(element);
-        if (entry.boundingClientRect.top < 0) continue;
-        const visual = element.dataset.reveal === 'card' || element.dataset.reveal === 'image';
-        const target = visual ? element.querySelector<HTMLElement>('.project-visual > img, :scope > img') : element;
-        if (!target || element.matches(':hover, :focus-within')) continue;
-        // Animate the image inside a fixed frame, never its hit target or caption.
-        const animation = target.animate(visual
-          ? [{ transform: 'scale(1.025)' }, { transform: 'scale(1)' }]
-          : [{ opacity: .85, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }],
-          { duration: visual ? 600 : 350, easing: 'cubic-bezier(.23,1,.32,1)' });
-        animations.add(animation);
-        const stop = () => animation.cancel();
-        element.addEventListener('pointerenter', stop, { once: true });
-        element.addEventListener('focusin', stop, { once: true });
-        cancellations.push(() => { element.removeEventListener('pointerenter', stop); element.removeEventListener('focusin', stop); });
-        void animation.finished.catch(() => {}).finally(() => animations.delete(animation));
+        const animation = animations.get(element);
+        // Fast jumps and keyboard navigation should land on readable content.
+        if (entry.boundingClientRect.top < 0 || element.matches(':hover, :focus-within')) animation?.cancel();
+        else animation?.play();
       }
-    }, { threshold: 0 });
-    targets.forEach(element => { if (element.getBoundingClientRect().top >= innerHeight) observer.observe(element); });
+    }, { threshold: .1 });
+    targets.forEach(element => {
+      if (element.getBoundingClientRect().top < innerHeight) return;
+      const visual = element.dataset.reveal === 'card' || element.dataset.reveal === 'image';
+      const target = visual ? element.querySelector<HTMLElement>('.project-visual > img, :scope > img') : element;
+      if (!target) return;
+      // Prepare the first frame offscreen; no visible-then-hidden stagger flash.
+      // Image motion stays inside its frame, away from captions and hit targets.
+      const animation = target.animate(visual
+        ? [{ transform: 'scale(1.08)' }, { transform: 'scale(1)' }]
+        : [{ opacity: .3, transform: 'translateY(28px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: visual ? 850 : 600, easing: 'cubic-bezier(.23,1,.32,1)', fill: 'both' });
+      animation.pause();
+      animations.set(element, animation);
+      const stop = () => { observer.unobserve(element); animation.cancel(); };
+      element.addEventListener('pointerenter', stop, { once: true });
+      element.addEventListener('focusin', stop, { once: true });
+      cancellations.push(() => { element.removeEventListener('pointerenter', stop); element.removeEventListener('focusin', stop); });
+      void animation.finished.then(() => animation.cancel(), () => {}).finally(() => animations.delete(element));
+      observer.observe(element);
+    });
     return () => { observer.disconnect(); animations.forEach(animation => animation.cancel()); cancellations.forEach(cancel => cancel()); };
 
   }, [reducedMotion]);

@@ -29,18 +29,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <header className="grading-intro page-width">
         <Link className="grading-back" href="/#work"><ArrowLeftIcon size={17} /> Selected work</Link>
         <h1>OxfordSaudia.<br /><span>{education ? 'Aviation explained.' : 'Meet the people.'}</span></h1>
-        <p>{education ? 'Educational short-film series. Making aviation concepts clear through scripting, cinematic scenes and a considered edit.' : 'The interview series. Students and captains, sharing their stories in their own words.'}</p>
+        <p>{education ? 'Short video lessons for student pilots, written, directed, filmed and edited by me.' : 'The interview series. Students and captains, sharing their stories in their own words.'}</p>
       </header>
       <section className={`project-films page-width ${education ? 'education-project-film' : 'film-pair'}`} id="project-films" aria-label={education ? 'Featured episode' : 'YouTube / Long-form interviews'}>
         {(education ? ['hazardous'] : ['students', 'captains']).map(id => <ProjectCard key={id} project={{ ...getProject(id), projectHref: undefined }} />)}
         {education && <div className="project-film-intro"><h2>5 Hazardous Attitudes</h2><p>The featured episode from the educational series.</p><p>Script, direction, filming, editing and audio finishing by Raden Hanifa.</p></div>}
       </section>
       <section className="production-story page-width" aria-labelledby="production-heading">
-        <div className="story-heading"><h2 id="production-heading">From the first idea<br /><span>to the final frame.</span></h2><p>{education ? 'My work on the series connects preparation on the page with direction on set and the finishing details in post.' : 'I handled the script, direction, shooting and edit for both episodes, including the motion-graphics titles and dialogue polishing.'}</p></div>
+        <div className="story-heading"><h2 id="production-heading">How I made<br /><span>the series.</span></h2><p>{education ? 'I handled the scripts, direction, filming, editing and audio finishing.' : 'I handled the script, direction, shooting and edit for both episodes, including the motion-graphics titles and dialogue polishing.'}</p></div>
         <div className="process-columns">
           <div><h3>Before the shoot</h3><p>{education ? 'Researching the topics, writing the scripts and planning the filming with students and crew.' : 'Developing the script and interview structure, then planning the shots and visual presentation.'}</p></div>
           <div><h3>On set</h3><p>{education ? 'Directing the scenes, arranging the set and filming in classroom and simulator environments.' : 'Directing and filming the conversations, with attention to framing, lighting and recorded dialogue.'}</p></div>
-          <div><h3>In the edit</h3><p>{education ? 'Shaping the lesson through the edit, then polishing and engineering the voice audio through to the finished film.' : 'Building the story and pacing, creating motion-graphics titles, and polishing the voice audio for the finished episodes.'}</p></div>
+          <div><h3>In the edit</h3><p>{education ? 'Editing each lesson and cleaning up the recorded dialogue.' : 'Building the story and pacing, creating motion-graphics titles, and polishing the voice audio for the finished episodes.'}</p></div>
         </div>
       </section>
       <section className="project-bts page-width" aria-labelledby="bts-heading">

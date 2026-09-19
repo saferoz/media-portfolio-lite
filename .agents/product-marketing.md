@@ -1,6 +1,6 @@
 # Portfolio marketing context
 
-**Document version:** v1
+**Document version:** v2
 **Last updated:** 2026-09-14
 
 Read [PROJECT_STATE.md](../PROJECT_STATE.md) for verified credits, media and current implementation. Read [COPY_STRATEGY.md](../docs/COPY_STRATEGY.md) for writing choices and framework sources. Those documents take precedence if this summary drifts.
@@ -15,7 +15,7 @@ Help visitors watch relevant work, identify Raden's actual contribution and deci
 
 ## Voice and language
 
-Natural, direct and understated. Use specific projects and actions rather than grand claims. The user asked for natural words, not cliches or AI-sounding copy. Preserve the approved hero headline and About voice. Never invent testimonials, awards, business results, fluency, service guarantees or competitive superiority.
+Natural, direct and understated. Use specific projects and actions rather than grand claims. The user asked for natural words, not cliches or AI-sounding copy. Preserve the approved hero headline and conversational About voice. Avoid repeating cinematic eye, feeling and final frame in body copy; use concrete work and production actions instead. The About intro now says: I shoot, edit and color grade. Never invent testimonials, awards, business results, fluency, service guarantees or competitive superiority.
 
 ## Actions
 
@@ -26,5 +26,7 @@ Explore work, watch projects and Request full portfolio. More work is available.
 No measured conversion baseline, customer interviews, quantified business outcomes, competitor comparison, buying objections or traffic-source mix has been supplied. Treat hypotheses as hypotheses. Adapt marketing frameworks to a portfolio; do not fabricate SaaS pain points, pricing funnels or urgency.
 
 ## Changelog
+
+- v2 (2026-09-14): Recorded plain-language review and specific About wording; retain signature headlines while removing abstract process language.
 
 - v1 (2026-09-14): Captured already-confirmed audience, voice, proof boundaries and CTA decisions for the requested marketing skill collection.

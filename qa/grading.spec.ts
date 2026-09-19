@@ -32,7 +32,7 @@ test('stills carousel, keyboard navigation, enlarge and focus return', async ({ 
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).toHaveCount(0);
   await expect(opener).toBeFocused();
-  await page.getByRole('button', { name: 'Show A look that holds together' }).focus();
+  await page.getByRole('button', { name: 'Show Daylight grading' }).focus();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('region', { name: 'Color grading stills', exact: true }).locator('.gallery-count')).toHaveText('4 / 4');
   await expect(page.getByRole('region', { name: 'Color grading stills', exact: true }).getByRole('button', { name: 'Next still', exact: true })).toBeDisabled();

@@ -27,8 +27,8 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/radenhanifa',
   cv: 'https://cv.radenhanifa.com',
   portrait: '/media/portrait.webp',
-  intro: 'I’m Raden. I bring a cinematic eye to the edit.',
-  about: 'My work moves between filming, editing and AI-assisted creation. From aviation to food and lifestyle, I’m drawn to the details that give a film its feeling: the rhythm, the color, the sound.',
+  intro: 'I’m Raden. I shoot, edit and color grade.',
+  about: 'My work includes commercial reels, aviation interviews and educational videos. I also make AI films. I care about how the picture, pacing and sound work together.',
   tools: ['Premiere Pro', 'DaVinci Resolve', 'After Effects', 'AI-assisted workflows'],
 };
 
@@ -81,7 +81,7 @@ export const projects: Project[] = [
   },
   {
     id: 'cadillac-second', title: 'Cadillac Escalade — Walkthrough', category: 'Reels',
-    description: 'A sales-led introduction to the then-new Cadillac Escalade.', cardLabel: 'Walkthrough reel', contribution: 'Concept, production, cinematography & editing',
+    description: 'A salesperson introduces the then-new Cadillac Escalade.', cardLabel: 'Walkthrough reel', contribution: 'Concept, production, cinematography & editing',
     credits: 'Concept, production, cinematography and editing: Raden Hanifa. In collaboration with Cadillac Alghanim Kuwait.',
     poster: '/media/cadillac-poster.webp', preview: '/media/cadillac-preview.mp4',
     film: '/media/cadillac-film.mp4', duration: '01:41', aspect: 'portrait', placeholder: false,
@@ -117,7 +117,7 @@ export type WorkFilter = typeof categories[number];
 
 export const gradingFilms: Project[] = [
   { id: 'founding-day', immersive: true, title: 'Saudi Founding Day', category: 'Color grading', description: 'Before and after, in motion', contribution: 'Color grading', cardLabel: 'Grading breakdown', poster: '/media/founding-day-poster.webp', preview: '/media/founding-day-preview.mp4', film: '/media/founding-day-film.mp4', duration: '00:12', aspect: 'portrait', placeholder: false },
-  { id: 'diriyah', title: 'Diriyah Colors', category: 'Color grading', description: 'A study in color and atmosphere', contribution: 'Color grading', cardLabel: 'Color study', poster: '/media/diriyah-poster.webp', preview: '/media/diriyah-preview.mp4', film: '/media/diriyah-film.mp4', duration: '00:11', aspect: 'landscape', placeholder: false },
+  { id: 'diriyah', title: 'Diriyah Colors', category: 'Color grading', description: 'Color grading for Diriyah footage', contribution: 'Color grading', cardLabel: 'Color grading', poster: '/media/diriyah-poster.webp', preview: '/media/diriyah-preview.mp4', film: '/media/diriyah-film.mp4', duration: '00:11', aspect: 'landscape', placeholder: false },
 ];
 export const supportingFilms: Project[] = [
   { id: 'archi', title: 'ARCHI \u2014 Food Commercial', category: 'Reels', description: 'From behind the scenes to the finished film', contribution: 'Commercial filmmaking', poster: '/media/archi-poster.webp', film: '/media/archi-film.mp4', duration: '00:20', aspect: 'portrait', placeholder: false },

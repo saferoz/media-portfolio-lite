@@ -8,10 +8,10 @@ import { usePortfolio } from './portfolio-runtime';
 
 export type GalleryStill = { src: string; title: string; description: string };
 const defaultStills: GalleryStill[] = [
-  { src: '/media/grading-night.webp', title: 'Twilight on the apron', description: 'Three final-graded frames, from preflight to the cockpit.' },
-  { src: '/media/grading-process.webp', title: 'From log to the final look', description: '8-bit log, Rec.709 and the final grade, as supplied in the original breakdown.' },
+  { src: '/media/grading-night.webp', title: 'Twilight on the apron', description: 'Three graded frames, from preflight to the cockpit.' },
+  { src: '/media/grading-process.webp', title: 'From log to the final look', description: 'The same footage in 8-bit log, Rec.709 and the final grade.' },
   { src: '/media/grading-day.webp', title: 'Above the clouds', description: 'Warm highlights, skin tones and the color of open sky.' },
-  { src: '/media/grading-flight.webp', title: 'A look that holds together', description: 'A second sequence of daylight frames from the film.' },
+  { src: '/media/grading-flight.webp', title: 'Daylight grading', description: 'A second sequence of daylight frames from the film.' },
 ];
 
 export function GradingGallery({ items = defaultStills, label = 'Color grading stills', compact = false }: { items?: GalleryStill[]; label?: string; compact?: boolean }) {

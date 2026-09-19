@@ -21,20 +21,20 @@ export default function ColorGradingPage() {
     <main className="grading-page">
       <header className="grading-intro page-width">
         <Link className="grading-back" href="/#work"><ArrowLeftIcon size={17} /> Selected work</Link>
-        <h1>Color changes<br /><span>the feeling.</span></h1>
-        <p>Color grading by Raden Hanifa. Light, skin tones and atmosphere, explored through original frames, final grades and films.</p>
+        <h1>Color grading.<br /><span>Before and after.</span></h1>
+        <p>Compare original footage with my finished grades, then watch the breakdowns and full films.</p>
         <nav className="grading-jumps" aria-label="Color grading projects"><a href="#comparison">Graduation trailer</a><a href="#student-interview">Student interview</a><a href="#color-films">Color in motion</a></nav>
       </header>
       <section className="comparison-section page-width" id="comparison" aria-label="Original and final color grade">
-        <div className="grading-gallery-heading"><h2>Graduation, in a different light.</h2><p>OxfordSaudia — Graduation Trailer. From 8-bit log to the final look.</p></div>
+        <div className="grading-gallery-heading"><h2>Graduation trailer</h2><p>OxfordSaudia — Graduation Trailer. From 8-bit log to the final look.</p></div>
         <GradingComparison priority />
       </section>
       <section className="grading-gallery-section page-width" aria-labelledby="stills-heading">
-        <div className="grading-gallery-heading"><h2 id="stills-heading">The look, across frames.</h2><p>Twilight on the apron. Warm light in the cockpit.<br />Explore the selected stills and grading stages.</p></div>
+        <div className="grading-gallery-heading"><h2 id="stills-heading">Stills and grading stages</h2><p>Twilight on the apron. Warm light in the cockpit.<br />Explore the selected stills and grading stages.</p></div>
         <GradingGallery />
       </section>
       <section className="graduation-story page-width" aria-labelledby="graduation-heading">
-        <div className="grading-gallery-heading"><h2 id="graduation-heading">The film behind the frames.</h2><p>Planning, cinematography, editing and color grading by Raden Hanifa.</p></div>
+        <div className="grading-gallery-heading"><h2 id="graduation-heading">Watch the graduation trailer</h2><p>Planning, cinematography, editing and color grading by Raden Hanifa.</p></div>
         <div className="supporting-film"><ProjectCard project={getProject('graduation')} /></div>
         <details className="bts-disclosure"><summary>Behind the shoot <span>Planning, equipment &amp; camera positions</span></summary><div className="disclosure-content"><p>I planned the camera angles and positions ahead of the shoot, working with the airside-approved Sony A7R IV. Low light and 8-bit footage shaped the approach to the final grade. I also served as a safety pilot on the shoot.</p>
           <GradingGallery compact label="Graduation trailer behind the scenes" items={[
@@ -44,12 +44,12 @@ export default function ColorGradingPage() {
         </div></details>
       </section>
       <section className="grading-chapter page-width" id="student-interview" aria-labelledby="interview-heading">
-        <div className="grading-gallery-heading"><h2 id="interview-heading">A natural presence.</h2><p>Get to Know Our Students. Compare the original interview frame with the finished grade.</p></div>
+        <div className="grading-gallery-heading"><h2 id="interview-heading">Student interview</h2><p>Get to Know Our Students. Compare the original interview frame with the finished grade.</p></div>
         <GradingComparison before="/media/interview-before.webp" after="/media/interview-after.webp" subject="the OxfordSaudia student interview" label="Reveal original student interview image" />
         <div className="supporting-film"><ProjectCard project={getProject('interview-grade')} /></div>
         <Link className="text-link" href="/work/oxfordsaudia-interviews">View interview project <ArrowUpRightIcon size={18} /></Link>
       </section>
-      <section className="grading-chapter page-width" id="color-films" aria-labelledby="color-films-heading"><div className="grading-gallery-heading"><h2 id="color-films-heading">Color, in motion.</h2><p>Saudi Founding Day and Diriyah. Two more studies in the finished image.</p></div><div className="grading-film-grid">{gradingFilms.map(project => <ProjectCard key={project.id} project={project} />)}</div></section>
+      <section className="grading-chapter page-width" id="color-films" aria-labelledby="color-films-heading"><div className="grading-gallery-heading"><h2 id="color-films-heading">Color, in motion.</h2><p>Saudi Founding Day and Diriyah. More examples of my color grading.</p></div><div className="grading-film-grid">{gradingFilms.map(project => <ProjectCard key={project.id} project={project} />)}</div></section>
       <section className="grading-close page-width">
         <h2>Want to see more?</h2>
         <a className="text-link" href={portfolioRequestHref}>Request full portfolio <ArrowUpRightIcon size={20} /></a>

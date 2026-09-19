@@ -38,3 +38,23 @@ Applied clarity, voice, evidence and specificity checks. Replaced F&B/Product fi
 The skills are useful editorial checklists, not evidence that particular wording will improve this site's conversion rate. Upstream 2.0.2 adds general conversion percentages; none are used as promises or proof here. Do not add invented guarantees, dramatic pain narratives, testimonials or customer outcomes to satisfy a template. The two equal audiences and natural voice come from the user and take precedence over generic single-audience advice.
 
 Shared skill context: ../.agents/product-marketing.md. Project truth and credits remain in ../PROJECT_STATE.md.
+
+
+## Plain-language review, 2026-09-14
+
+Reviewed the homepage, project cards, grading page, galleries and both OxfordSaudia project pages using the copy-editing clarity, voice, specificity and evidence checks. The issue was repeated cinematic phrasing and abstract descriptions, not the presence of every poetic phrase.
+
+| Previous wording | Current wording | Reason |
+| --- | --- | --- |
+| A natural presence. | Student interview | Names the project visitors are comparing. |
+| The look, across frames. | Stills and grading stages | Describes the section contents. |
+| A look that holds together | Daylight grading | Replaces a vague quality claim with the actual subject. |
+| A sales-led introduction | A salesperson introduces | Uses ordinary language and identifies what happens. |
+| I bring a cinematic eye to the edit. | I shoot, edit and color grade. | Removes repetition of the About heading and states the work. |
+| My work on the series connects preparation on the page... | I handled the scripts, direction, filming, editing and audio finishing. | Makes the production credit explicit. |
+
+About body: My work includes commercial reels, aviation interviews and educational videos. I also make AI films. I care about how the picture, pacing and sound work together.
+
+Retained the homepage headline From idea to final frame, the About heading A cinematic eye. A curious mind., and Want to see more? with Request full portfolio. These serve as short identity/invitation lines; surrounding copy supplies specific evidence. Avoid repeating cinematic, atmosphere, feeling and final frame across unrelated descriptions. Process copy should name actions rather than describe how thoughtful the process was. Keep meaningful technical details such as 8-bit footage and the approved camera; remove agent-facing phrases like as supplied in the original breakdown from visitor copy.
+
+No new client results, availability claims, personal history or customer quotes were invented. The user clarified that the motion complaint was about bugs, not a desire to remove visible animation. Record motion preferences in PROJECT_STATE.md; do not treat near-invisible movement as approved art direction.
