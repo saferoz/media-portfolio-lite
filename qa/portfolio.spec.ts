@@ -64,7 +64,7 @@ test('filters and playable motion intros', async ({ page }) => {
   await expect(page.getByRole('button', { name: 'Play SwiftSoft', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Color grading', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Color grading.' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'View color grading' })).toHaveAttribute('href', '/color-grading');
+  await expect(page.getByRole('link', { name: 'View color grading' })).toHaveAttribute('href', '/color-grading#grading-intro');
   await page.getByRole('button', { name: 'All work', exact: true }).click();
   await expect(page.locator('.project-card')).toHaveCount(15);
   await page.getByRole('button', { name: 'Motion', exact: true }).click();

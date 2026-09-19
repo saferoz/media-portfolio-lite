@@ -19,7 +19,7 @@ export default function ColorGradingPage() {
     <a className="skip-link" href="#comparison">Skip to color comparison</a>
     <Navigation innerPage />
     <main className="grading-page">
-      <header className="grading-intro page-width">
+      <header className="grading-intro page-width" id="grading-intro">
         <Link className="grading-back" href="/#work"><ArrowLeftIcon size={17} /> Selected work</Link>
         <h1>Color grading.<br /><span>Before and after.</span></h1>
         <p>Compare original footage with my finished grades, then watch the breakdowns and full films.</p>

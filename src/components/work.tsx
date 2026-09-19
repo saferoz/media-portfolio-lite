@@ -18,7 +18,7 @@ export function Work() {
     <GradingComparison />
     <div className="interview-comparison"><div className="grading-heading"><h3>Skin tones, in balance.</h3><p>A frame from Get to Know Our Students.</p></div><GradingComparison before="/media/interview-before.webp" after="/media/interview-after.webp" subject="the OxfordSaudia student interview" label="Reveal original student interview image" /></div>
     <div className="grading-film-grid">{[gradingFilms[0], getProject('interview-grade')].map(project => <ProjectCard key={project.id} project={project} />)}</div>
-    <Link className="grading-project-link" href="/color-grading">View color grading <ArrowUpRightIcon size={20} /></Link>
+    <Link className="grading-project-link" href="/color-grading#grading-intro" onNavigate={settleScroll}>View color grading <ArrowUpRightIcon size={20} /></Link>
   </section>;
   return <section id="work" className="work-section page-width" aria-labelledby="work-heading">
     <div className="section-heading" data-reveal><h2 id="work-heading">Selected <span>work.</span></h2><p>Commercial reels, interviews,<br />and work made with AI.</p></div>

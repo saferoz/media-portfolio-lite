@@ -575,3 +575,10 @@ h1, h2, h3 { font-weight: 500; }
   .player-screen video { max-height: calc(100svh - 180px); }
 }
 @media (prefers-reduced-motion: reduce) { .reel-navigation { transition: none; } }
+
+/* Keep the authored desktop cover framing identical before and after hydration. */
+@media (min-width: 768px) {
+  .hero-media { transform: none !important; will-change: auto; }
+  .stills-carousel .still-enlarge { height: min(560px, 55svh); min-height: 0; aspect-ratio: auto; }
+}
+#grading-intro { scroll-margin-top: 78px; }
