@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { PortfolioLink as Link } from '@/components/portfolio-link';
+import { StudioLight } from '@/components/studio-light';
 import { notFound } from 'next/navigation';
 import { ArrowLeftIcon, ArrowUpRightIcon } from '@phosphor-icons/react/dist/ssr';
 import { Navigation } from '@/components/navigation';
@@ -26,7 +27,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   return <PortfolioRuntime>
     <a className="skip-link" href="#project-films">Skip to films</a><Navigation innerPage />
     <main className="project-page">
-      <header className="grading-intro page-width">
+      <header className="grading-intro page-width" id="project-intro">
+        <StudioLight />
         <Link className="grading-back" href="/#work"><ArrowLeftIcon size={17} /> Selected work</Link>
         <h1>OxfordSaudia.<br /><span>{education ? 'Aviation explained.' : 'Meet the people.'}</span></h1>
         <p>{education ? 'Short video lessons for student pilots, written, directed, filmed and edited by me.' : 'The interview series. Students and captains, sharing their stories in their own words.'}</p>

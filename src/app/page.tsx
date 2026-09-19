@@ -5,6 +5,7 @@ import { PortfolioRuntime } from '@/components/portfolio-runtime';
 import { Navigation } from '@/components/navigation';
 import { Hero } from '@/components/hero';
 import { Work } from '@/components/work';
+import { StudioLight } from '@/components/studio-light';
 
 export default function Home() {
   return <PortfolioRuntime>
@@ -14,10 +15,12 @@ export default function Home() {
       <Hero />
       <Work />
       <section className="about-section page-width" id="about" aria-labelledby="about-heading">
+        <StudioLight side="right" />
         <div className="about-image" data-reveal="image"><Image src={profile.portrait} alt="Raden Hanifa" fill sizes="(max-width: 640px) 85vw, 36vw" /></div>
         <div className="about-copy" data-reveal><h2 id="about-heading">A cinematic eye.<br /><span>A curious mind.</span></h2><p className="about-intro">{profile.intro}</p><p>{profile.about}</p><div className="tool-list" aria-label="Creative tools">{profile.tools.map(tool => <span key={tool}>{tool}</span>)}</div><a className="text-link" href={profile.cv} target="_blank" rel="noreferrer">The longer story <span>View CV</span><ArrowUpRightIcon size={18} /></a></div>
       </section>
       <section className="contact-section" id="contact" aria-labelledby="contact-heading">
+        <StudioLight side="right" quiet />
         <div className="page-width contact-inner"><div className="contact-title" data-reveal><h2 id="contact-heading">Want to<br /><span>see more?</span></h2><ArrowUpRightIcon weight="light" /></div><p className="contact-intro">I have more work to share across filming, cinematography, editing, color grading and AI filmmaking.</p><p className="contact-region">Saudi Arabia, the UAE and the wider GCC.</p><div className="contact-actions"><a className="grading-project-link" href={portfolioRequestHref}>Request full portfolio <ArrowUpRightIcon size={20} /></a></div><a className="contact-email" href={`mailto:${profile.email}`}>{profile.email}<ArrowUpRightIcon size={19} /></a><div className="contact-socials"><a className="contact-instagram" href={profile.instagram} target="_blank" rel="noreferrer" aria-label="Instagram: @radenhanifa"><InstagramLogoIcon size={20} />@radenhanifa<ArrowUpRightIcon size={17} /></a><a className="contact-instagram" href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn: Raden Hanifa"><LinkedinLogoIcon size={20} />LinkedIn<ArrowUpRightIcon size={17} /></a></div></div>
       </section>
     </main>

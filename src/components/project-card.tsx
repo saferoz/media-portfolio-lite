@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { PortfolioLink as Link } from './portfolio-link';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRightIcon, PlayIcon, SpeakerSlashIcon } from '@phosphor-icons/react';
 import { categoryLabel, type Project } from '@/lib/portfolio';

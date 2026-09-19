@@ -1,5 +1,25 @@
 # Project state
 
+## Project navigation, native scrollbar and studio lighting, 2026-09-19
+
+Shared PortfolioLink settles pending Lenis scrolling before client navigation and adds #project-intro to unfragmented /work/ links. Both project introductions have that anchor and a 78px scroll margin, matching the established grading arrival. Explicit grading/interview fragments and browser history restoration remain intact. Project cards, Behind the series and project/grading cross-links use the wrapper; there is no blanket route-change scroll reset.
+
+Desktop wheel interpolation retains lerp 0.085. Primary-pointer input and scroll-navigation keys immediately settle pending interpolation, with editable fields and dialog keyboard controls excluded. Global native CSS scrolling is now auto. Before the fix, a real Chromium scrollbar drag was pulled back toward an old wheel target; after the fix, dragging reaches the intended position and remains there after release. Local project arrivals varied before the fix, though the exact reported bottom-of-page landing was not reproduced; all five project links now consistently land at the introduction. Mobile scrolling remains native.
+
+Frontend-design and animate skills informed restrained off-axis blue studio light behind work, About, contact and project introductions. Feathered static gradient washes avoid visible rectangular edges. Only their transform moves, over a bounded 24px desktop range, using existing Motion; no new dependency. Touch, data-saving and reduced-motion modes are static. Light-theme opacity is softer; grading comparisons, media frames, hero framing and content positions are preserved.
+
+Validation: final production build and TypeScript passed. Full Chromium run passed 62/63 in 2.1 minutes; the remaining new data-saving test used an incomplete navigator.connection mock. Corrected it to EventTarget and reran successfully on the same build, so all 63 cases passed across those runs. New regressions cover all five project links, filtered and keyboard navigation, history, direct anchors, Behind the series, actual scrollbar drag/reversal/release, wheel resumption, Home-key interruption, bounded lighting, reduced motion, touch and save-data. Existing playback, gallery, hero and icon checks passed. Reviewed desktop dark/light and mobile captures; corrected background edge feathering before the final build. Additional synthetic modified-click check retains the homepage and does not prevent the click; an attempted automated popup-event check timed out, so actual new-tab behavior is not claimed as verified. Physical iOS/WebKit remain unverified. Local final preview: http://127.0.0.1:3032.
+
+Delivery: user authorized pushing this pass and the preceding Open Graph/favicon changes to origin/main. Keep original icon backups tracked and the pre-existing next-env.d.ts development references uncommitted. Deployment status is independent of local checks and Git push; no hosting deployment is asserted here.
+
+## Open Graph and temporary favicon, 2026-09-19
+
+Homepage sharing now uses the supplied og raden.jpg, copied byte-for-byte to public/media/raden-hanifa-og-v1.jpg (1731x909, 146643 bytes). The metadata base defaults to https://media.radenhanifa.com. The copywriting skill and existing marketing context informed the title Raden Hanifa ? Filmmaker & Video Editor and description: Explore commercial reels, interviews, color grading and AI films by Raden Hanifa. Watch selected work and request the full portfolio. Project-specific OG images and visible page copy remain intact.
+
+The supplied D:/Downloads/ChatGPT Image Sep 19, 2026, 04_42_18 PM.png is the temporary favicon, exported without cropping as 192px icon.png, 180px apple-icon.png and 16/32/48px favicon.ico. Original icon.svg, favicon.ico and apple-icon.png are preserved in tools/media/favicon-backup-2026-09-19/. The old SVG is removed from the active app route only. tools/media/prepare-brand-assets.cjs reproduces exports without overwriting backups. External original images are untouched.
+
+Validation: production build and TypeScript passed after correcting ICO exports to RGBA. Generated production HTML confirms OG/Twitter copy, absolute HTTPS image URL, dimensions and new icon links. OG JPEG hash matches the supplied original. Binary favicon backups match Git; SVG content matches after normalizing Git line endings. git diff --check passed. Pre-existing next-env.d.ts development references were restored after the build. Changes are local; deployment and actual WhatsApp preview remain unverified.
+
 Read this first. This is the canonical tracked handover for the media portfolio. Re-read relevant source before editing; update this document after meaningful code, media, credit, or validation changes. `AGENTS.md` preserves the installed Next.js guide requirement; `CLAUDE.md` links here. The ignored local `AGENT_HANDOFF.md` is only a pointer.
 
 ## Verified repository state — 2026-09-14

@@ -50,11 +50,26 @@ export function PortfolioRuntime({ children }: { children: React.ReactNode }) {
         if (disposed) return;
         const scroll = new Lenis({ autoRaf: true, lerp: 0.085, smoothWheel: true, syncTouch: false, anchors: true, prevent: node => node.closest('[role="dialog"]') !== null });
         scrollRef.current = scroll;
+        // Direct browser input takes ownership from pending wheel interpolation.
+        const interrupt = () => {
+          if (!scroll.isStopped) scroll.scrollTo(window.scrollY, { immediate: true });
+        };
+        const onPointer = (event: PointerEvent) => { if (event.button === 0) interrupt(); };
+        const onKey = (event: KeyboardEvent) => {
+          if (event.target instanceof Element && event.target.closest('input, textarea, select, [contenteditable], [role="dialog"]')) return;
+          if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) interrupt();
+        };
+        window.addEventListener('pointerdown', onPointer, true);
+        window.addEventListener('keydown', onKey, true);
         const onModal = () => document.documentElement.classList.contains('film-open') ? scroll.stop() : scroll.start();
         const observer = new MutationObserver(onModal);
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
         onModal();
-        destroy = () => { observer.disconnect(); scroll.destroy(); scrollRef.current = null; };
+        destroy = () => {
+          window.removeEventListener('pointerdown', onPointer, true);
+          window.removeEventListener('keydown', onKey, true);
+          observer.disconnect(); scroll.destroy(); scrollRef.current = null;
+        };
       });
     }
     return () => { disposed = true; destroy?.(); };

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { PortfolioLink as Link } from '@/components/portfolio-link';
+import { StudioLight } from '@/components/studio-light';
 import { ArrowLeftIcon, ArrowUpRightIcon } from '@phosphor-icons/react/dist/ssr';
 import { Navigation } from '@/components/navigation';
 import { PortfolioRuntime } from '@/components/portfolio-runtime';
@@ -20,6 +21,7 @@ export default function ColorGradingPage() {
     <Navigation innerPage />
     <main className="grading-page">
       <header className="grading-intro page-width" id="grading-intro">
+        <StudioLight />
         <Link className="grading-back" href="/#work"><ArrowLeftIcon size={17} /> Selected work</Link>
         <h1>Color grading.<br /><span>Before and after.</span></h1>
         <p>Compare original footage with my finished grades, then watch the breakdowns and full films.</p>
