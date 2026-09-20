@@ -18,6 +18,8 @@ test('sitemap contains only the four canonical pages and robots advertises it', 
   const xml = await sitemap.text();
   expect([...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]).sort())
     .toEqual(pages.map(([path]) => canonicalUrl(path)).sort());
+  expect([...xml.matchAll(/<image:loc>(.*?)<\/image:loc>/g)].map(match => match[1]))
+    .toEqual([`${origin}/media/portrait.webp`]);
   expect(xml).not.toMatch(/lastmod|hreflang|\/ar|localhost|vercel\.app/);
   const robots = await request.get('/robots.txt');
   expect(robots.status()).toBe(200);
@@ -48,16 +50,32 @@ for (const [path, title] of pages) {
     const robots = page.locator('meta[name="robots"]');
     if (await robots.count()) expect(await robots.getAttribute('content')).not.toContain('noindex');
     const graph = JSON.parse(await page.locator('script[type="application/ld+json"]').innerText())['@graph'];
-    expect(graph.map((entry: { '@type': string }) => entry['@type'])).toEqual(['Person', 'WebSite', 'WebPage']);
-    expect(graph[0]['@id']).toBe('https://radenhanifa.com/#person');
-    expect(graph[0].sameAs).toContain('https://cv.radenhanifa.com');
-    expect(graph[0]).not.toHaveProperty('address');
-    expect(graph[0]).not.toHaveProperty('areaServed');
-    expect(graph[1].creator['@id']).toBe(graph[0]['@id']);
-    expect(graph[2].url).toBe(canonicalUrl(path));
-    expect(graph[2].isPartOf['@id']).toBe(graph[1]['@id']);
-    expect(graph[2].author['@id']).toBe(graph[0]['@id']);
-    expect(graph[2].inLanguage).toBe('en');
+    const person = graph.find((entry: { '@type': string }) => entry['@type'] === 'Person');
+    const website = graph.find((entry: { '@type': string }) => entry['@type'] === 'WebSite');
+    const webPage = graph.find((entry: { '@type': string }) => entry['@type'] === 'WebPage');
+    const portrait = graph.find((entry: { '@type': string }) => entry['@type'] === 'ImageObject');
+    expect(person['@id']).toBe('https://radenhanifa.com/#person');
+    expect(person.sameAs).toContain('https://cv.radenhanifa.com');
+    expect(person).not.toHaveProperty('address');
+    expect(person).not.toHaveProperty('areaServed');
+    expect(website.creator['@id']).toBe(person['@id']);
+    expect(webPage.url).toBe(canonicalUrl(path));
+    expect(webPage.isPartOf['@id']).toBe(website['@id']);
+    expect(webPage.author['@id']).toBe(person['@id']);
+    expect(webPage.inLanguage).toBe('en');
+    if (path === '/') {
+      expect(person.image['@id']).toBe(`${origin}/media/portrait.webp#image`);
+      expect(webPage.primaryImageOfPage['@id']).toBe(person.image['@id']);
+      expect(portrait).toMatchObject({
+        '@id': person.image['@id'], contentUrl: `${origin}/media/portrait.webp`,
+        width: 900, height: 1153, representativeOfPage: true,
+      });
+      await expect(page.getByAltText('Portrait of Raden Hanifa, media producer and cinematographer')).toHaveCount(1);
+      expect((await request.get('/media/portrait.webp')).status()).toBe(200);
+    } else {
+      expect(portrait).toBeUndefined();
+      expect(webPage).not.toHaveProperty('primaryImageOfPage');
+    }
     await expect(page.locator('main')).toContainText(path === '/' ? 'I’m Raden Hanifa.' : path === '/color-grading' ? 'Before and after.' : 'OxfordSaudia.');
     const image = await page.locator('meta[property="og:image"]').getAttribute('content');
     expect(image).toMatch(/^https:\/\/media\.radenhanifa\.com\/media\//);

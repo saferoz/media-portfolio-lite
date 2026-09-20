@@ -21,7 +21,7 @@ export default function Home() {
       <Work />
       <section className="about-section page-width" id="about" aria-labelledby="about-heading">
         <StudioLight side="right" cinematic />
-        <div className="about-image" data-reveal="portrait"><Image src={profile.portrait} alt="Raden Hanifa" fill sizes="(max-width: 640px) 85vw, 36vw" /></div>
+        <div className="about-image" data-reveal="portrait"><Image src={profile.portrait} alt="Portrait of Raden Hanifa, media producer and cinematographer" fill sizes="(max-width: 640px) 85vw, 36vw" /></div>
         <div className="about-copy"><h2 id="about-heading" data-reveal="lines"><span className="reveal-line"><span>A cinematic eye.</span></span><span className="reveal-line"><span>A curious mind.</span></span></h2><p className="about-intro">{profile.intro}</p><p>{profile.about}</p><div className="tool-list" aria-label="Creative tools">{profile.tools.map(tool => <span key={tool}>{tool}</span>)}</div><a className="text-link" href={profile.cv} target="_blank" rel="noreferrer">The longer story <span>View CV</span><ArrowUpRightIcon size={18} /></a></div>
       </section>
       <section className="contact-section" id="contact" aria-labelledby="contact-heading">

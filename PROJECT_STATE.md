@@ -1,5 +1,11 @@
 # Project state
 
+## Homepage portrait search eligibility, 2026-09-20
+
+The user asked to make the existing headshot eligible for a small Google text-result thumbnail while retaining the RH favicon. The homepage now identifies the visible 900×1153 `/media/portrait.webp` as `primaryImageOfPage`, connects it to the existing Person entity through an ImageObject, and includes the same stable URL in the homepage image sitemap entry. The visible Next Image alt text now describes Raden as a media producer and cinematographer. Social-sharing artwork remains the cinematic OG image. Google selects text-result images automatically, so this is an eligibility signal rather than a display or size guarantee.
+
+Validation: production build and TypeScript passed. All 14 selected Chromium SEO/gallery/icon/navigation cases passed in 21.5s against port 3044. Coverage confirms the visible portrait, 200 image response, linked Person/ImageObject/WebPage graph, exact image sitemap URL, unchanged OG artwork, four canonical pages and true 404s. Restored the pre-existing next-env.d.ts development-type references after validation and keep that unrelated change outside delivery.
+
 ## Media-first positioning and authorized SEO publication, 2026-09-20
 
 User clarified that media.radenhanifa.com must appeal to general agencies: Media Producer & Cinematographer is the homepage search/share title, with aviation retained as a proven specialty in the description and project pages. The CV connects aviation/media experience; the future main site connects both as a personal-brand home. This supersedes the aviation-first homepage wording below. No visible portfolio copy, attribution or external site was changed. Marketing context v4 and unpublished Arabic drafts reflect this distinction. Aviation photographer remains a research target pending a relevant verified still-photo portfolio, not an added claim.

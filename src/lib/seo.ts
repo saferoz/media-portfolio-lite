@@ -5,6 +5,8 @@ import { profile } from './portfolio';
 export const siteOrigin = 'https://media.radenhanifa.com';
 export const personId = 'https://radenhanifa.com/#person';
 export const websiteId = `${siteOrigin}/#website`;
+export const portraitUrl = new URL(profile.portrait, siteOrigin).href;
+export const portraitImageId = `${portraitUrl}#image`;
 export const projectSlugs = ['oxfordsaudia-interviews', 'oxfordsaudia-educational-series'];
 export const seoPages = {
   '/': {
@@ -48,14 +50,22 @@ export function pageMetadata(path: SeoPath): Metadata {
 
 export function pageStructuredData(path: SeoPath) {
   const page = seoPages[path];
-  return { '@context': 'https://schema.org', '@graph': [
+  const graph: Record<string, unknown>[] = [
     { '@type': 'Person', '@id': personId, name: profile.name, url: 'https://radenhanifa.com/',
-      image: new URL(profile.portrait, siteOrigin).href, sameAs: [profile.linkedin, profile.instagram, profile.cv],
+      image: path === '/' ? { '@id': portraitImageId } : portraitUrl,
+      sameAs: [profile.linkedin, profile.instagram, profile.cv],
       description: profile.about, knowsAbout: ['Aviation filmmaking', 'Cinematography', 'Video editing', 'Color grading', 'AI filmmaking'] },
     { '@type': 'WebSite', '@id': websiteId, url: pageUrl('/'), name: profile.name,
       inLanguage: 'en', creator: { '@id': personId } },
     { '@type': 'WebPage', '@id': `${pageUrl(path)}#webpage`, url: pageUrl(path), name: page.title,
       description: page.description, inLanguage: 'en', isPartOf: { '@id': websiteId },
-      author: { '@id': personId }, about: { '@id': personId } },
-  ] };
+      author: { '@id': personId }, about: { '@id': personId },
+      ...(path === '/' ? { primaryImageOfPage: { '@id': portraitImageId } } : {}) },
+  ];
+  if (path === '/') graph.push({
+    '@type': 'ImageObject', '@id': portraitImageId, url: portraitUrl, contentUrl: portraitUrl,
+    caption: 'Portrait of Raden Hanifa, media producer and cinematographer',
+    width: 900, height: 1153, representativeOfPage: true,
+  });
+  return { '@context': 'https://schema.org', '@graph': graph };
 }
