@@ -1,5 +1,13 @@
 # Project state
 
+## PostHog browser analytics, 2026-09-20
+
+Installed `posthog-js` 1.434.2 and added the Next.js 16 client-instrumentation entry at `instrumentation-client.ts`. It initializes only when both `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` and `NEXT_PUBLIC_POSTHOG_HOST` are available, using PostHog's supplied `defaults: '2026-05-30'` configuration. The user-provided US project token and `https://us.i.posthog.com` are stored in ignored `.env.local`; `.env.example` documents the variable names without a project token. Existing Vercel Analytics remains in the root layout. No server-side PostHog SDK, event instrumentation, consent UI, proxy, identity capture, SEO metadata, schema, visible copy, media or attribution was changed.
+
+Validation: TypeScript and the production Next.js build passed with `.env.local`. A local production Chromium smoke test retained the exact homepage title `Raden Hanifa — Media Producer & Cinematographer`, canonical `https://media.radenhanifa.com` and one JSON-LD script while observing PostHog configuration requests to the supplied US project. All six focused Chromium SEO tests passed, covering the four canonical routes, sitemap/robots, structured data, portrait image signal and true 404 behavior. The pre-existing `next-env.d.ts` development-type references remain unrelated and outside this change.
+
+Deployment status: local integration is verified but not yet deployed. The user supplied screenshot evidence that both variables were added as Config values to the Vercel project's Production environment. Preview intentionally has no PostHog configuration and will no-op through the initialization guard. `NEXT_PUBLIC_` values are frozen into the client bundle at build time, so a new production build is required. A future commit/push is not proof that PostHog is collecting on the public domain; verify live network events and the PostHog activity dashboard separately after deployment.
+
 ## Homepage portrait search eligibility, 2026-09-20
 
 The user asked to make the existing headshot eligible for a small Google text-result thumbnail while retaining the RH favicon. The homepage now identifies the visible 900×1153 `/media/portrait.webp` as `primaryImageOfPage`, connects it to the existing Person entity through an ImageObject, and includes the same stable URL in the homepage image sitemap entry. The visible Next Image alt text now describes Raden as a media producer and cinematographer. Social-sharing artwork remains the cinematic OG image. Google selects text-result images automatically, so this is an eligibility signal rather than a display or size guarantee.
