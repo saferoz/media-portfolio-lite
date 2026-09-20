@@ -1,4 +1,5 @@
-import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+import { SeoData } from '@/components/seo-data';
 import { PortfolioLink as Link } from '@/components/portfolio-link';
 import { StudioLight } from '@/components/studio-light';
 import { ArrowLeftIcon, ArrowUpRightIcon } from '@phosphor-icons/react/dist/ssr';
@@ -9,14 +10,11 @@ import { GradingComparison } from '@/components/grading-comparison';
 import { gradingFilms, getProject, portfolioRequestHref } from '@/lib/portfolio';
 import { ProjectCard } from '@/components/project-card';
 
-export const metadata: Metadata = {
-  title: 'Color grading — Raden Hanifa',
-  description: 'Explore Raden Hanifa’s aviation color work, from the original image to the final grade, with selected stills.',
-  openGraph: { title: 'Color grading — Raden Hanifa', description: 'From original to final frame.', images: [{ url: '/media/grading-after.webp', width: 1920, height: 1080 }] },
-};
+export const metadata = pageMetadata('/color-grading');
 
 export default function ColorGradingPage() {
   return <PortfolioRuntime>
+    <SeoData path="/color-grading" />
     <a className="skip-link" href="#comparison">Skip to color comparison</a>
     <Navigation innerPage />
     <main className="grading-page">

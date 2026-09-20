@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { pageMetadata, projectSlugs, type SeoPath } from '@/lib/seo';
+import { SeoData } from '@/components/seo-data';
 import { PortfolioLink as Link } from '@/components/portfolio-link';
 import { StudioLight } from '@/components/studio-light';
 import { notFound } from 'next/navigation';
@@ -9,15 +11,13 @@ import { ProjectCard } from '@/components/project-card';
 import { GradingGallery } from '@/components/grading';
 import { getProject, portfolioRequestHref } from '@/lib/portfolio';
 
-const slugs = ['oxfordsaudia-interviews', 'oxfordsaudia-educational-series'];
+const slugs = projectSlugs;
 export function generateStaticParams() { return slugs.map(slug => ({ slug })); }
 export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const education = slug === slugs[1];
-  const title = education ? 'OxfordSaudia — Aviation Explained' : 'OxfordSaudia — The interview series';
-  const description = education ? 'Educational short films: scripting, directing, filming, editing and audio finishing by Raden Hanifa.' : 'Student and captain interviews: from scripting and cinematography to the final edit and dialogue polish.';
-  return { title, description, openGraph: { title, description, images: [{ url: education ? '/media/hazardous-v2-poster.webp' : '/media/students-poster.webp' }] } };
+  if (!slugs.includes(slug)) notFound();
+  return pageMetadata(`/work/${slug}` as SeoPath);
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -25,6 +25,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   if (!slugs.includes(slug)) notFound();
   const education = slug === slugs[1];
   return <PortfolioRuntime>
+    <SeoData path={`/work/${slug}` as SeoPath} />
     <a className="skip-link" href="#project-films">Skip to films</a><Navigation innerPage />
     <main className="project-page">
       <header className="grading-intro page-width" id="project-intro">

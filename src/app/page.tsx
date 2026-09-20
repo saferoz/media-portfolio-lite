@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { pageMetadata } from '@/lib/seo';
+import { SeoData } from '@/components/seo-data';
 import { ArrowUpRightIcon, ArrowUpIcon, InstagramLogoIcon, LinkedinLogoIcon } from '@phosphor-icons/react/dist/ssr';
 import { profile, portfolioRequestHref } from '@/lib/portfolio';
 import { PortfolioRuntime } from '@/components/portfolio-runtime';
@@ -7,8 +9,11 @@ import { Hero } from '@/components/hero';
 import { Work } from '@/components/work';
 import { StudioLight } from '@/components/studio-light';
 
+export const metadata = pageMetadata('/');
+
 export default function Home() {
   return <PortfolioRuntime>
+    <SeoData path="/" />
     <a className="skip-link" href="#work">Skip to selected work</a>
     <Navigation />
     <main>

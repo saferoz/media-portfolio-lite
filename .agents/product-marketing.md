@@ -1,13 +1,15 @@
 # Portfolio marketing context
 
-**Document version:** v2
-**Last updated:** 2026-09-14
+**Document version:** v4
+**Last updated:** 2026-09-20
 
 Read [PROJECT_STATE.md](../PROJECT_STATE.md) for verified credits, media and current implementation. Read [COPY_STRATEGY.md](../docs/COPY_STRATEGY.md) for writing choices and framework sources. Those documents take precedence if this summary drifts.
 
 ## Offer and audience
 
-Raden Hanifa's personal video portfolio, covering filming, cinematography, editing, color grading and AI filmmaking. Hiring teams and commissioning clients are equally important. Primary markets: Saudi Arabia, the UAE and the wider GCC. This is target geography, not a residence or travel-availability claim. Pricing and current availability are unconfirmed.
+Raden Hanifa's media portfolio leads with Media Producer & Cinematographer for general agencies, brands and hiring teams. Aviation is a demonstrated specialty, not the only offering. Filming, editing, color grading and AI filmmaking are supported by the existing work. Hiring teams and commissioning clients are equally important. Research priorities: Saudi Arabia, UAE and Qatar, then the wider GCC. These are target markets, not residence, office or travel-availability claims. Keep availability private; do not publish remote-service coverage or exact-city claims.
+
+This release is technical SEO only: all visible English copy, media, layout and controls are preserved. The media subdomain remains independently canonical. The CV presents the combined aviation/media professional background; the future main domain connects both sides as the personal-brand home. Neither external site is changed in this release. Arabic metadata drafts live only in docs/SEO_ROADMAP.md until full translated pages are developed and reviewed. Do not emit Arabic language alternatives before those pages exist.
 
 ## Visitor task and evidence
 
@@ -26,6 +28,10 @@ Explore work, watch projects and Request full portfolio. More work is available.
 No measured conversion baseline, customer interviews, quantified business outcomes, competitor comparison, buying objections or traffic-source mix has been supplied. Treat hypotheses as hypotheses. Adapt marketing frameworks to a portfolio; do not fabricate SaaS pain points, pricing funnels or urgency.
 
 ## Changelog
+
+- v4 (2026-09-20): User clarified broader media-first portfolio positioning with aviation specialty; CV and future personal homepage connect aviation and media. Supersedes the aviation-first homepage direction in v3.
+
+- v3 (2026-09-20): Set aviation media as the lead SEO positioning; confirmed equal employer/client priority, private availability, technical-only scope, independent domain roles and unpublished Arabic preparation.
 
 - v2 (2026-09-14): Recorded plain-language review and specific About wording; retain signature headlines while removing abstract process language.
 
