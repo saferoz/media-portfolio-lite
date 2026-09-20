@@ -433,6 +433,8 @@ h1, h2, h3 { font-weight: 500; }
 .education-feature .project-visual { aspect-ratio: 9 / 16; }
 .education-feature-copy h3 { font-size: clamp(44px, 5vw, 76px); letter-spacing: -.035em; line-height: 1.05; }
 .education-feature-copy h3 span { color: var(--accent); }
+.education-feature-copy h3 > .reveal-line:first-child { color: var(--foreground); }
+.education-feature-copy h3 .reveal-line > span { color: inherit; }
 .education-feature-copy p { max-width: 34ch; color: var(--muted); line-height: 1.7; margin-top: 25px; }
 .ai-pair { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.55fr); gap: 40px; align-items: center; }
 .ai-pair .portrait-card { max-width: 320px; justify-self: start; }
@@ -534,7 +536,7 @@ h1, h2, h3 { font-weight: 500; }
   .interview-comparison { margin-top: 44px; }
   .player-heading { align-items: flex-start; flex-direction: column-reverse; }
   .player-actions { align-self: flex-end; }
-  .reel-context { top: auto; bottom: 100px; max-width: calc(100% - 90px); padding: 9px 12px; background: #03080ecc; border-radius: 8px; }
+  .reel-context { top: auto; bottom: max(96px, calc(env(safe-area-inset-bottom) + 80px)); max-width: calc(100% - 90px); padding: 0; background: transparent; }
   .reel-context p { margin-top: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -561,6 +563,18 @@ h1, h2, h3 { font-weight: 500; }
 @media (hover: hover) and (pointer: fine) { .reel-navigation:hover { opacity: 1; } }
 .reel-navigation button { background: #03080e35; border-color: #ffffff30; }
 .immersive-controls { background: #03080ea6; }
+.is-reel-view .immersive-controls { background: transparent; padding: 0; gap: 8px; }
+.is-reel-view .player-screen::after { content: ''; position: absolute; z-index: 1; inset: auto 0 0; height: 180px; background: linear-gradient(transparent, #03080e99); pointer-events: none; opacity: 0; transition: opacity 160ms var(--ease); }
+.is-reel-view.controls-active .player-screen::after, .is-reel-view .player-screen:has(.immersive-controls.is-visible)::after { opacity: 1; }
+.reel-context { z-index: 2; opacity: 0; transition: opacity 160ms var(--ease); }
+.controls-active .reel-context, .film-dialog:has(.immersive-controls.is-visible) .reel-context { opacity: 1; }
+
+/* Arrivals start with the route's first paint, including client navigation. */
+@keyframes project-arrive { from { opacity: .25; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .grading-intro h1 { animation: project-arrive 700ms var(--ease) both; }
+  .grading-intro > p { animation: project-arrive 700ms var(--ease) 80ms both; }
+}
 .is-reel-view .player-shell { position: relative; overflow: hidden; }
 .reel-track { position: relative; }
 .is-reel-view .reel-track { height: 100%; touch-action: none; }

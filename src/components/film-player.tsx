@@ -7,6 +7,11 @@ import { allowReelPrefetch, cachedReel, prepareReel, reelSource } from '@/lib/re
 
 const reels = projects.filter(item => item.category === 'Reels' && item.film);
 
+function formatTime(value: number) {
+  const seconds = Math.max(0, Math.floor(Number.isFinite(value) ? value : 0));
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+}
+
 function PlaybackTimeline({ videoRef, projectId }: { videoRef: React.RefObject<HTMLVideoElement | null>; projectId: string }) {
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -19,7 +24,7 @@ function PlaybackTimeline({ videoRef, projectId }: { videoRef: React.RefObject<H
     video.addEventListener('loadedmetadata', update);
     return () => { video.removeEventListener('timeupdate', update); video.removeEventListener('loadedmetadata', update); };
   }, [videoRef, projectId]);
-  return <><input aria-label="Seek film" type="range" min="0" max={duration} step="0.1" value={time} aria-valuetext={`${Math.floor(time)} of ${Math.floor(duration)} seconds`} onChange={event => { if (videoRef.current) videoRef.current.currentTime = Number(event.target.value); setTime(Number(event.target.value)); }} /><span className="playback-time">{Math.floor(time)} / {Math.floor(duration)}s</span></>;
+  return <><input aria-label="Seek film" type="range" min="0" max={duration} step="0.1" value={time} aria-valuetext={`${formatTime(time)} of ${formatTime(duration)}`} onChange={event => { if (videoRef.current) videoRef.current.currentTime = Number(event.target.value); setTime(Number(event.target.value)); }} /><span className="playback-time">{formatTime(time)} / {formatTime(duration)}</span></>;
 }
 
 function ReelPoster({ project, className = '' }: { project: Project; className?: string }) {
@@ -56,6 +61,7 @@ export default function FilmPlayer({ project: initialProject, onClose }: { proje
   const [readyProject, setReadyProject] = useState<string | null>(null);
   const [prepared, setPrepared] = useState<{ id: string; url: string } | null>(null);
   const muteRef = useRef(false);
+  const suppressClickUntil = useRef(0);
 
   function revealControls() {
     if (!customControls) return;
@@ -189,15 +195,19 @@ export default function FilmPlayer({ project: initialProject, onClose }: { proje
     const video = videoRef.current;
     if (!screen || !video) return;
     setControlsVisible(false);
-    if (!animate || reduce()) { video.pause(); setProject(next); return; }
+    if (!animate || reduce()) { setProject(next); return; }
     // Move the actual outgoing panel alongside the destination's own poster.
-    video.pause();
+    // A second touch can cancel the slide. Keep playing until selection commits.
     transitionBusy.current = true;
     const current = getComputedStyle(screen).transform;
     transition.current?.cancel();
     const animation = screen.animate([{ transform: current }, { transform: `translateY(${-direction * 100}%)` }], { duration: 280, easing: 'cubic-bezier(.23,1,.32,1)', fill: 'forwards' });
     transition.current = animation;
-    void animation.finished.then(() => setProject(next), () => { transitionBusy.current = false; });
+    void animation.finished.then(() => {
+      if (transition.current === animation) setProject(next);
+    }, () => {
+      if (transition.current === animation) transitionBusy.current = false;
+    });
   }
 
   function onWheel(event: React.WheelEvent) {
@@ -252,6 +262,7 @@ export default function FilmPlayer({ project: initialProject, onClose }: { proje
       if (!origin) return;
       // Own touch completion so a swipe never becomes a delayed click on the next Reel.
       event.preventDefault();
+      suppressClickUntil.current = performance.now() + 800;
       const dx = event.changedTouches[0].clientX - origin.x;
       const dy = event.changedTouches[0].clientY - origin.y;
       const velocity = performance.now() - origin.lastTime < 100 ? origin.velocity : 0;
@@ -286,7 +297,7 @@ export default function FilmPlayer({ project: initialProject, onClose }: { proje
       <div className="reel-track" ref={trackRef}>
       {expanded && reels[reelIndex - 1] && <div className="reel-neighbor reel-previous" aria-hidden="true" key={reels[reelIndex - 1].id}><ReelPoster project={reels[reelIndex - 1]} /></div>}
       <div key="active-screen" ref={screenRef} className={`player-screen ${project.aspect === 'portrait' ? 'portrait-player' : ''}`} data-active-project={project.id}>
-        <video key={`video-${project.id}`} ref={videoRef} loop={expanded} poster={project.poster} controls={!customControls} playsInline preload="none" aria-label={`${project.title} full film`} onClick={() => { if (isReel) { revealControls(); if (videoRef.current?.paused) void play(); else videoRef.current?.pause(); } }} onPlaying={event => { if (event.currentTarget === videoRef.current) setStatus('playing'); }} onVolumeChange={event => { if (event.currentTarget !== videoRef.current) return; muteRef.current = event.currentTarget.muted; setMuted(muteRef.current); }} onWaiting={event => { if (event.currentTarget === videoRef.current) setStatus('loading'); }} onPause={event => { if (event.currentTarget === videoRef.current) setStatus(current => current === 'error' ? 'error' : 'paused'); }} onError={event => { if (event.currentTarget === videoRef.current) setStatus('error'); }} onEnded={event => { if (event.currentTarget === videoRef.current) setStatus('paused'); }}>
+        <video ref={videoRef} loop={expanded} poster={project.poster} controls={!customControls} playsInline preload="none" aria-label={`${project.title} full film`} onClick={() => { if (performance.now() < suppressClickUntil.current || transitionBusy.current) return; if (isReel) { revealControls(); if (videoRef.current?.paused) void play(); else videoRef.current?.pause(); } }} onPlaying={event => { if (event.currentTarget === videoRef.current) setStatus('playing'); }} onVolumeChange={event => { if (event.currentTarget !== videoRef.current) return; muteRef.current = event.currentTarget.muted; setMuted(muteRef.current); }} onWaiting={event => { if (event.currentTarget === videoRef.current) setStatus('loading'); }} onPause={event => { if (event.currentTarget === videoRef.current && event.currentTarget.paused) setStatus(current => current === 'error' ? 'error' : 'paused'); }} onError={event => { if (event.currentTarget === videoRef.current) setStatus('error'); }} onEnded={event => { if (event.currentTarget === videoRef.current) setStatus('paused'); }}>
           {project.captions && <track kind="captions" src={project.captions} srcLang="en" label="English" default />}
         </video>
         {isReel && readyProject !== project.id && <ReelPoster key={project.id} project={project} className="active-reel-poster" />}

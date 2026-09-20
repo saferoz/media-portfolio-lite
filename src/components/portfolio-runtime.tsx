@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
 import type Lenis from 'lenis';
 import type { Project } from '@/lib/portfolio';
 
@@ -26,6 +27,7 @@ function subscribeReduced(callback: () => void) {
 }
 
 export function PortfolioRuntime({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const reducedMotion = useSyncExternalStore(subscribeReduced, () => matchMedia(reducedQuery).matches, () => true);
   const [saveData, setSaveData] = useState(true);
   const [activePreview, setPreview] = useState<string | null>(null);
@@ -90,7 +92,7 @@ export function PortfolioRuntime({ children }: { children: React.ReactNode }) {
         if (entry.boundingClientRect.top < 0 || element.matches(':hover, :focus-within')) group?.forEach(animation => animation.cancel());
         else group?.forEach(animation => animation.play());
       }
-    }, { threshold: .1 });
+    }, { threshold: .1, rootMargin: `0px 0px -${Math.round(innerHeight * .14)}px 0px` });
     targets.forEach(element => {
       if (element.getBoundingClientRect().top < innerHeight) return;
       const kind = element.dataset.reveal;
@@ -120,7 +122,7 @@ export function PortfolioRuntime({ children }: { children: React.ReactNode }) {
     });
     return () => { observer.disconnect(); animations.forEach(group => group.forEach(animation => animation.cancel())); cancellations.forEach(cancel => cancel()); };
 
-  }, [reducedMotion]);
+  }, [reducedMotion, pathname]);
 
   const settleScroll = useCallback(() => {
     const top = window.scrollY;

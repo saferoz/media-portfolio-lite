@@ -15,9 +15,9 @@ export function Work() {
   const { setPreview, reducedMotion, settleScroll } = usePortfolio();
   const filtered = projects.filter(project => project.category === filter);
   const grading = <section className="grading-section" aria-labelledby="grading-heading">
-    <div className="grading-heading"><h3 id="grading-heading">Color grading.</h3><p>Compare the camera image with the finished grade.</p></div>
+    <div className="grading-heading" data-reveal><h3 id="grading-heading">Color grading.</h3><p>Compare the camera image with the finished grade.</p></div>
     <GradingComparison />
-    <div className="interview-comparison"><div className="grading-heading"><h3>Skin tones, in balance.</h3><p>A frame from Get to Know Our Students.</p></div><GradingComparison before="/media/interview-before.webp" after="/media/interview-after.webp" subject="the OxfordSaudia student interview" label="Reveal original student interview image" /></div>
+    <div className="interview-comparison"><div className="grading-heading" data-reveal><h3>Skin tones, in balance.</h3><p>A frame from Get to Know Our Students.</p></div><GradingComparison before="/media/interview-before.webp" after="/media/interview-after.webp" subject="the OxfordSaudia student interview" label="Reveal original student interview image" /></div>
     <div className="grading-film-grid">{[gradingFilms[0], getProject('interview-grade')].map(project => <ProjectCard key={project.id} project={project} />)}</div>
     <Link className="grading-project-link" href="/color-grading#grading-intro">View color grading <ArrowUpRightIcon size={20} /></Link>
   </section>;
@@ -32,7 +32,7 @@ export function Work() {
         <div className="reels-pair">{projects.filter(project => project.id.startsWith('eltacoria') || project.id.startsWith('jury')).map(project => <ProjectCard key={project.id} project={project} />)}</div>
         <div className="reels-pair cadillac-feature">{[getProject('cadillac'), getProject('cadillac-second')].map(project => <ProjectCard key={project.id} project={project} />)}</div>
         <section className="work-collection"><h3 className="collection-title" data-reveal="chapter">YouTube / Long-form</h3><div className="film-pair">{projects.filter(project => project.category === 'Films').map(project => <ProjectCard key={project.id} project={project} />)}</div></section>
-        <section className="education-feature work-collection"><ProjectCard project={projects.find(p => p.id === 'hazardous')!} /><div className="education-feature-copy"><h3>Aviation,<br /><span>explained.</span></h3><p>Short lessons for student pilots. Scripted, filmed and edited for OxfordSaudia.</p><Link className="text-link" href="/work/oxfordsaudia-educational-series">Behind the series <ArrowUpRightIcon size={18} /></Link></div></section>
+        <section className="education-feature work-collection"><ProjectCard project={projects.find(p => p.id === 'hazardous')!} /><div className="education-feature-copy"><h3 data-reveal="lines"><span className="reveal-line"><span>Aviation,</span></span><span className="reveal-line"><span>explained.</span></span></h3><p data-reveal>Short lessons for student pilots. Scripted, filmed and edited for OxfordSaudia.</p><Link className="text-link" href="/work/oxfordsaudia-educational-series">Behind the series <ArrowUpRightIcon size={18} /></Link></div></section>
         <section className="work-collection"><h3 className="collection-title" data-reveal="chapter">AI filmmaking</h3><div className="ai-pair">{projects.filter(project => project.category === 'AI filmmaking').map(project => <ProjectCard key={project.id} project={project} />)}</div></section>
         <section className="work-collection"><h3 className="collection-title" data-reveal="chapter">Motion graphics</h3><div className="film-pair">{projects.filter(project => project.category === 'Motion').map(project => <ProjectCard key={project.id} project={project} />)}</div></section>
         {grading}

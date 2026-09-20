@@ -17,6 +17,13 @@ export const metadata: Metadata = {
     images: [{ url: '/media/raden-hanifa-og-v1.jpg', width: 1731, height: 909, type: 'image/jpeg', alt: 'Raden Hanifa — Ideas in motion. Media, creative and storytelling.' }],
   },
   twitter: { card: 'summary_large_image' },
+  icons: {
+    apple: { url: '/apple-icon.png', type: 'image/png', sizes: '180x180' },
+    icon: [
+      { url: '/brand/rh-light-v2.png', type: 'image/png', sizes: '192x192', media: '(prefers-color-scheme: light)' },
+      { url: '/brand/rh-dark-v2.png', type: 'image/png', sizes: '192x192', media: '(prefers-color-scheme: dark)' },
+    ],
+  },
 };
 
 const themeScript = `(function(){try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})()`;
