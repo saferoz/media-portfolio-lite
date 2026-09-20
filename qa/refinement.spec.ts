@@ -19,7 +19,7 @@ test('Cadillac follows the four commercials, previews silently and plays with cr
   await page.keyboard.press('Escape');
   await expect(card.locator('.project-visual')).toBeFocused();
   await page.locator('[data-project="cadillac-second"] .project-visual').click();
-  await expect(page.locator('.player-screen video')).toHaveAttribute('src', '/media/cadillac-film.mp4');
+  await expect(page.locator('.player-screen')).toHaveAttribute('data-active-project', 'cadillac-second');
   await expect.poll(() => page.locator('.player-screen video').evaluate((v: HTMLVideoElement) => v.duration)).toBeGreaterThan(100);
   await page.keyboard.press('Escape');
   await page.getByRole('button', { name: 'Reels', exact: true }).click();

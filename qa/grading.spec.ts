@@ -46,7 +46,7 @@ test('commercial films preview and play independently with attribution', async (
     await expect(card.locator('video')).toHaveAttribute('src', `/media/${id}-preview.mp4`);
     await card.locator('button').click();
     await expect(page.getByRole('dialog')).toBeVisible();
-    await expect(page.locator('.player-screen video')).toHaveAttribute('src', `/media/${id}-film.mp4`);
+    await expect(page.locator('.player-screen')).toHaveAttribute('data-active-project', id);
     await expect.poll(() => page.locator('.player-screen video').evaluate((v: HTMLVideoElement) => v.readyState >= 2)).toBe(true);
     if (id === 'eltacoria-app') await expect(page.locator('.player-credit')).toContainText('Abdullah Alzahrani');
     await expect.poll(() => page.locator('video').evaluateAll(videos => videos.filter(v => !(v as HTMLVideoElement).paused).length)).toBeLessThanOrEqual(1);

@@ -78,40 +78,47 @@ export function PortfolioRuntime({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (reducedMotion) return;
     const targets = document.querySelectorAll<HTMLElement>('[data-reveal]');
-    const animations = new Map<HTMLElement, Animation>();
+    const animations = new Map<HTMLElement, Animation[]>();
     const cancellations: Array<() => void> = [];
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         const element = entry.target as HTMLElement;
         observer.unobserve(element);
-        const animation = animations.get(element);
+        const group = animations.get(element);
         // Fast jumps and keyboard navigation should land on readable content.
-        if (entry.boundingClientRect.top < 0 || element.matches(':hover, :focus-within')) animation?.cancel();
-        else animation?.play();
+        if (entry.boundingClientRect.top < 0 || element.matches(':hover, :focus-within')) group?.forEach(animation => animation.cancel());
+        else group?.forEach(animation => animation.play());
       }
     }, { threshold: .1 });
     targets.forEach(element => {
       if (element.getBoundingClientRect().top < innerHeight) return;
-      const visual = element.dataset.reveal === 'card' || element.dataset.reveal === 'image';
-      const target = visual ? element.querySelector<HTMLElement>('.project-visual > img, :scope > img') : element;
-      if (!target) return;
+      const kind = element.dataset.reveal;
+      const visual = kind === 'card' || kind === 'image' || kind === 'portrait';
+      const targets = kind === 'lines' ? Array.from(element.querySelectorAll<HTMLElement>('.reveal-line > span'))
+        : [visual ? element.querySelector<HTMLElement>('.project-visual > img, :scope > img') : kind === 'signature' ? element.querySelector<HTMLElement>('.wordmark') : element];
       // Prepare the first frame offscreen; no visible-then-hidden stagger flash.
       // Image motion stays inside its frame, away from captions and hit targets.
-      const animation = target.animate(visual
-        ? [{ transform: 'scale(1.08)' }, { transform: 'scale(1)' }]
-        : [{ opacity: .3, transform: 'translateY(28px)' }, { opacity: 1, transform: 'translateY(0)' }],
-        { duration: visual ? 850 : 600, easing: 'cubic-bezier(.23,1,.32,1)', fill: 'both' });
-      animation.pause();
-      animations.set(element, animation);
-      const stop = () => { observer.unobserve(element); animation.cancel(); };
+      const group = targets.filter((target): target is HTMLElement => !!target).map((target, index) => {
+        const frames = kind === 'lines' || kind === 'signature'
+          ? [{ transform: 'translateY(105%)' }, { transform: 'translateY(0)' }]
+          : kind === 'portrait'
+            ? [{ transform: 'scale(1.08)', clipPath: 'inset(8% 0 8% 0)' }, { transform: 'scale(1)', clipPath: 'inset(0% 0 0% 0)' }]
+            : visual ? [{ transform: 'scale(1.08)' }, { transform: 'scale(1)' }]
+            : [{ opacity: .3, transform: `translateY(${matchMedia('(max-width: 767px)').matches ? 16 : 28}px)` }, { opacity: 1, transform: 'translateY(0)' }];
+        const animation = target.animate(frames, { duration: visual || kind === 'signature' ? 850 : 600, delay: kind === 'lines' ? index * 80 : 0, easing: 'cubic-bezier(.23,1,.32,1)', fill: 'both' });
+        animation.pause();
+        return animation;
+      });
+      animations.set(element, group);
+      const stop = () => { observer.unobserve(element); group.forEach(animation => animation.cancel()); };
       element.addEventListener('pointerenter', stop, { once: true });
       element.addEventListener('focusin', stop, { once: true });
       cancellations.push(() => { element.removeEventListener('pointerenter', stop); element.removeEventListener('focusin', stop); });
-      void animation.finished.then(() => animation.cancel(), () => {}).finally(() => animations.delete(element));
+      void Promise.allSettled(group.map(animation => animation.finished)).then(() => { group.forEach(animation => animation.cancel()); animations.delete(element); });
       observer.observe(element);
     });
-    return () => { observer.disconnect(); animations.forEach(animation => animation.cancel()); cancellations.forEach(cancel => cancel()); };
+    return () => { observer.disconnect(); animations.forEach(group => group.forEach(animation => animation.cancel())); cancellations.forEach(cancel => cancel()); };
 
   }, [reducedMotion]);
 

@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('Reels open without native chrome, reveal controls and settle navigation', async ({ browser }, info) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const page = await context.newPage();
-  await page.goto(process.env.TEST_URL!);
+  await page.goto(process.env.TEST_URL || 'http://127.0.0.1:3000');
   await page.locator('[data-project="eltacoria-app"] .project-visual').tap();
   const video = page.locator('.player-screen video');
   await expect.poll(() => video.evaluate((v: HTMLVideoElement) => !v.paused && v.readyState >= 2)).toBe(true);
@@ -16,9 +16,9 @@ test('Reels open without native chrome, reveal controls and settle navigation', 
   await video.tap();
   await expect(page.locator('.immersive-controls')).toHaveClass(/is-visible/);
   await page.getByRole('button', { name: 'Play film', exact: true }).tap();
-  await page.getByRole('button', { name: 'Expand reel' }).tap();
+  await expect(page.locator('.film-dialog')).toHaveClass(/is-reel-view/);
   await page.getByRole('button', { name: 'Next reel', exact: true }).tap();
-  await expect(video).toHaveAttribute('src', '/media/eltacoria-translation-film.mp4');
+  await expect(page.locator('.player-screen')).toHaveAttribute('data-active-project', 'eltacoria-translation');
   await expect(page.locator('.reel-outgoing')).toHaveCount(0);
   await expect.poll(() => video.evaluate((v: HTMLVideoElement) => !v.paused)).toBe(true);
   await expect(page.locator('.reel-navigation')).toHaveCSS('opacity', '0.18');
