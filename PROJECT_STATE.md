@@ -6,6 +6,8 @@ User clarified that media.radenhanifa.com must appeal to general agencies: Media
 
 User explicitly authorized commit and push to origin/main. Validation and remote/deployment evidence will be recorded separately; a push does not establish Google indexing, rankings or AI recommendations.
 
+Delivery evidence: implementation commit 649fed2f897bb937abd284f612c010395bcb23d5 was pushed to origin/main and matched git ls-remote. The immediate public endpoint check still returned the previous deployment's 404 page for sitemap/robots; deployment was not yet verified. Submit the sitemap only after its public endpoint returns the new XML. Only the pre-existing next-env.d.ts change remains outside the delivery.
+
 Final media-first build and TypeScript passed; all 14 selected Chromium SEO/gallery/icon/navigation tests passed (21.3s) against port 3043. Read-only inspection of CV-website-v2 confirmed frontend/src/lib/cvData.js leads with Aviation Media Producer — Pilot (PPL-IR), while its summary includes corporate, lifestyle and cultural brands; frontend/public/index.html uses Aviation Media Producer & Pilot in GCC. CV files were not modified. Preserve the unrelated next-env.d.ts working-tree change outside this commit.
 
 ## Technical SEO and rounded-tile favicon, 2026-09-20
