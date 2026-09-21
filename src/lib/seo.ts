@@ -8,6 +8,7 @@ export const websiteId = `${siteOrigin}/#website`;
 export const portraitUrl = new URL(profile.portrait, siteOrigin).href;
 export const portraitImageId = `${portraitUrl}#image`;
 export const projectSlugs = ['oxfordsaudia-interviews', 'oxfordsaudia-educational-series'];
+export const personDescription = 'Raden Hanifa is a media producer and cinematographer whose portfolio includes commercial reels, aviation interviews and educational videos, color grading and AI filmmaking.';
 export const seoPages = {
   '/': {
     title: 'Raden Hanifa — Media Producer & Cinematographer',
@@ -52,9 +53,10 @@ export function pageStructuredData(path: SeoPath) {
   const page = seoPages[path];
   const graph: Record<string, unknown>[] = [
     { '@type': 'Person', '@id': personId, name: profile.name, url: 'https://radenhanifa.com/',
+      jobTitle: profile.role,
       image: path === '/' ? { '@id': portraitImageId } : portraitUrl,
       sameAs: [profile.linkedin, profile.instagram, profile.cv],
-      description: profile.about, knowsAbout: ['Aviation filmmaking', 'Cinematography', 'Video editing', 'Color grading', 'AI filmmaking'] },
+      description: personDescription, knowsAbout: ['Aviation filmmaking', 'Cinematography', 'Video editing', 'Color grading', 'AI filmmaking'] },
     { '@type': 'WebSite', '@id': websiteId, url: pageUrl('/'), name: profile.name,
       inLanguage: 'en', creator: { '@id': personId } },
     { '@type': 'WebPage', '@id': `${pageUrl(path)}#webpage`, url: pageUrl(path), name: page.title,

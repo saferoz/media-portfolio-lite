@@ -21,7 +21,7 @@ export type Project = {
 
 export const profile = {
   name: 'Raden Hanifa',
-  role: 'Video editor & multimedia creative',
+  role: 'Media Producer & Cinematographer',
   email: 'raden@radenhanifa.com',
   instagram: 'https://www.instagram.com/radenhanifa/',
   linkedin: 'https://www.linkedin.com/in/radenhanifa',

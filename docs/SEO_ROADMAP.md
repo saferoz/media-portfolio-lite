@@ -35,6 +35,24 @@ Arabic release gate: translate body text, navigation, captions, accessible names
 4. Video metadata only after publication dates and crawler-visible playback are verified. Preserve interaction-only full-film loading.
 5. Main-domain migration only after its role is decided: inventory old URLs, map equivalent replacements, implement permanent redirects, retain useful content and verify canonical/sitemap consistency.
 
+## AI-readable portfolio phase, 2026-09-21
+
+This phase adds public, non-visual reference files at `/llms.txt` and `/llms-full.txt`. The short file supplies discovery, positioning and canonical links; the expanded file records supported project credits, identity URLs, the owner-approved PPL-IR credential and 300 flight hours, and explicit evidence boundaries. The root layout advertises `/llms.txt` with `rel="describedby"`. These files are supplementary discovery aids for compatible agents, not canonical HTML pages, and remain outside the visible navigation and four-page XML sitemap.
+
+No visible aviation landing page is added in this phase. The media portfolio remains Media Producer & Cinematographer first, with aviation as demonstrated work. The CV remains hybrid, while the future main domain will revisit the broader personal-brand architecture. Do not add LocalBusiness, address, `areaServed`, region-wide availability or hidden credential schema. Do not target aviation photography until supporting still-photo work is published.
+
+Google states that AI Overviews and AI Mode use the same core SEO requirements as Search and require no special AI file or markup. Accordingly, `llms.txt` is not represented as a Google ranking factor, an indexing instruction, or a guarantee of AI citation. The strongest signals remain useful visible pages, crawlability, accurate entity consistency and genuine third-party references.
+
+Fixed observation prompts for 2-, 4- and 8-week checks:
+
+1. Who is Raden Hanifa?
+2. Raden Hanifa media producer
+3. Aviation media producer Saudi Arabia
+4. Aviation videographer Saudi Arabia
+5. Who produced the OxfordSaudia interview videos?
+
+Run each prompt three to five times where practical across Google, ChatGPT and Perplexity. Record exact prompt, locale, date, mention, recommendation wording, citation URL and sample count. In PostHog, review referrals containing `utm_source=chatgpt.com`; a referral is evidence of a visit, not of stable recommendation rank.
+
 ## Deployment and monitoring checklist
 
 - Build and test locally, then independently verify the deployed custom domain. Git push is not proof of deployment.
@@ -51,6 +69,6 @@ Search Console DNS ownership verified for radenhanifa.com. The media homepage wa
 
 ## Tooling and evidence boundaries
 
-Installed local skills: seo-audit 2.0.1, schema 2.0.0 and ai-seo 2.5.0 from coreyhaines31/marketingskills. They are agent guidance, not website dependencies. Use official search-engine guidance over speculative skill claims; do not repeat unverified visibility percentages or conflate training crawlers with search crawlers. No llms.txt, synthetic statistics, fabricated freshness dates, hidden Arabic content or unsupported local-business markup.
+Installed local skills: seo-audit 2.0.1, schema 2.0.0 and ai-seo 2.5.0 from coreyhaines31/marketingskills. They are agent guidance, not website dependencies. Use official search-engine guidance over speculative skill claims; do not repeat unverified visibility percentages or conflate training crawlers with search crawlers. Public llms reference files are supplemental only; do not add synthetic statistics, fabricated freshness dates, hidden Arabic content or unsupported local-business markup.
 
 References: [Google AI features](https://developers.google.com/search/docs/appearance/ai-features), [multilingual sites](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites), [canonical URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls), [structured data policies](https://developers.google.com/search/docs/appearance/structured-data/sd-policies).
