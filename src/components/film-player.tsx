@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ArrowsOutSimpleIcon, ArrowsInSimpleIcon, CaretUpIcon, CaretDownIcon, ArrowClockwiseIcon, PauseIcon, PlayIcon, SpeakerHighIcon, SpeakerSlashIcon, XIcon } from '@phosphor-icons/react';
 import { projects, type Project } from '@/lib/portfolio';
 import { allowReelPrefetch, cachedReel, prepareReel, reelSource } from '@/lib/reel-cache';
+import { trackEvent } from '@/lib/analytics';
 
 const reels = projects.filter(item => item.category === 'Reels' && item.film);
 
@@ -35,6 +36,7 @@ function ReelPoster({ project, className = '' }: { project: Project; className?:
 }
 
 export default function FilmPlayer({ project: initialProject, onClose }: { project: Project; onClose: () => void }) {
+  const startedProjects = useRef(new Set<string>());
   const [project, setProject] = useState(initialProject);
   const [expanded, setExpanded] = useState(() => initialProject.category === 'Reels' && matchMedia('(max-width: 767px)').matches);
   const isReel = initialProject.category === 'Reels';
@@ -97,6 +99,10 @@ export default function FilmPlayer({ project: initialProject, onClose }: { proje
     video.muted = muteRef.current;
     const revealFrame = () => {
       if (disposed) return;
+      if (!video.paused && video.readyState >= 2 && !startedProjects.current.has(project.id)) {
+        startedProjects.current.add(project.id);
+        trackEvent('film_started', { action_location: 'film_viewer', project_id: project.id, project_category: project.category });
+      }
       if (typeof video.requestVideoFrameCallback === 'function') frame = video.requestVideoFrameCallback(() => { if (!disposed) setReadyProject(project.id); });
       else if (video.readyState >= 2) setReadyProject(project.id);
     };

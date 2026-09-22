@@ -1,5 +1,13 @@
 # SEO foundation and Arabic preparation
 
+## Search appearance audit follow-up, 2026-09-22
+
+The live audit found all four canonical pages, robots, sitemap and both AI references accessible. The About portrait is already the homepage primary image and Person image; the portrait and navy white/cyan RH icon files matched local assets. The user explicitly retained cinematic social-sharing artwork. Do not replace it or remove legitimate student/client images to try to force Google's thumbnail.
+
+Next authenticated check: inspect Search Console's last crawl, indexed HTML, selected canonical and sitemap processing. Compare the crawled portrait/favicon references with production. If the indexed copy predates the release and no indexing request is pending, request indexing once. Record dates and subsequent appearance rather than repeatedly changing stable image URLs. If current signals are processed and the student remains selected, record Google's selection despite preferred-image signals; no guaranteed image switch is claimed.
+
+Keep branded appearance separate from service discovery. Future commercial case studies can balance the existing aviation-specific pages, but no new page, credential, geographic coverage or visible copy is authorized by this technical follow-up. Continue the fixed prompt observations below; private Search Console results and cross-platform citation observations remain pending, not inferred from successful HTTP requests.
+
 ## Release scope
 
 Technical SEO only. Preserve all visitor-facing English text, layouts, controls, media and credits. The media portfolio is independently canonical at https://media.radenhanifa.com. The Adobe site at radenhanifa.com and CV at cv.radenhanifa.com remain untouched. A future main-domain replacement does not automatically move the media portfolio.

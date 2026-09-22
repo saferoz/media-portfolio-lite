@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import type Lenis from 'lenis';
 import type { Project } from '@/lib/portfolio';
+import { profile, portfolioRequestHref } from '@/lib/portfolio';
+import { trackEvent } from '@/lib/analytics';
 
 const FilmPlayer = dynamic(() => import('./film-player'), { ssr: false });
 
@@ -27,6 +29,20 @@ function subscribeReduced(callback: () => void) {
 }
 
 export function PortfolioRuntime({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    const trackLink = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0) return;
+      const link = event.target instanceof Element ? event.target.closest('a') : null;
+      if (!link) return;
+      const href = link.getAttribute('href');
+      const action = href === portfolioRequestHref ? 'portfolio_request_clicked'
+        : href === `mailto:${profile.email}` ? 'contact_email_clicked'
+        : href === profile.cv ? 'cv_clicked' : null;
+      if (action) trackEvent(action, { action_location: link.closest('#about') ? 'about' : 'contact' });
+    };
+    document.addEventListener('click', trackLink);
+    return () => document.removeEventListener('click', trackLink);
+  }, []);
   const pathname = usePathname();
   const reducedMotion = useSyncExternalStore(subscribeReduced, () => matchMedia(reducedQuery).matches, () => true);
   const [saveData, setSaveData] = useState(true);
