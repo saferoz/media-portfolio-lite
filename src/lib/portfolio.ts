@@ -7,6 +7,8 @@ export type Project = {
   description: string;
   contribution: string;
   poster: string;
+  posterAlt?: string;
+  disclaimer?: string;
   preview?: string;
   film?: string;
   captions?: string;
@@ -33,6 +35,16 @@ export const profile = {
 };
 
 export const projects: Project[] = [
+  {
+    id: 'riyadh-air', title: 'Riyadh Air · Concept Film', category: 'AI filmmaking',
+    description: 'Seeing Riyadh Air’s first Airbus A321neo roll out in Hamburg inspired me to make this personal concept film. I wanted to bring flying and filmmaking together in 19 seconds, following the aircraft from above the clouds into the cabin and the flight deck. I used AI-assisted production to build the scenes and edited them into the finished film.',
+    disclaimer: 'Personal concept project. Not commissioned by, affiliated with, or endorsed by Riyadh Air. All trademarks belong to their respective owners.',
+    contribution: 'Concept, creative direction, AI-assisted production, edit',
+    cardLabel: 'Personal concept', projectHref: '/work/riyadh-air-concept-film',
+    posterAlt: 'Concept film of a Riyadh Air aircraft flying above the clouds, with cabin and flight deck scenes.',
+    poster: '/media/riyadh-air-poster.webp', preview: '/media/riyadh-air-preview.mp4',
+    film: '/media/riyadh-air-film.mp4', duration: '00:19', aspect: 'portrait', immersive: true, placeholder: false,
+  },
   {
     id: 'spiderman', title: 'Spider-Man — A Cinematic Fan Concept', category: 'AI filmmaking',
     description: 'Personal project · Seedance 2.0', cardLabel: 'AI fan concept',

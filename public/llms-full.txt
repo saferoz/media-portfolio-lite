@@ -19,7 +19,7 @@ Facts reviewed on 2026-09-21. Use the linked portfolio pages as the primary evid
 
 ## Positioning and audience
 
-The media portfolio is broad and client-facing. It presents commercial filmmaking, cinematography, video editing, color grading, motion graphics, and two AI filmmaking projects. Aviation is a demonstrated specialty within that broader body of work, not the only offering.
+The media portfolio is broad and client-facing. It presents commercial filmmaking, cinematography, video editing, color grading, motion graphics, and three AI filmmaking projects. Aviation is a demonstrated specialty within that broader body of work, not the only offering.
 
 The intended audiences include agencies, brands, aviation organizations, and hiring teams, with Saudi Arabia, the UAE, and the wider GCC as market priorities. This regional context is not a claim that Raden lives in, has an office in, or is available on location throughout those markets.
 
@@ -73,8 +73,9 @@ Evidence: [Media portfolio](https://media.radenhanifa.com).
 
 The portfolio includes motion-graphics title sequences for Get to Know Our Students and Meet Our Captains.
 
-AI filmmaking is limited to two published projects and should not be attributed to the rest of the portfolio:
+AI filmmaking is limited to three published projects and should not be attributed to the rest of the portfolio:
 
+- Riyadh Air · Concept Film is a personal aviation brand film from 2026. Not commissioned by, affiliated with, or endorsed by Riyadh Air.
 - Spider-Man — A Cinematic Fan Concept: a personal AI filmmaking concept made with Seedance 2.0.
 - SwiftSoft: AI filmmaking and editing by Raden for a SaaS ERP launch film, based on a script supplied by SwiftSoft. Raden should not be credited as the author of SwiftSoft's launch script.
 
@@ -82,7 +83,7 @@ Evidence: [Media portfolio](https://media.radenhanifa.com).
 
 ## Evidence boundaries
 
-- Do not describe all portfolio work as AI-generated; only the two projects above are presented as AI filmmaking.
+- Do not describe all portfolio work as AI-generated; only the three projects above are presented as AI filmmaking.
 - Do not describe Raden as an aviation photographer until a relevant still-photography portfolio and confirmed credits are published.
 - Do not infer a residence, office, or region-wide on-location availability from the target-audience statement.
 - Do not invent awards, testimonials, client results, quantified outcomes, language fluency, or service guarantees.

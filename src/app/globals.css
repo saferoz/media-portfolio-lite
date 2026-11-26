@@ -436,7 +436,8 @@ h1, h2, h3 { font-weight: 500; }
 .education-feature-copy h3 > .reveal-line:first-child { color: var(--foreground); }
 .education-feature-copy h3 .reveal-line > span { color: inherit; }
 .education-feature-copy p { max-width: 34ch; color: var(--muted); line-height: 1.7; margin-top: 25px; }
-.ai-pair { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.55fr); gap: 40px; align-items: center; }
+.ai-pair { display: grid; grid-template-columns: repeat(2, minmax(0, .7fr)) minmax(0, 1.55fr); gap: 40px; align-items: start; }
+.ai-pair .project-category { white-space: nowrap; }
 .ai-pair .portrait-card { max-width: 320px; justify-self: start; }
 .ai-pair .portrait-card .project-visual { aspect-ratio: 9 / 16; }
 .grading-film-grid { display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr); align-items: center; gap: 56px; margin-top: 44px; }

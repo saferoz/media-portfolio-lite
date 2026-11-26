@@ -6,12 +6,13 @@ const origin = 'https://media.radenhanifa.com';
 const canonicalUrl = (path: string) => path === '/' ? origin : origin + path;
 const pages = [
   ['/', 'Raden Hanifa — Media Producer & Cinematographer'],
+  ['/work/riyadh-air-concept-film', 'Riyadh Air Concept Film | Raden Hanifa'],
   ['/color-grading', 'Color Grading Portfolio — Raden Hanifa'],
   ['/work/oxfordsaudia-interviews', 'OxfordSaudia Aviation Interviews — Raden Hanifa'],
   ['/work/oxfordsaudia-educational-series', 'OxfordSaudia Aviation Educational Videos — Raden Hanifa'],
 ] as const;
 
-test('sitemap contains only the four canonical pages and robots advertises it', async ({ request }) => {
+test('sitemap contains only the five canonical pages and robots advertises it', async ({ request }) => {
   const sitemap = await request.get('/sitemap.xml');
   expect(sitemap.status()).toBe(200);
   expect(sitemap.headers()['content-type']).toContain('xml');
@@ -46,7 +47,10 @@ for (const [path, title] of pages) {
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', title);
     await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute('content', title);
     await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute('content', 'Raden Hanifa');
-    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /Raden Hanifa/);
+    const description = path === '/work/riyadh-air-concept-film'
+      ? 'A personal concept film inspired by Riyadh Air’s first Airbus A321neo, made with AI-assisted production. Not affiliated with Riyadh Air.'
+      : /Raden Hanifa/;
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', description);
     await expect(page.locator('link[hreflang]')).toHaveCount(0);
     const robots = page.locator('meta[name="robots"]');
     if (await robots.count()) expect(await robots.getAttribute('content')).not.toContain('noindex');
@@ -81,7 +85,7 @@ for (const [path, title] of pages) {
       expect(portrait).toBeUndefined();
       expect(webPage).not.toHaveProperty('primaryImageOfPage');
     }
-    await expect(page.locator('main')).toContainText(path === '/' ? 'I’m Raden Hanifa.' : path === '/color-grading' ? 'Before and after.' : 'OxfordSaudia.');
+    await expect(page.locator('main')).toContainText(path === '/' ? 'I’m Raden Hanifa.' : path === '/color-grading' ? 'Before and after.' : path === '/work/riyadh-air-concept-film' ? 'Riyadh Air · Concept Film' : 'OxfordSaudia.');
     const image = await page.locator('meta[property="og:image"]').getAttribute('content');
     expect(image).toMatch(/^https:\/\/media\.radenhanifa\.com\/media\//);
     expect((await request.get(new URL(image!).pathname)).status()).toBe(200);
@@ -109,7 +113,7 @@ test('AI-readable references publish supported facts without changing the canoni
   expect(full).toContain('Raden also served as a safety pilot');
   expect(full).toContain('based on a script supplied by SwiftSoft');
   expect(full).toContain('Do not describe Raden as an aviation photographer');
-  expect(full).toContain('only the two projects above are presented as AI filmmaking');
+  expect(full).toContain('only the three projects above are presented as AI filmmaking');
 
   const combined = `${short}\n${full}`;
   expect(combined).not.toMatch(/localhost|vercel\.app/i);

@@ -7,7 +7,7 @@ export const personId = 'https://radenhanifa.com/#person';
 export const websiteId = `${siteOrigin}/#website`;
 export const portraitUrl = new URL(profile.portrait, siteOrigin).href;
 export const portraitImageId = `${portraitUrl}#image`;
-export const projectSlugs = ['oxfordsaudia-interviews', 'oxfordsaudia-educational-series'];
+export const projectSlugs = ['oxfordsaudia-interviews', 'oxfordsaudia-educational-series', 'riyadh-air-concept-film'];
 export const personDescription = 'Raden Hanifa is a media producer and cinematographer whose portfolio includes commercial reels, aviation interviews and educational videos, color grading and AI filmmaking.';
 export const seoPages = {
   '/': {
@@ -20,6 +20,12 @@ export const seoPages = {
     title: 'Color Grading Portfolio — Raden Hanifa',
     description: 'Explore Raden Hanifa’s aviation color grading, including OxfordSaudia interviews and a graduation trailer, with original footage and finished grades.',
     image: '/media/grading-after.webp', width: 1920, height: 1080, alt: 'Aviation footage color graded by Raden Hanifa',
+  },
+  '/work/riyadh-air-concept-film': {
+    title: 'Riyadh Air Concept Film | Raden Hanifa',
+    description: 'A personal concept film inspired by Riyadh Air’s first Airbus A321neo, made with AI-assisted production. Not affiliated with Riyadh Air.',
+    image: '/media/riyadh-air-poster.webp', width: 720, height: 1280,
+    alt: 'Concept film of a Riyadh Air aircraft flying above the clouds, with cabin and flight deck scenes.',
   },
   '/work/oxfordsaudia-interviews': {
     title: 'OxfordSaudia Aviation Interviews — Raden Hanifa',

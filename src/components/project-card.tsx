@@ -63,7 +63,7 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
   }, [activePreview, project.id, setPreview]);
 
   const image = <>
-    {!imageFailed && <Image src={project.poster} alt={project.placeholder ? `${project.description} — placeholder image, selection pending` : `${project.title} — ${project.description}`} fill sizes={featured ? '(max-width: 767px) 100vw, 90vw' : '(max-width: 600px) 100vw, (max-width: 1100px) 45vw, 24vw'} onError={() => setImageFailed(true)} />}
+    {!imageFailed && <Image src={project.poster} alt={project.posterAlt ?? (project.placeholder ? `${project.description} — placeholder image, selection pending` : `${project.title} — ${project.description}`)} fill sizes={featured ? '(max-width: 767px) 100vw, 90vw' : '(max-width: 600px) 100vw, (max-width: 1100px) 45vw, 24vw'} onError={() => setImageFailed(true)} />}
     {imageFailed && <span className="image-fallback">{project.title}</span>}
     {!project.placeholder && <video ref={videoRef} className={`card-preview ${active && previewReady ? 'is-ready' : ''}`} muted loop playsInline preload="none" aria-hidden="true" onPlaying={() => setPreviewReady(true)} onError={() => { setPreviewReady(false); setPreviewFailed(true); setPreview(null); }} />}
     <span className="card-shade" />

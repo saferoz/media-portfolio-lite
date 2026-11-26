@@ -23,6 +23,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   if (!slugs.includes(slug)) notFound();
+  if (slug === 'riyadh-air-concept-film') {
+    const film = getProject('riyadh-air');
+    return <PortfolioRuntime>
+      <SeoData path="/work/riyadh-air-concept-film" />
+      <a className="skip-link" href="#project-films">Skip to film</a><Navigation innerPage />
+      <main className="project-page">
+        <header className="grading-intro page-width" id="project-intro">
+          <StudioLight />
+          <Link className="grading-back" href="/#work"><ArrowLeftIcon size={17} /> Selected work</Link>
+          <h1>{film.title}</h1>
+          <p>{film.description}</p>
+          <p>{film.disclaimer}</p>
+        </header>
+        <section className="project-films page-width education-project-film" id="project-films" aria-label="Concept film">
+          <ProjectCard project={{ ...film, projectHref: undefined }} />
+          <div className="project-film-intro"><h2>Personal concept</h2><p>Brand film / Aviation · 2026</p></div>
+        </section>
+      </main>
+    </PortfolioRuntime>;
+  }
   const education = slug === slugs[1];
   return <PortfolioRuntime>
     <SeoData path={`/work/${slug}` as SeoPath} />

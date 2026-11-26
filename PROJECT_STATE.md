@@ -1,5 +1,9 @@
 # Project state
 
+## Riyadh Air concept film release, 2026-11-26
+
+First in AI filmmaking with a dedicated project page, visible personal-concept disclaimer, portrait social poster and one-tap immersive player. The author credits the first A321neo rollout in Hamburg as inspiration. The local H.264/AAC film is 1080×1920, 19.18 seconds and 6,137,158 bytes. The poster is from 2.15 seconds. Local desktop and mobile Chromium checks verified portrait presentation, playback, grid alignment, close and scroll restoration. Owner approved publication for a job application. Verify the public URL and stream after push.
+
 ## Focused analytics and search-appearance audit, 2026-09-22
 
 The user approved focused analytics without replay and explicitly retained cinematic social-sharing artwork. The About portrait remains the preferred Google image through existing Person/ImageObject/primaryImageOfPage metadata and the image sitemap. The navy white/cyan RH favicon is already deployed. The audit verified all four public pages, robots, sitemap and both AI references; the live portrait and icon assets matched local bytes. Google displaying a student thumbnail or previous favicon is not evidence that those current signals are absent. Search Console's indexed HTML, last crawl and selected canonical still require authenticated inspection; no Google thumbnail change or citation improvement is claimed.

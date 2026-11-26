@@ -102,7 +102,7 @@ test('reduced motion keeps expanded navigation immediate and caption excerpt com
 
 test('AI order and launch copy reflect the confirmed brief', async ({ page }) => {
   await page.goto('/');
-  expect(await page.locator('.ai-pair .project-card').evaluateAll(cards => cards.map(c => c.getAttribute('data-project')))).toEqual(['spiderman', 'swiftsoft']);
+  expect(await page.locator('.ai-pair .project-card').evaluateAll(cards => cards.map(c => c.getAttribute('data-project')))).toEqual(['riyadh-air', 'spiderman', 'swiftsoft']);
   await expect(page.locator('.contact-region')).toContainText('Saudi Arabia, the UAE');
   await page.locator('[data-project="swiftsoft"] .project-visual').click();
   await expect(page.locator('.player-credit')).toContainText('based on a script from SwiftSoft for their launch');
